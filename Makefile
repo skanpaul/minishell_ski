@@ -6,14 +6,14 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/12 17:15:48 by gudias           ###   ########.fr        #
+#    Updated: 2022/04/12 17:47:57 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror 
+CFLAGS	= -Wall -Wextra -Werror -lreadline
 INCL	= -I incs
 RM		= rm -f
 
@@ -22,7 +22,7 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS	= minishell.c
+SRCS	= minishell.c lexing.c parsing.c 
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 

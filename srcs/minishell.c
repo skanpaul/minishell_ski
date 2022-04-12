@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/12 17:39:23 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/12 18:40:16 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ int	main(void)
 	//------------------------------------
 	while(1)
 	{
-		new_line = readline("minisell>");
+		new_line = readline("minishell>");
 		if (new_line)
+		{
 			add_history(new_line);
-		printf("%s\n", new_line);
-	}
-	
+			lexer(new_line);
+		}
+
+		free(new_line);
+	}	
 	//------------------------------------
 	
 	return (0);

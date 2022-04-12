@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/12 17:41:25 by gudias           ###   ########.fr       */
+/*   Created: 2022/04/12 17:48:06 by gudias            #+#    #+#             */
+/*   Updated: 2022/04/12 18:40:22 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "../libft/includes/libft.h"
+#include "minishell.h"
 
-# include <readline/readline.h>
-# include <readline/history.h>
-
-#endif
+char	**lexing(char *line)
+{
+	return (ft_split(line, '|');
+}
