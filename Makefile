@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/12 17:47:57 by gudias           ###   ########.fr        #
+#    Updated: 2022/04/13 18:36:24 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS	= minishell.c lexing.c parsing.c 
+SRCS	= minishell.c lexing.c run_cmd.c errors.c 
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
@@ -52,7 +52,7 @@ fclean: clean
 	@echo "$(RED)Removed $(CYAN)./$(NAME)$(DEFAULT)"
 
 libclean: 
-	@make fclean -C libs/libft 1>/dev/null 2>/dev/null
+	@make fclean -C libft 1>/dev/null 2>/dev/null
 	@echo "$(RED)Removed $(CYAN)Libft$(DEFAULT)"
 
 fullclean: fclean libclean

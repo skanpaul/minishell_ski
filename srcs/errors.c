@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing.c                                           :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 17:48:06 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/13 14:17:44 by gudias           ###   ########.fr       */
+/*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
+/*   Updated: 2022/04/13 16:23:39 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**lexing(char *line)
+void	err_msg(char *msg)
 {
-	return (ft_split(line, '|'));
+	ft_putendl_fd(msg, 2);
+}
+
+void	exit_msg(char *msg)
+{
+	err_msg(msg);
+	exit(0);
 }
