@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/18 14:22:47 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/18 16:16:56 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc > 1)
 		exit_msg(ERR_ARGS);
-
+	if (!isatty(0) || !isatty(1) || !isatty(2))
+		exit_msg(ERR_TTY);	
 	init_vars(&vars);
 	init_sa_struc_main(&d);
 	init_sigaction_main(&d);
