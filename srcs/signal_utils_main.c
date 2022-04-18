@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/04/18 14:46:17 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/18 17:14:42 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	handler_signal_main(int sig_code)
 {
 	if (sig_code == SIGINT)
 	{
-		//write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
+		write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
 	}
 	
-	// if (sig_code == SIGQUIT)
-	// {
-	// 	write(1, MSG_SIGQUIT_MAIN, ft_strlen(MSG_SIGQUIT_MAIN));
-	// }
+	 if (sig_code == SIGQUIT)
+	 {
+	 	write(1, MSG_SIGQUIT_MAIN, ft_strlen(MSG_SIGQUIT_MAIN));
+	 }
 }
 
 /* ************************************************************************** */
