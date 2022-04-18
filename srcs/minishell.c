@@ -6,11 +6,20 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/18 16:16:56 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/18 18:30:36 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#include <termios.h>
+
+struct termios saved;
+
+void restore(void)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, &saved);
+}
 
 static void	init_vars(t_vars *vars)
 {
@@ -32,6 +41,13 @@ int	main(int argc, char **argv, char **envp)
 	init_vars(&vars);
 	init_sa_struc_main(&d);
 	init_sigaction_main(&d);
+
+	struct termios attributes;
+	tcgetattr(STDIN_FILENO, &saved);
+	atexit(restore);
+	tcgetattr(STDIN_FILENO, &attributes);
+	attributes.c_lflag &= ~ ECHO;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
 	
 	ft_putendl("HELLO MINISHELL");
 	//------------------------------------
