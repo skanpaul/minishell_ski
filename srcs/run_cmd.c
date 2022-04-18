@@ -6,12 +6,11 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/13 18:34:17 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/18 13:38:35 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-extern int FD_STDIN;
 
 static void	free_all(char **strs)
 {
@@ -64,7 +63,7 @@ char	*find_cmd_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-void	run_cmd(char *cmd, char **envp, int output)
+void	run_cmd(t_vars *vars, char *cmd, char **envp, int output)
 {
 	int	id;
 	int	pipe_fd[2];
@@ -88,7 +87,7 @@ void	run_cmd(char *cmd, char **envp, int output)
 	if (!output)
 		dup2(pipe_fd[0], 0);
 	else
-		dup2(FD_STDIN, 0);
+		dup2(vars->stdin_fd, 0);
 	close(pipe_fd[0]);
 	waitpid(id, NULL, 0);
 }
@@ -109,6 +108,7 @@ void	exec_cmd(char *cmd, char **envp)
 	{
 		free_all(cmd_args);
 		err_msg(ERR_CMD);
+		return ;
 	}
 	execve(cmd_args[0], cmd_args, envp);
 	free_all(cmd_args);
