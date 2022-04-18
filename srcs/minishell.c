@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/18 13:51:41 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/18 14:22:47 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	init_vars(t_vars *vars)
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_data	d;
 	t_vars	vars;
 	char	*new_line;
 
@@ -28,6 +29,8 @@ int	main(int argc, char **argv, char **envp)
 		exit_msg(ERR_ARGS);
 
 	init_vars(&vars);
+	init_sa_struc_main(&d);
+	init_sigaction_main(&d);
 	
 	ft_putendl("HELLO MINISHELL");
 	//------------------------------------
@@ -43,6 +46,5 @@ int	main(int argc, char **argv, char **envp)
 		free(new_line);
 	}	
 	//------------------------------------
-	
 	return (0);
 }
