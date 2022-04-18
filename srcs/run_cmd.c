@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/18 13:38:35 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/18 15:03:16 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	run_cmd(t_vars *vars, char *cmd, char **envp, int output)
 		err_msg(ERR_FORK);
 	if (id == 0)
 	{
+		
 		close(pipe_fd[0]);
 		if (output)
 			dup2(output, 1);

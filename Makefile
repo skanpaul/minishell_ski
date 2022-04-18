@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
+#    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/13 18:36:24 by gudias           ###   ########.fr        #
+#    Updated: 2022/04/18 14:23:57 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS	= minishell.c lexing.c run_cmd.c errors.c 
+SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
