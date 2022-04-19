@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/19 15:49:34 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/19 17:26:03 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	exec_builtin(char *cmd)
 	else if (!ft_strncmp(cmd, "cd", 2))
 			(void)cmd;//cd_builtin();
 	else if (!ft_strncmp(cmd, "pwd", 3))
-			(void)cmd;//pwd_builtin();
+			pwd_builtin();
 	else if (!ft_strncmp(cmd, "export", 6))
 			(void)cmd;//export_builtin();
 	else if (!ft_strncmp(cmd, "unset", 5))

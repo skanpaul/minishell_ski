@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/19 15:04:47 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/19 17:24:58 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_data
 /* ************************************************************************** */
 # define MSG_SIGINT_MAIN	"\nminishell ski> "
 # define MSG_SIGQUIT_MAIN	""
-// # define MSG_SIGQUIT_MAIN	"\rski_shell> "
 // ----------------------------------------
 # define MSG_SIGINT_PROG	"\nCCCC "
 # define MSG_SIGQUIT_PROG	"\nDDDD "
@@ -58,6 +57,7 @@ void	init_sigaction_main(t_data *d);
 
 void	exit_builtin(void);
 void	echo_builtin(char *str, int nl);
+int		pwd_builtin(void);
 
 
 char	*get_path(char **envp);

@@ -6,11 +6,11 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/19 16:19:46 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/19 17:26:31 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "minishell.h"
 /* ************************************************************************** */
 #define PWD_NO_ERROR	0
 #define PWD_ERROR		-1
@@ -24,7 +24,7 @@ int pwd_builtin(void)
 		return (PWD_ERROR);
 	else
 	{
-		write(1, cwd_name, strlen(cwd_name));
+		write(1, cwd_name, ft_strlen(cwd_name));
 		write(1, "\n", 1);
 	}
 	
