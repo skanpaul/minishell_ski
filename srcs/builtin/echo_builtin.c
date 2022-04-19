@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:05:21 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/19 15:49:24 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/19 16:08:20 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	echo_builtin(char *str, int nl)
 		str += 3;
 	ft_putstr_fd(str, 1);
 	if (nl)
-		write(1, "\n", 1)
+		write(1, "\n", 1);
+}
