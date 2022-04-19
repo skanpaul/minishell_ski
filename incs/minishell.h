@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/18 14:43:02 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/19 15:04:47 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	init_sa_struc_main(t_data *d);
 void	handler_signal_main(int sig_code);
 void	init_sigaction_main(t_data *d);
 /* ************************************************************************** */
+
+void	exit_builtin(void);
+void	echo_builtin(char *str, int nl);
+
 
 char	*get_path(char **envp);
 char	*find_cmd_path(char *cmd, char **envp);

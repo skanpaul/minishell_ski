@@ -6,17 +6,58 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/18 16:16:56 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/19 15:49:34 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#include <termios.h>
+
+//struct termios saved;
+
+/*void restore(void)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, &saved);
+}*/
 
 static void	init_vars(t_vars *vars)
 {
 	vars->stdin_fd = dup(0);
 	vars->stdout_fd = dup(1);
 	vars->stderr_fd = dup(2);
+}
+
+int	is_builtin(char *cmd)
+{
+	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", NULL};
+
+	int i = 0;
+	while (builtins[i])
+	{
+		if (!ft_strncmp(cmd, builtins[i], ft_strlen(builtins[i])))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	exec_builtin(char *cmd)
+{
+	if (!ft_strncmp(cmd, "echo", 4))
+			echo_builtin(cmd+5, ft_strncmp(cmd+5, "-n", 2));
+	else if (!ft_strncmp(cmd, "cd", 2))
+			(void)cmd;//cd_builtin();
+	else if (!ft_strncmp(cmd, "pwd", 3))
+			(void)cmd;//pwd_builtin();
+	else if (!ft_strncmp(cmd, "export", 6))
+			(void)cmd;//export_builtin();
+	else if (!ft_strncmp(cmd, "unset", 5))
+			(void)cmd;//unset_builtin();
+	else if (!ft_strncmp(cmd, "env", 3))
+			(void)cmd;//env_builtin();
+	else if (!ft_strncmp(cmd, "exit", 4))
+			exit_builtin();
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -32,6 +73,13 @@ int	main(int argc, char **argv, char **envp)
 	init_vars(&vars);
 	init_sa_struc_main(&d);
 	init_sigaction_main(&d);
+
+	struct termios attributes;
+	//tcgetattr(STDIN_FILENO, &saved);
+	//atexit(restore);
+	//tcgetattr(STDIN_FILENO, &attributes);
+	//attributes.c_lflag &= ~ ECHO;
+	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
 	
 	ft_putendl("HELLO MINISHELL");
 	//------------------------------------
@@ -41,7 +89,10 @@ int	main(int argc, char **argv, char **envp)
 		if (new_line)
 		{
 			add_history(new_line);
-			run_cmd(&vars, new_line, envp, 1);
+			if (is_builtin(new_line))
+					exec_builtin(new_line);
+			else
+				run_cmd(&vars, new_line, envp, 1);
 		}
 		new_line = NULL;
 		free(new_line);

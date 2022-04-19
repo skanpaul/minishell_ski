@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/18 14:23:57 by ski              ###   ########.fr        #
+#    Updated: 2022/04/19 15:05:10 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,14 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c
+SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c \
+		  builtin/exit_builtin.c builtin/echo_builtin.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c
 	@echo "$(YELLOW)Compiling $(DEFAULT)$<"
-	@mkdir -p $(OBJSDIR)
+	@mkdir -p $(OBJSDIR) $(OBJSDIR)/builtin
 	@$(CC) $(CLFAGS) $(INCL) -c $< -o $@
 
 all: $(NAME)
