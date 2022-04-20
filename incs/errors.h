@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:48:48 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 21:36:03 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:41:48 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #define CD_MSG_ERR_NO_ARG	"cd: need a relative or absolut path"
 #define CHDIR_NO_ERROR	    0
 #define CHDIR_ERROR		    -1
+// -------------------------------
 
 /* ************************************************************************** */
 #endif
