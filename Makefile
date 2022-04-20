@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
+#    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/20 20:25:41 by ski              ###   ########.fr        #
+#    Updated: 2022/04/20 21:29:58 by sorakann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -lreadline
+CFLAGS	= -Wall -Wextra -Werror 
 INCL	= -I incs
 RM		= rm -f
 
@@ -37,7 +37,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	@echo "$(YELLOW)Creating executable..$(DEFAULT)"
-	@$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $^ -lreadline -o $@
 	@echo "$(GREEN)---> ./$@ is ready$(DEFAULT)"
 
 $(LIBFT):

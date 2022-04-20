@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/20 20:19:45 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/20 21:31:22 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/* ************************************************************************** */
-#define CD_NO_ERROR		0
-#define CD_ERROR		-1
-#define CD_MSG_ERR_NO_ARG		"cd: need a relative or absolut path"
-/* ************************************************************************** */
-#define CHDIR_NO_ERROR	0
-#define CHDIR_ERROR		-1
-/* ************************************************************************** */
-#define MSG_ERR_GETCWD			"getcwd() "
 /* ************************************************************************** */
 static int manage_error(char *remark);
 static int cd_empty(void);
@@ -64,7 +55,7 @@ static int cd_point(char *pathname, t_maillon **ptr_env)
 		return (manage_error(pathname));
 		
 	if(getcwd(cwd, 4096) == NULL)
-		return(manage_error(MSG_ERR_GETCWD));
+		return(manage_error("getcwd() "));
 		
 	replace_env_oldpwd(ptr_env, cwd);
 	
@@ -77,13 +68,13 @@ static int cd_other(char *pathname, t_maillon **ptr_env)
 	char oldcwd[4096];
 	
 	if(getcwd(oldcwd, 4096) == NULL)
-		return(manage_error(MSG_ERR_GETCWD));
+		return(manage_error("getcwd() "));
 		
 	if (chdir(pathname) == CHDIR_ERROR)
 		return (manage_error(pathname));
 		
 	if(getcwd(cwd, 4096) == NULL)
-		return(manage_error(MSG_ERR_GETCWD));
+		return(manage_error("getcwd() "));
 	
 	replace_env_oldpwd(ptr_env, oldcwd);
 	replace_env_pwd(ptr_env, cwd);
