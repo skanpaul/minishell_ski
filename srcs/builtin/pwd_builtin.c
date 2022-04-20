@@ -3,24 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/19 17:26:31 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/20 21:35:57 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
-#define PWD_NO_ERROR	0
-#define PWD_ERROR		-1
-#define CWD_LEN			4096
-/* ************************************************************************** */
 int pwd_builtin(void)
 {
-	char	cwd_name[CWD_LEN];
+	char	cwd_name[4096];
 	
-	if (getcwd(cwd_name, CWD_LEN) == NULL)	
+	if (getcwd(cwd_name, 4096) == NULL)	
 		return (PWD_ERROR);
 	else
 	{
