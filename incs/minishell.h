@@ -6,27 +6,42 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/19 17:24:58 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/20 20:23:19 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+/* ************************************************************************** */
 # include "../libft/includes/libft.h"
 # include "errors.h"
-
+/* ************************************************************************** */
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <errno.h>
+# include <string.h>
+/* ************************************************************************** */
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
 /* ************************************************************************** */
-
+typedef struct s_maillon t_maillon;
+/* ************************************************************************** */
+typedef struct s_maillon
+{
+	char		*var_env;
+	t_maillon	*prev;
+	t_maillon	*next;
+}	t_maillon;
+/* ************************************************************************** */
 typedef struct	s_vars
 {
 	int		stdin_fd;
 	int		stdout_fd;
 	int		stderr_fd;
 }			t_vars;
-
 /* ************************************************************************** */
 typedef struct s_data
 {
@@ -40,8 +55,6 @@ typedef struct s_data
 	pid_t	pid_parent;
 	pid_t	pid_process;
 	pid_t	pid_child;
-
-
 } t_data;
 /* ************************************************************************** */
 # define MSG_SIGINT_MAIN	"\nminishell ski> "
@@ -58,7 +71,11 @@ void	init_sigaction_main(t_data *d);
 void	exit_builtin(void);
 void	echo_builtin(char *str, int nl);
 int		pwd_builtin(void);
+int		cd_builtin(char *pathname, t_maillon **ptr_head);
 
+void	print_maillon(t_maillon **ptr_head);
+void	replace_env_pwd(t_maillon **ptr_env, char *new_path);
+void	replace_env_oldpwd(t_maillon **ptr_env, char *new_path);
 
 char	*get_path(char **envp);
 char	*find_cmd_path(char *cmd, char **envp);
