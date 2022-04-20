@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 20:23:19 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/20 20:24:40 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	echo_builtin(char *str, int nl);
 int		pwd_builtin(void);
 int		cd_builtin(char *pathname, t_maillon **ptr_head);
 
-void	print_maillon(t_maillon **ptr_head);
-void	replace_env_pwd(t_maillon **ptr_env, char *new_path);
-void	replace_env_oldpwd(t_maillon **ptr_env, char *new_path);
+void	print_maillon(t_maillon **ptr_head); // SKI
+void	replace_env_pwd(t_maillon **ptr_env, char *new_path); // SKI
+void	replace_env_oldpwd(t_maillon **ptr_env, char *new_path); // SKI
 
 char	*get_path(char **envp);
 char	*find_cmd_path(char *cmd, char **envp);
