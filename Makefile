@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/19 17:25:27 by ski              ###   ########.fr        #
+#    Updated: 2022/04/20 09:49:43 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCSDIR	= srcs
 OBJSDIR	= objs
 
 SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c \
-		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c
+		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
+		  builtin/cd_builtin.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
