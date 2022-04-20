@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/19 17:26:03 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/20 20:27:54 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exec_builtin(char *cmd)
 	if (!ft_strncmp(cmd, "echo", 4))
 			echo_builtin(cmd+5, ft_strncmp(cmd+5, "-n", 2));
 	else if (!ft_strncmp(cmd, "cd", 2))
-			(void)cmd;//cd_builtin();
+			(void)cmd;//cd_builtin();		// ski: jai besoin  du path et de l-environnement
 	else if (!ft_strncmp(cmd, "pwd", 3))
 			pwd_builtin();
 	else if (!ft_strncmp(cmd, "export", 6))
