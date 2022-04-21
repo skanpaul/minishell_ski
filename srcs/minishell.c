@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 21:44:44 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:06:04 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	exec_builtin(char *cmd)				// ski: certain cmd ont besoin d'argument
 	if (!ft_strncmp(cmd, "echo", 4))
 			echo_builtin(cmd+5, ft_strncmp(cmd+5, "-n", 2));
 	else if (!ft_strncmp(cmd, "cd", 2))
-			(void)cmd;//cd_builtin();		// ski: jai besoin  du path désiré et de l-environnement du minishell
+			// ski: jai besoin  du path désiré et de l-environnement du minishell
+			(void)cmd;//cd_builtin();		
 	else if (!ft_strncmp(cmd, "pwd", 3))
 			pwd_builtin();
 	else if (!ft_strncmp(cmd, "export", 6))
