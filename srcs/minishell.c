@@ -21,11 +21,13 @@
 	tcsetattr(STDIN_FILENO, TCSANOW, &saved);
 }*/
 
-static void	init_vars(t_vars *vars)
+static void	init_vars(t_vars *vars, char **envp)
 {
 	vars->stdin_fd = dup(0);
 	vars->stdout_fd = dup(1);
 	vars->stderr_fd = dup(2);
+	vars->env = NULL;
+	init_env(vars, envp);
 }
 
 int	is_builtin(char *cmd)
@@ -42,7 +44,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-void	exec_builtin(char *cmd)
+void	exec_builtin(char *cmd, t_vars *vars)
 {
 	if (!ft_strncmp(cmd, "echo", 4))
 			echo_builtin(cmd+5, ft_strncmp(cmd+5, "-n", 2));
@@ -55,9 +57,9 @@ void	exec_builtin(char *cmd)
 	else if (!ft_strncmp(cmd, "unset", 5))
 			(void)cmd;//unset_builtin();
 	else if (!ft_strncmp(cmd, "env", 3))
-			(void)cmd;//env_builtin();
+			env_builtin(vars);
 	else if (!ft_strncmp(cmd, "exit", 4))
-			exit_builtin();
+			exit_builtin(vars);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -70,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 		exit_msg(ERR_ARGS);
 	if (!isatty(0) || !isatty(1) || !isatty(2))
 		exit_msg(ERR_TTY);	
-	init_vars(&vars);
+	init_vars(&vars, envp);
 	init_sa_struc_main(&d);
 	init_sigaction_main(&d);
 
@@ -80,7 +82,6 @@ int	main(int argc, char **argv, char **envp)
 	//tcgetattr(STDIN_FILENO, &attributes);
 	//attributes.c_lflag &= ~ ECHO;
 	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
-	
 	ft_putendl("HELLO MINISHELL");
 	//------------------------------------
 	while(1)
@@ -90,7 +91,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(new_line);
 			if (is_builtin(new_line))
-					exec_builtin(new_line);
+					exec_builtin(new_line, &vars);
 			else
 				run_cmd(&vars, new_line, envp, 1);
 		}

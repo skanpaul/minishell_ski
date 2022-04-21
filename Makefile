@@ -6,14 +6,14 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/19 17:25:27 by ski              ###   ########.fr        #
+#    Updated: 2022/04/20 14:10:07 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -lreadline
+CFLAGS	= -Wall -Wextra -Werror -lreadline 
 INCL	= -I incs
 RM		= rm -f
 
@@ -23,7 +23,8 @@ SRCSDIR	= srcs
 OBJSDIR	= objs
 
 SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c \
-		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c
+	builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
+	builtin/env_builtin.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
@@ -36,7 +37,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	@echo "$(YELLOW)Creating executable..$(DEFAULT)"
-	@$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $^ -lreadline -o $@
 	@echo "$(GREEN)---> ./$@ is ready$(DEFAULT)"
 
 $(LIBFT):
