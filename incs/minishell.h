@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 15:23:13 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/21 15:55:54 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 /* ************************************************************************** */
-// typedef struct s_maillon t_maillon;
-// /* ************************************************************************** */
-// typedef struct s_maillon
-// {
-// 	char		*var_env;
-// 	t_maillon	*prev;
-// 	t_maillon	*next;
-// }	t_maillon;
-// /* ************************************************************************** */
+typedef struct s_sig
+{
+	//-------------------------------------------
+	struct sigaction	sa_sigint_main;
+	struct sigaction	sa_sigquit_main;
+	//-------------------------------------------
+	struct sigaction	sa_signal_prog;
+
+} t_sig;
 
 typedef struct	s_env
 {
@@ -52,22 +52,10 @@ typedef struct	s_vars
 	int		stdin_fd;
 	int		stdout_fd;
 	int		stderr_fd;
-	t_env		*env;
-}			t_vars;
+	t_env	*env;
+	t_sig	sig;
+}	t_vars;
 /* ************************************************************************** */
-typedef struct s_data
-{
-	char				*new_line;
-	//-------------------------------------------
-	struct sigaction	sa_sigint_main;
-	struct sigaction	sa_sigquit_main;
-	//-------------------------------------------
-	struct sigaction	sa_signal_prog;
-	//-------------------------------------------
-	pid_t	pid_parent;
-	pid_t	pid_process;
-	pid_t	pid_child;
-} t_data;
 /* ************************************************************************** */
 # define MSG_SIGINT_MAIN	"\nminishell ski> "
 # define MSG_SIGQUIT_MAIN	""
@@ -75,9 +63,9 @@ typedef struct s_data
 # define MSG_SIGINT_PROG	"\nCCCC "
 # define MSG_SIGQUIT_PROG	"\nDDDD "
 /* ************************************************************************** */
-void	init_sa_struc_main(t_data *d);
+void	init_sa_struc_main(t_sig *s);
 void	handler_signal_main(int sig_code);
-void	init_sigaction_main(t_data *d);
+void	init_sigaction_main(t_sig *s);
 /* ************************************************************************** */
 
 void	exit_builtin(t_vars *vars);

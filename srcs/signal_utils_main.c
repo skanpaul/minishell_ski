@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/04/18 17:14:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/21 15:53:30 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,32 @@ void	handler_signal_main(int sig_code)
 }
 
 /* ************************************************************************** */
-void init_sigaction_main(t_data *d)
+void init_sigaction_main(t_sig *s)
 {
 	// signal(SIGINT, handler_signal_main);	// [ctrl-C]: SIGINT
 	// signal(SIGQUIT, SIG_IGN);				// [ctrl-\]: SIGQUIT
 		
-	sigaction(SIGINT, &d->sa_sigint_main, NULL);	// [ctrl-C]: SIGINT
-	sigaction(SIGQUIT, &d->sa_sigquit_main, NULL);	// [ctrl-\]: SIGQUIT	
+	sigaction(SIGINT, &s->sa_sigint_main, NULL);	// [ctrl-C]: SIGINT
+	sigaction(SIGQUIT, &s->sa_sigquit_main, NULL);	// [ctrl-\]: SIGQUIT	
 }
 
 /* ************************************************************************** */
-void init_sa_struc_main(t_data *d)
+void init_sa_struc_main(t_sig *s)
 {
 	// SIGINT -----------------------------------------	
-	d->sa_sigint_main.sa_handler = &handler_signal_main;	// SA_HANDLER	
-	sigemptyset(&d->sa_sigint_main.sa_mask);				// SA_MASK
-	sigaddset(&d->sa_sigint_main.sa_mask, SIGINT);			// -
-	sigaddset(&d->sa_sigint_main.sa_mask, SIGQUIT);			// -	
-	d->sa_sigint_main.sa_flags = SA_RESTART;				// SA_FLAG
+	s->sa_sigint_main.sa_handler = &handler_signal_main;	// SA_HANDLER	
+	sigemptyset(&s->sa_sigint_main.sa_mask);				// SA_MASK
+	sigaddset(&s->sa_sigint_main.sa_mask, SIGINT);			// -
+	sigaddset(&s->sa_sigint_main.sa_mask, SIGQUIT);			// -	
+	s->sa_sigint_main.sa_flags = SA_RESTART;				// SA_FLAG
 	
 	// SIGQUIT -----------------------------------------	
-	d->sa_sigquit_main.sa_handler = SIG_IGN;
-	// d->sa_sigquit_main.sa_handler = &handler_signal_main;	// SA_HANDLER	
-	sigemptyset(&d->sa_sigquit_main.sa_mask);				// SA_MASK
-	sigaddset(&d->sa_sigquit_main.sa_mask, SIGINT);			// -
-	sigaddset(&d->sa_sigquit_main.sa_mask, SIGQUIT);			// -	
-	d->sa_sigquit_main.sa_flags = SA_RESTART;				// SA_FLAG
+	s->sa_sigquit_main.sa_handler = SIG_IGN;
+	// s->sa_sigquit_main.sa_handler = &handler_signal_main;	// SA_HANDLER	
+	sigemptyset(&s->sa_sigquit_main.sa_mask);				// SA_MASK
+	sigaddset(&s->sa_sigquit_main.sa_mask, SIGINT);			// -
+	sigaddset(&s->sa_sigquit_main.sa_mask, SIGQUIT);			// -	
+	s->sa_sigquit_main.sa_flags = SA_RESTART;				// SA_FLAG
 	// ------------------------------------------------
 }
 
