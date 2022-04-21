@@ -6,21 +6,21 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/21 17:35:54 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/21 17:48:42 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
 static int manage_error(char *remark);
-static int cd_empty(void);
+static int cd_empty(t_env **ptr_env);
 static int cd_point(char *pathname, t_env **ptr_env);
 static int cd_other();
 /* ************************************************************************** */
 int cd_builtin(char *pathname, t_env **ptr_env)
 {
 	if (pathname == NULL || pathname[0] == '\0')
-		return (cd_empty());
+		return (cd_empty(ptr_env));
 
 	//*pathname == '.';
 	else if (ft_strncmp(pathname, ".", 2)  == 0)
@@ -41,12 +41,15 @@ static int manage_error(char *remark)
 }
 
 /* ************************************************************************** */
-static int cd_empty(void)
+static int cd_empty(t_env **ptr_env)
 {
-	write(1, CD_MSG_ERR_NO_ARG, ft_strlen(CD_MSG_ERR_NO_ARG));
+	/*write(1, CD_MSG_ERR_NO_ARG, ft_strlen(CD_MSG_ERR_NO_ARG));
 	write(1, "\n", 1);
-	write(1, "\n", 1);
-	return (CD_ERROR);
+	write(1, "\n", 1);*/
+	char	*path;
+
+	path = get_env(*ptr_env, "HOME")->data; 
+	return (cd_other(path, ptr_env));
 }
 /* ************************************************************************** */
 static int cd_point(char *pathname, t_env **ptr_env)
