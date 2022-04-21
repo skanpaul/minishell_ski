@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/20 21:31:22 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:01:27 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static int cd_empty(void)
 /* ************************************************************************** */
 static int cd_point(char *pathname, t_maillon **ptr_env)
 {
-	char cwd[4096];
+	char cwd[CWD_BUF_SIZE];
 	if (chdir(pathname) == CHDIR_ERROR)
 		return (manage_error(pathname));
 		
-	if(getcwd(cwd, 4096) == NULL)
+	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
 		return(manage_error("getcwd() "));
 		
 	replace_env_oldpwd(ptr_env, cwd);
@@ -64,16 +64,16 @@ static int cd_point(char *pathname, t_maillon **ptr_env)
 /* ************************************************************************** */
 static int cd_other(char *pathname, t_maillon **ptr_env)
 {
-	char cwd[4096];
-	char oldcwd[4096];
+	char cwd[CWD_BUF_SIZE];
+	char oldcwd[CWD_BUF_SIZE];
 	
-	if(getcwd(oldcwd, 4096) == NULL)
+	if(getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
 		return(manage_error("getcwd() "));
 		
 	if (chdir(pathname) == CHDIR_ERROR)
 		return (manage_error(pathname));
 		
-	if(getcwd(cwd, 4096) == NULL)
+	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
 		return(manage_error("getcwd() "));
 	
 	replace_env_oldpwd(ptr_env, oldcwd);

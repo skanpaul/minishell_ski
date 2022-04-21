@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:48:48 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 21:41:48 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:00:41 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #define CD_MSG_ERR_NO_ARG	"cd: need a relative or absolut path"
 #define CHDIR_NO_ERROR	    0
 #define CHDIR_ERROR		    -1
+#define CWD_BUF_SIZE    	4096
 // -------------------------------
 
 /* ************************************************************************** */

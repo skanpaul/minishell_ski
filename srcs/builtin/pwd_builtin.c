@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/20 21:35:57 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:02:44 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 /* ************************************************************************** */
 int pwd_builtin(void)
 {
-	char	cwd_name[4096];
+	char	cwd_name[CWD_BUF_SIZE];
 	
-	if (getcwd(cwd_name, 4096) == NULL)	
+	if (getcwd(cwd_name, CWD_BUF_SIZE) == NULL)	
 		return (PWD_ERROR);
 	else
 	{
