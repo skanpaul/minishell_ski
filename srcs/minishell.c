@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 20:17:24 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/21 15:54:34 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	exec_builtin(char *cmd, t_vars *vars)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data	d;
 	t_vars	vars;
 	char	*new_line;
 
@@ -74,8 +73,8 @@ int	main(int argc, char **argv, char **envp)
 	if (!isatty(0) || !isatty(1) || !isatty(2))
 		exit_msg(ERR_TTY);	
 	init_vars(&vars, envp);
-	init_sa_struc_main(&d);
-	init_sigaction_main(&d);
+	init_sa_struc_main(&vars.sig);
+	init_sigaction_main(&vars.sig);
 
 	struct termios attributes;
 	//tcgetattr(STDIN_FILENO, &saved);

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/21 11:01:27 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/21 15:21:03 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 /* ************************************************************************** */
 static int manage_error(char *remark);
 static int cd_empty(void);
-static int cd_point(char *pathname, t_maillon **ptr_env);
+static int cd_point(char *pathname, t_env **ptr_env);
 static int cd_other();
 /* ************************************************************************** */
-int cd_builtin(char *pathname, t_maillon **ptr_env)
+int cd_builtin(char *pathname, t_env **ptr_env)
 {
 	if (pathname == NULL || pathname[0] == '\0')
 		return (cd_empty());
@@ -48,7 +48,7 @@ static int cd_empty(void)
 	return (CD_ERROR);
 }
 /* ************************************************************************** */
-static int cd_point(char *pathname, t_maillon **ptr_env)
+static int cd_point(char *pathname, t_env **ptr_env)
 {
 	char cwd[CWD_BUF_SIZE];
 	if (chdir(pathname) == CHDIR_ERROR)
@@ -62,7 +62,7 @@ static int cd_point(char *pathname, t_maillon **ptr_env)
 	return (CD_NO_ERROR);	
 }
 /* ************************************************************************** */
-static int cd_other(char *pathname, t_maillon **ptr_env)
+static int cd_other(char *pathname, t_env **ptr_env)
 {
 	char cwd[CWD_BUF_SIZE];
 	char oldcwd[CWD_BUF_SIZE];

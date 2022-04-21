@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 17:57:28 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/21 15:55:54 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,44 +30,32 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 /* ************************************************************************** */
-typedef struct s_maillon t_maillon;
-/* ************************************************************************** */
-typedef struct s_maillon
+typedef struct s_sig
 {
-	char		*var_env;
-	t_maillon	*prev;
-	t_maillon	*next;
-}	t_maillon;
-/* ************************************************************************** */
+	//-------------------------------------------
+	struct sigaction	sa_sigint_main;
+	struct sigaction	sa_sigquit_main;
+	//-------------------------------------------
+	struct sigaction	sa_signal_prog;
+
+} t_sig;
 
 typedef struct	s_env
 {
-	char		*name;
-	char		*data;
+	char			*name;
+	char			*data;
 	struct s_env	*next;
-}		t_env;
+}	t_env;
 
 typedef struct	s_vars
 {
 	int		stdin_fd;
 	int		stdout_fd;
 	int		stderr_fd;
-	t_env		*env;
-}			t_vars;
+	t_env	*env;
+	t_sig	sig;
+}	t_vars;
 /* ************************************************************************** */
-typedef struct s_data
-{
-	char				*new_line;
-	//-------------------------------------------
-	struct sigaction	sa_sigint_main;
-	struct sigaction	sa_sigquit_main;
-	//-------------------------------------------
-	struct sigaction	sa_signal_prog;
-	//-------------------------------------------
-	pid_t	pid_parent;
-	pid_t	pid_process;
-	pid_t	pid_child;
-} t_data;
 /* ************************************************************************** */
 # define MSG_SIGINT_MAIN	"\nminishell ski> "
 # define MSG_SIGQUIT_MAIN	""
@@ -75,16 +63,16 @@ typedef struct s_data
 # define MSG_SIGINT_PROG	"\nCCCC "
 # define MSG_SIGQUIT_PROG	"\nDDDD "
 /* ************************************************************************** */
-void	init_sa_struc_main(t_data *d);
+void	init_sa_struc_main(t_sig *s);
 void	handler_signal_main(int sig_code);
-void	init_sigaction_main(t_data *d);
+void	init_sigaction_main(t_sig *s);
 /* ************************************************************************** */
 
 void	exit_builtin(t_vars *vars);
 void	echo_builtin(char *str, int nl);
 int		pwd_builtin(void);
 
-int		cd_builtin(char *pathname, t_maillon **ptr_head);
+int		cd_builtin(char *pathname, t_env **ptr_env);
 
 void	env_builtin(t_vars *vars);
 
@@ -93,9 +81,9 @@ void	add_to_env(t_vars *vars, char *name, char *data);
 t_env	*get_env(t_vars *vars, char *name);
 void	free_env(t_vars *vars);
 
-void	print_maillon(t_maillon **ptr_head); // SKI
-void	replace_env_pwd(t_maillon **ptr_env, char *new_path); // SKI
-void	replace_env_oldpwd(t_maillon **ptr_env, char *new_path); // SKI
+void	print_maillon(t_env **ptr_env); // SKI
+void	replace_env_pwd(t_env **ptr_env, char *new_path); // SKI
+void	replace_env_oldpwd(t_env **ptr_env, char *new_path); // SKI
 
 char	*get_path(char **envp);
 char	*find_cmd_path(char *cmd, char **envp);
