@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:48:48 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 11:00:41 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/20 14:55:57 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # define ERR_PIPE   "Error: pipe"
 # define ERR_FORK   "Error: fork"
 # define ERR_EXECVE "Error: execve"
+# define ERR_MALLOC "Error: malloc"
 # define ERR_CMD    "Error: command not found"
 # define ERR_ARGS   "Error: bad arguments"
 # define ERR_TTY    "Error: not tty"
+
 
 /* ************************************************************************** */
 #define PWD_NO_ERROR	0

@@ -14,6 +14,7 @@ NAME	= minishell
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror 
+
 INCL	= -I incs
 RM		= rm -f
 
@@ -24,7 +25,7 @@ OBJSDIR	= objs
 
 SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c \
 		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
-		  builtin/cd_builtin.c builtin/cd_builtin_utils.c 
+		  builtin/cd_builtin.c builtin/cd_builtin_utils.c builtin/env_builtin.c 
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
