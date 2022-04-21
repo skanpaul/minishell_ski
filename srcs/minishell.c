@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 16:25:58 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/21 18:56:53 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exec_builtin(char *cmd, t_vars *vars)
 	else if (!ft_strncmp(cmd, "export", 6))
 			(void)cmd;//export_builtin();
 	else if (!ft_strncmp(cmd, "unset", 5))
-			(void)cmd;//unset_builtin();
+			unset_builtin(vars, cmd+6);
 	else if (!ft_strncmp(cmd, "env", 3))
 			env_builtin(vars);
 	else if (!ft_strncmp(cmd, "exit", 4))

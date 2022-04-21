@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 17:04:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/21 17:48:40 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	add_to_env(t_vars *vars, char *name, char *data)
 	}
 }
 
-t_env	*get_env(t_vars *vars, char *name)
+t_env	*get_env(t_env *env, char *name)
 {
 	t_env	*ptr;
 
-	ptr = vars->env;
+	ptr = env;
 	while (ptr)
 	{
 		if (!ft_strncmp(name, ptr->name, ft_strlen(name)))
