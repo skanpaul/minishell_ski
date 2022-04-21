@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 18:08:52 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/21 13:45:48 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	add_to_env(t_vars *vars, char *name, char *data)
 	t_env	*ptr;
 	t_env	*new;
 
-	new = malloc(sizeof(t_env*));
+	new = malloc(sizeof(t_env));
 	if (!new)
 		return ;
 	new->name = ft_strdup(name);
