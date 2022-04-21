@@ -49,7 +49,8 @@ void	exec_builtin(char *cmd, t_vars *vars)
 	if (!ft_strncmp(cmd, "echo", 4))
 			echo_builtin(cmd+5, ft_strncmp(cmd+5, "-n", 2));
 	else if (!ft_strncmp(cmd, "cd", 2))
-			(void)cmd;//cd_builtin();
+			// ski: jai besoin  du path désiré et de l-environnement du minishell
+			(void)cmd;//cd_builtin();		
 	else if (!ft_strncmp(cmd, "pwd", 3))
 			pwd_builtin();
 	else if (!ft_strncmp(cmd, "export", 6))

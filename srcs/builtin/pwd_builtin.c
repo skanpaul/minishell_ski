@@ -6,21 +6,17 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/19 17:26:31 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/21 11:02:44 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
-#define PWD_NO_ERROR	0
-#define PWD_ERROR		-1
-#define CWD_LEN			4096
-/* ************************************************************************** */
 int pwd_builtin(void)
 {
-	char	cwd_name[CWD_LEN];
+	char	cwd_name[CWD_BUF_SIZE];
 	
-	if (getcwd(cwd_name, CWD_LEN) == NULL)	
+	if (getcwd(cwd_name, CWD_BUF_SIZE) == NULL)	
 		return (PWD_ERROR);
 	else
 	{
