@@ -6,15 +6,11 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:35:13 by ski               #+#    #+#             */
-/*   Updated: 2022/04/21 15:32:22 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/21 16:00:44 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/* ************************************************************************** */
-#define START_PWD		"PWD="
-#define START_OLDPWD	"OLDPWD="
-
 /* ************************************************************************** */
 static void		replace_env_var(t_env **ptr_env, char *var_name, char *path);
 static t_env	**get_env_var_ptr(t_env **ptr_env, char *wished_var);
