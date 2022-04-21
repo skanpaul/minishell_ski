@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 13:45:48 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/21 17:04:13 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	init_env(t_vars *vars, char **envp)
 		free(data);
 		envp++;
 	}
+	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
+	//sinon -> les ajouter
 }
 
 void	env_builtin(t_vars *vars)

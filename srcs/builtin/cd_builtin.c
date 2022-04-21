@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/21 15:21:03 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/21 17:35:54 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int cd_builtin(char *pathname, t_env **ptr_env)
 	if (pathname == NULL || pathname[0] == '\0')
 		return (cd_empty());
 
+	//*pathname == '.';
 	else if (ft_strncmp(pathname, ".", 2)  == 0)
 		return (cd_point(pathname, ptr_env));
 
