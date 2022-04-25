@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/25 17:10:32 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 17:23:20 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_env(t_vars *vars, char **envp)
 		len = ft_strchr(*envp, '=') - *envp;
 		name = ft_substr(*envp, 0, len);
 		data = ft_substr(*envp, len + 1, ft_strlen(*envp));
-		add_to_env(vars, name, data);
+		add_var(vars, name, data);
 		free(name);
 		free(data);
 		envp++;
