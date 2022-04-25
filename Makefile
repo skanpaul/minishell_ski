@@ -6,7 +6,7 @@
 #    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/21 18:48:44 by gudias           ###   ########.fr        #
+#    Updated: 2022/04/25 17:32:17 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,10 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c \
+SRCS	= minishell.c lexing.c parsing.c run_cmd.c errors.c signal_utils_main.c \
 		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
 		  builtin/cd_builtin.c builtin/cd_builtin_utils.c builtin/env_builtin.c \
-		 builtin/unset_builtin.c 
+		 builtin/unset_builtin.c builtin_utils.c 
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 

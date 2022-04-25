@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 18:42:18 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/25 19:00:11 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,16 @@ void	handler_signal_main(int sig_code);
 void	init_sigaction_main(t_sig *s);
 /* ************************************************************************** */
 
+void	parse_line(t_vars *vars, char *line);
+
+int		is_builtin(char *cmd);
+void	exec_builtin(t_vars *vars, char *cmd);
+
 void	exit_builtin(t_vars *vars);
 void	echo_builtin(char *str, int nl);
 int		pwd_builtin(void);
 void	unset_builtin(t_vars *vars, char *name);
 int		cd_builtin(char *pathname, t_env **ptr_env);
-
 void	env_builtin(t_vars *vars);
 
 void	init_env(t_vars *vars, char **envp);
@@ -85,10 +89,9 @@ void	print_maillon(t_env **ptr_env); // SKI
 void	replace_env_pwd(t_env **ptr_env, char *new_path); // SKI
 void	replace_env_oldpwd(t_env **ptr_env, char *new_path); // SKI
 
-char	*get_path(char **envp);
-char	*find_cmd_path(char *cmd, char **envp);
-void	run_cmd(t_vars *vars, char *cmd, char **envp, int output);
-void	exec_cmd(char *cmd, char **envp);
+char	*find_cmd_path(t_env *env, char *cmd);
+void	run_cmd(t_vars *vars, char *cmd, int output);
+void	exec_cmd(t_vars *vars, char *cmd);
 
 void	here_doc(char *limiter);
 
