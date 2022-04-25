@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/25 16:41:51 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 16:48:43 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	add_to_env(t_vars *vars, char *name, char *data);
 t_env	*get_env(t_env *env, char *name);
 void	free_env(t_vars *vars);
 t_env	**get_env_var_ptr(t_env **ptr_env, char *wished_var);
-void	replace_env_var(t_env **ptr_env, char *var_name, char *path);
 void	print_maillon(t_env **ptr_env); // SKI
+void	update_var(t_env **ptr_env, char *var_name, char *path);
 // -------------------------------------------------------------------
 
 void	replace_env_pwd(t_env **ptr_env, char *new_path); // SKI

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/25 16:36:16 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 16:48:51 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void print_maillon(t_env **ptr_head)
 	printf("\n");
 }
 
-void replace_env_var(t_env **ptr_env, char *var_name, char *path)
+void update_var(t_env **ptr_env, char *var_name, char *path)
 {
 	t_env **buff;
 
