@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/25 16:48:51 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 17:04:31 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,7 @@ t_env **get_env_var_ptr(t_env **ptr_env, char *wished_var)
 	return (NULL);
 }
 
-void print_maillon(t_env **ptr_head)
-{
-	t_env *temp;
-
-	temp = *ptr_head;
-
-	while(temp != NULL)
-	{
-		printf("%s=", temp->name);
-		printf("%s\n", temp->data);
-		temp = temp->next;		
-	}
-	printf("\n");
-}
-
-void update_var(t_env **ptr_env, char *var_name, char *path)
+void update_var(t_env **ptr_env, char *var_name, char *new_data)
 {
 	t_env **buff;
 
@@ -110,6 +95,6 @@ void update_var(t_env **ptr_env, char *var_name, char *path)
 	else
 	{
 		free((*buff)->data);
-		(*buff)->data = ft_strdup(path);
+		(*buff)->data = ft_strdup(new_data);
 	}	
 }
