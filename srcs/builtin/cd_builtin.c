@@ -6,13 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/21 17:48:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/25 16:25:41 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
-static int manage_error(char *remark);
+static int manage_perror(char *remark);
 static int cd_empty(t_env **ptr_env);
 static int cd_point(char *pathname, t_env **ptr_env);
 static int cd_other();
@@ -33,7 +33,7 @@ int cd_builtin(char *pathname, t_env **ptr_env)
 }
 
 /* ************************************************************************** */
-static int manage_error(char *remark)
+static int manage_perror(char *remark)
 {
 	perror(remark);
 	printf("\n");
@@ -56,10 +56,10 @@ static int cd_point(char *pathname, t_env **ptr_env)
 {
 	char cwd[CWD_BUF_SIZE];
 	if (chdir(pathname) == CHDIR_ERROR)
-		return (manage_error(pathname));
+		return (manage_perror(pathname));
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
-		return(manage_error("getcwd() "));
+		return(manage_perror("getcwd() "));
 		
 	replace_env_oldpwd(ptr_env, cwd);
 	
@@ -72,13 +72,13 @@ static int cd_other(char *pathname, t_env **ptr_env)
 	char oldcwd[CWD_BUF_SIZE];
 	
 	if(getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
-		return(manage_error("getcwd() "));
+		return(manage_perror("getcwd() "));
 		
 	if (chdir(pathname) == CHDIR_ERROR)
-		return (manage_error(pathname));
+		return (manage_perror(pathname));
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
-		return(manage_error("getcwd() "));
+		return(manage_perror("getcwd() "));
 	
 	replace_env_oldpwd(ptr_env, oldcwd);
 	replace_env_pwd(ptr_env, cwd);
