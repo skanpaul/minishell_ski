@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/13 16:23:39 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/25 16:28:06 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,11 @@ void	exit_msg(char *msg)
 {
 	err_msg(msg);
 	exit(0);
+}
+
+int manage_perror(char *remark)
+{
+	perror(remark);
+	printf("\n");
+	return (CD_ERROR);
 }

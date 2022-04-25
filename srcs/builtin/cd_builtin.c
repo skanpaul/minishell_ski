@@ -6,13 +6,12 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/25 16:25:41 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 16:28:10 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
-static int manage_perror(char *remark);
 static int cd_empty(t_env **ptr_env);
 static int cd_point(char *pathname, t_env **ptr_env);
 static int cd_other();
@@ -30,14 +29,6 @@ int cd_builtin(char *pathname, t_env **ptr_env)
 		return (cd_other(pathname, ptr_env));
 
 	return (CD_NO_ERROR);
-}
-
-/* ************************************************************************** */
-static int manage_perror(char *remark)
-{
-	perror(remark);
-	printf("\n");
-	return (CD_ERROR);
 }
 
 /* ************************************************************************** */
