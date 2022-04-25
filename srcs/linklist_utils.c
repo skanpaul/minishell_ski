@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/25 17:04:31 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 17:08:51 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,21 @@ t_env **get_env_var_ptr(t_env **ptr_env, char *wished_var)
 	}
 	
 	return (NULL);
+}
+
+void print_var(t_env *ptr_var)
+{
+	t_env	*temp;
+	
+	temp = ptr_var;
+	while (temp)
+	{
+		ft_putstr_fd(temp->name, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(temp->data, 1);
+		ft_putstr_fd("\n", 1);
+		temp = temp->next;
+	}	
 }
 
 void update_var(t_env **ptr_env, char *var_name, char *new_data)
