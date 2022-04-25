@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/25 16:28:10 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 16:43:19 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ int cd_builtin(char *pathname, t_env **ptr_env)
 /* ************************************************************************** */
 static int cd_empty(t_env **ptr_env)
 {
-	/*write(1, CD_MSG_ERR_NO_ARG, ft_strlen(CD_MSG_ERR_NO_ARG));
-	write(1, "\n", 1);
-	write(1, "\n", 1);*/
 	char	*path;
 
 	path = get_env(*ptr_env, "HOME")->data; 

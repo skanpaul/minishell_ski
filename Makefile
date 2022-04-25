@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
+#    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/04/21 18:48:44 by gudias           ###   ########.fr        #
+#    Updated: 2022/04/25 16:32:51 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJSDIR	= objs
 SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c \
 		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
 		  builtin/cd_builtin.c builtin/cd_builtin_utils.c builtin/env_builtin.c \
-		 builtin/unset_builtin.c 
+		 builtin/unset_builtin.c linklist_utils.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:48:48 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/20 14:55:57 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/25 16:43:11 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 // -------------------------------
 #define CD_NO_ERROR		    0
 #define CD_ERROR		    -1
-#define CD_MSG_ERR_NO_ARG	"cd: need a relative or absolut path"
 #define CHDIR_NO_ERROR	    0
 #define CHDIR_ERROR		    -1
 #define CWD_BUF_SIZE    	4096
