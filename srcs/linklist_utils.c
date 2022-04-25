@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/25 17:23:12 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/25 17:32:07 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_env(t_vars *vars)
 	}
 }
 
-void	add_var(t_vars *vars, char *name, char *data)
+void	add_var(t_env **var_table, char *name, char *data)
 {
 	t_env	*ptr;
 	t_env	*new;
@@ -39,11 +39,11 @@ void	add_var(t_vars *vars, char *name, char *data)
 	new->name = ft_strdup(name);
 	new->data = ft_strdup(data);
 	new->next = NULL;
-	if (!vars->env)
-		vars->env = new;
+	if (!*var_table)
+		*var_table = new;
 	else
 	{
-		ptr = vars->env;
+		ptr = *var_table;
 		while (ptr->next)
 			ptr = ptr->next;
 		ptr->next = new;
