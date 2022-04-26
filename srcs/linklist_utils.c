@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 15:18:29 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 15:38:50 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,58 +92,29 @@ void	add_var(t_env **var_list, char *name, char *data)
 }
 
 /* ************************************************************************** */
-void free_one_var(t_env **var)
-{
-	if (*var && (*var)->name)
-		free((*var)->name);
-		
-	if (*var && (*var)->data)
-		free((*var)->data);
-
-	if (*var)
-		free(*var);
-
-	*var == NULL;
-}
-
-/* ************************************************************************** */
 void remove_var(t_env **var_list, char *var_name)
 {
-	t_env *prev;
-	t_env *temp;
+	t_env	*ptr;
+	t_env	*prev;
 
 	prev = NULL;
-	temp = *var_list;
-
-	// RIEN dans la liste
-	if (temp == NULL)  
-		return ;
-
-	// 1 seule variable dans la liste
-	if (!ft_strncmp(temp->name, var_name, ft_strlen(var_name)) && temp->next == NULL)
+	ptr = *var_list;
+	while (ptr)
 	{
-		free_one_var(&temp);
-		*var_list = NULL;
-		return ;
-	}
-
-	// 2 variable ou plus
-	while (temp != NULL)
-	{
-		prev = temp;
-		temp = temp->next;
-		if (temp == NULL)
-			break;
-		
-		if (!ft_strncmp(temp->name, var_name, ft_strlen(var_name)))
+		if (!ft_strncmp(var_name, ptr->name, ft_strlen(ptr->name)))
 		{
-			free_one_var(&temp);
-			break ;
+			if (prev)
+				prev->next = ptr->next;
+			else
+				*var_list = ptr->next;
+			free(ptr->name);
+			free(ptr->data);
+			free(ptr);
+			return ;
 		}
-		
-	}		
-	
-			
+		prev = ptr;
+		ptr = ptr->next;	
+	}
 }
 
 /* ************************************************************************** */

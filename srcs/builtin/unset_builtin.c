@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:14:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 18:54:45 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/26 15:37:50 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,5 @@
 
 void	unset_builtin(t_vars *vars, char *name)
 {
-	t_env	*ptr;
-	t_env	*prev;
-
-	prev = NULL;
-	ptr = vars->env;
-	while (ptr)
-	{
-		if (!ft_strncmp(name, ptr->name, ft_strlen(ptr->name)))
-		{
-			if (prev)
-				prev->next = ptr->next;
-			else
-				vars->env = ptr->next;
-			free(ptr->name);
-			free(ptr->data);
-			free(ptr);
-			return ;
-		}
-		prev = ptr;
-		ptr = ptr->next;	
-	}
+	remove_var(&vars->env, name);
 }
