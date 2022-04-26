@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 13:39:32 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 16:26:14 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ void	init_env(t_vars *vars, char **envp)
 	// Update: SHLVL
 	temp = get_var(vars->env, "SHLVL");
 	temp->data = ft_itoa(ft_atoi(temp->data) + 1);
+
+	// AJOUTER le path de [./minishell] dans la variable d'environnement $PATH
 	
 	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
 	//sinon -> les ajouter
+	
 }
 
 /* ************************************************************************** */

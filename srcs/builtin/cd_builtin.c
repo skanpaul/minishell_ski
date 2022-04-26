@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 14:22:43 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 16:15:35 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 /* ************************************************************************** */
 static int cd_empty(t_env **ptr_env);
 static int cd_point(char *pathname, t_env **ptr_env);
-static int cd_other();
+static int cd_other(char *pathname, t_env **ptr_env);
 /* ************************************************************************** */
 int cd_builtin(char *pathname, t_env **ptr_env)
 {
