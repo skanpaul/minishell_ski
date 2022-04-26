@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/25 19:00:11 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/26 17:38:49 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,13 @@ void	init_sigaction_main(t_sig *s);
 void	parse_line(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
-void	exec_builtin(t_vars *vars, char *cmd);
+void	exec_builtin(t_vars *vars, char **cmd_args);
 
 void	exit_builtin(t_vars *vars);
-void	echo_builtin(char *str, int nl);
+void	echo_builtin(char **cmd_args);
 int		pwd_builtin(void);
-void	unset_builtin(t_vars *vars, char *name);
+void	export_builtin(t_vars *vars, char **cmd_args);
+void	unset_builtin(t_vars *vars, char **cmd_args);
 int		cd_builtin(char *pathname, t_env **ptr_env);
 void	env_builtin(t_vars *vars);
 

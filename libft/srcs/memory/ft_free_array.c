@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 22:18:12 by gudias           ###   ########.fr       */
+/*   Created: 2022/04/26 21:16:17 by gudias            #+#    #+#             */
+/*   Updated: 2022/04/26 21:18:44 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	parse_line(t_vars *vars, char *line)
+void	ft_free_array(char **array)
 {
-	char	**cmd_args;
-	
-	//check single quotes
+	int	i;
 
-	//check double quotes
-	
-	//check redirs
-
-	//replace $value
-
-	cmd_args = ft_split(line, ' ');
-	if (!cmd_args[0])
-		return ;
-	add_history(line);
-	if (is_builtin(cmd_args[0]))
-		exec_builtin(vars, cmd_args);
-	else
-		run_cmd(vars, line, 1);
-	
-	ft_free_array(cmd_args);
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	free(array);
+	array = NULL;
 }
