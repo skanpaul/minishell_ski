@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 14:25:58 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 14:26:49 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	env_builtin(t_vars *vars);
 void	init_env(t_vars *vars, char **envp);
 
 // -------------------------------------------------------------------
-void	print_var(t_env *ptr_var);
+void	print_var(t_env *var_list);
 t_env	*get_var(t_env *env, char *name);
 bool	does_var_exist(t_env *var_list, char *var_name);
 void	update_var(t_env **var_list, char *var_name, char *new_data);

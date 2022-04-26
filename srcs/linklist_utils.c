@@ -6,17 +6,17 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 13:55:25 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 14:27:07 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_var(t_env *ptr_var)
+void print_var(t_env *var_list)
 {
 	t_env	*temp;
 	
-	temp = ptr_var;
+	temp = var_list;
 	while (temp)
 	{
 		ft_putstr_fd(temp->name, 1);
