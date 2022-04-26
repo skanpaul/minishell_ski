@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 12:55:44 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 13:01:55 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	init_var(t_env **child_env, char **parent_env);
 // -------------------------------------------------------------------
 void	add_var(t_env **var_table, char *name, char *data);
 t_env	*get_var(t_env *env, char *name);
-void	free_env(t_vars *vars);
+void	free_var_list(t_vars *vars);
 void	print_var(t_env *ptr_var);
 void	update_var(t_env **ptr_env, char *var_name, char *new_data);
 // -------------------------------------------------------------------
