@@ -6,34 +6,28 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 13:14:52 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 13:50:09 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-
-
-
-void	free_var_list(t_env **var_list)
+void print_var(t_env *ptr_var)
 {
-	t_env	*tmp;
-	t_env	*ptr;
-
-	ptr = *var_list;
-	while (ptr)
+	t_env	*temp;
+	
+	temp = ptr_var;
+	while (temp)
 	{
-		free(ptr->name);
-		free(ptr->data);
-		tmp = ptr->next;
-		free(ptr);
-		ptr = tmp;
-	}
-	*var_list = NULL;
+		ft_putstr_fd(temp->name, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(temp->data, 1);
+		ft_putstr_fd("\n", 1);
+		temp = temp->next;
+	}	
 }
 
+/* ************************************************************************** */
 t_env	*get_var(t_env *env, char *name)
 {
 	t_env	*ptr;
@@ -48,6 +42,33 @@ t_env	*get_var(t_env *env, char *name)
 	return (NULL);
 }
 
+/* ************************************************************************** */
+bool does_var_exist(t_env *var_list, char *var_name)
+{
+	if (get_var(var_list, var_name) == NULL)
+		return (false);
+	return (true);
+}
+
+/* ************************************************************************** */
+void update_var(t_env **ptr_var_table, char *var_name, char *new_data)
+{
+	t_env *buff;
+
+	buff = get_var(*ptr_var_table, var_name);
+	
+	if (buff == NULL)
+	{
+		printf("[ %s ] n'existe pas\n", var_name);	
+	}
+	else
+	{
+		free(buff->data);
+		buff->data = ft_strdup(new_data);
+	}	
+}
+
+/* ************************************************************************** */
 void	add_var(t_env **var_table, char *name, char *data)
 {
 	t_env	*ptr;
@@ -70,34 +91,22 @@ void	add_var(t_env **var_table, char *name, char *data)
 	}
 }
 
-void print_var(t_env *ptr_var)
+/* ************************************************************************** */
+void	free_var_list(t_env **var_list)
 {
-	t_env	*temp;
-	
-	temp = ptr_var;
-	while (temp)
-	{
-		ft_putstr_fd(temp->name, 1);
-		ft_putstr_fd("=", 1);
-		ft_putstr_fd(temp->data, 1);
-		ft_putstr_fd("\n", 1);
-		temp = temp->next;
-	}	
-}
+	t_env	*tmp;
+	t_env	*ptr;
 
-void update_var(t_env **ptr_var_table, char *var_name, char *new_data)
-{
-	t_env *buff;
-
-	buff = get_var(*ptr_var_table, var_name);
-	
-	if (buff == NULL)
+	ptr = *var_list;
+	while (ptr)
 	{
-		printf("[ %s ] n'existe pas\n", var_name);	
+		free(ptr->name);
+		free(ptr->data);
+		tmp = ptr->next;
+		free(ptr);
+		ptr = tmp;
 	}
-	else
-	{
-		free(buff->data);
-		buff->data = ft_strdup(new_data);
-	}	
+	*var_list = NULL;
 }
+
+/* ************************************************************************** */
