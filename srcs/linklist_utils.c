@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linklist_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 10:54:48 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:55:54 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_env(t_vars *vars)
 	}
 }
 
-t_env	*get_env(t_env *env, char *name)
+t_env	*get_var(t_env *env, char *name)
 {
 	t_env	*ptr;
 
@@ -83,7 +83,7 @@ void update_var(t_env **ptr_var_table, char *var_name, char *new_data)
 {
 	t_env *buff;
 
-	buff = get_env(*ptr_var_table, var_name);
+	buff = get_var(*ptr_var_table, var_name);
 	
 	if (buff == NULL)
 	{

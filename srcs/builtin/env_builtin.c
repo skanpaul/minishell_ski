@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 12:54:19 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 12:56:03 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_var(t_env **child_env, char **parent_env)
 	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
 	//sinon -> les ajouter
 	
-	temp = get_env(*child_env, "SHLVL");
+	temp = get_var(*child_env, "SHLVL");
 	temp->data = ft_itoa(ft_atoi(temp->data) + 1);
 }
 

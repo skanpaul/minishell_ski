@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/25 16:43:19 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 12:55:58 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int cd_empty(t_env **ptr_env)
 {
 	char	*path;
 
-	path = get_env(*ptr_env, "HOME")->data; 
+	path = get_var(*ptr_env, "HOME")->data; 
 	return (cd_other(path, ptr_env));
 }
 /* ************************************************************************** */
