@@ -6,34 +6,34 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 12:44:23 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 12:51:29 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_var(t_vars *vars, char **envp)
+void	init_var(t_env **child_env, char **parent_env)
 {
 	char	*name;
 	char	*data;
 	int		len;
 	t_env	*temp;
 
-	while (*envp)
+	while (*parent_env)
 	{
-		len = ft_strchr(*envp, '=') - *envp;
-		name = ft_substr(*envp, 0, len);
-		data = ft_substr(*envp, len + 1, ft_strlen(*envp));
-		add_var(&vars->env, name, data);
+		len = ft_strchr(*parent_env, '=') - *parent_env;
+		name = ft_substr(*parent_env, 0, len);
+		data = ft_substr(*parent_env, len + 1, ft_strlen(*parent_env));
+		add_var(child_env, name, data);
 		free(name);
 		free(data);
-		envp++;
+		parent_env++;
 	}
 
 	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
 	//sinon -> les ajouter
 	
-	temp = get_env(vars->env, "SHLVL");
+	temp = get_env(*child_env, "SHLVL");
 	temp->data = ft_itoa(ft_atoi(temp->data) + 1);
 }
 
