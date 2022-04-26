@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 13:55:07 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 14:25:58 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ void	update_var(t_env **var_list, char *var_name, char *new_data);
 void	add_var(t_env **var_list, char *name, char *data);
 void	free_var_list(t_env **var_list);
 // -------------------------------------------------------------------
-
-void	replace_env_pwd(t_env **ptr_env, char *new_path); // SKI
-void	replace_env_oldpwd(t_env **ptr_env, char *new_path); // SKI
 
 char	*get_path(char **envp);
 char	*find_cmd_path(char *cmd, char **envp);
