@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 17:27:47 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 18:43:49 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@
 /* ************************************************************************** */
 void init_loc(t_vars *vars)
 {
+	ft_printf("AAAAAAAAAA\n");
+	
 	if(does_var_exist(vars->loc, "?"))
+	{
+		ft_printf("? DOESNT EXIST\n");
 		update_var(&vars->loc, "?", "0");
-	else	
+	}
+		
+	else
+	{
+		ft_printf("? exist\n");		
 		add_var(&vars->loc, "?", "0");
+	}	
 
+
+
+	ft_printf("BBBBBBB\n");
 	print_var(vars->loc);	
 	
 }

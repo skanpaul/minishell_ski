@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 15:38:50 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 18:41:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void print_var(t_env *var_list)
 t_env	*get_var(t_env *var_list, char *name)
 {
 	t_env	*ptr;
-
+	
 	ptr = var_list;
 	while (ptr)
 	{
