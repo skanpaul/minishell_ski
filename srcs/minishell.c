@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 13:32:32 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 17:26:08 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_vars(t_vars *vars, char **envp)
 	vars->stderr_fd = dup(2);
 	vars->env = NULL;
 	init_env(vars, envp);
+	init_loc(vars);
 }
 
 int	is_builtin(char *cmd)
