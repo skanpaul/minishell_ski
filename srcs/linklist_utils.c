@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 10:52:28 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/26 10:54:48 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,6 @@ t_env	*get_env(t_env *env, char *name)
 	}
 	return (NULL);
 }
-
-// t_env **get_env_var_ptr(t_env **ptr_env, char *wished_var)
-// {
-// 	t_env **temp;
-
-// 	temp = ptr_env;
-// 	while (*temp != NULL)
-// 	{
-// 		if(ft_strncmp((*temp)->name, wished_var, ft_strlen(wished_var)) == 0)
-// 			return (temp);
-// 		temp = &(*temp)->next;
-// 	}
-	
-// 	return (NULL);
-// }
 
 void	add_var(t_env **var_table, char *name, char *data)
 {
