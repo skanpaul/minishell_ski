@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 10:55:58 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:44:30 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	unset_builtin(t_vars *vars, char *name);
 int		cd_builtin(char *pathname, t_env **ptr_env);
 
 void	env_builtin(t_vars *vars);
-void	init_env(t_vars *vars, char **envp);
+void	init_var(t_vars *vars, char **envp);
 
 // -------------------------------------------------------------------
 void	add_var(t_env **var_table, char *name, char *data);
