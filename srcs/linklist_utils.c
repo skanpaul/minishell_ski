@@ -6,18 +6,18 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 13:02:04 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 13:05:30 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_var_list(t_vars *vars)
+void	free_var_list(t_env **var_list)
 {
 	t_env	*tmp;
 	t_env	*ptr;
 
-	ptr = vars->env;
+	ptr = *var_list;
 	while (ptr)
 	{
 		free(ptr->name);
@@ -26,6 +26,7 @@ void	free_var_list(t_vars *vars)
 		free(ptr);
 		ptr = tmp;
 	}
+	*var_list = NULL;
 }
 
 t_env	*get_var(t_env *env, char *name)
