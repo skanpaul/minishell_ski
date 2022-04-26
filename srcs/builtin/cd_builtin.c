@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 14:18:10 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 14:22:43 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int cd_point(char *pathname, t_env **ptr_env)
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
 		return(manage_perror("getcwd() "));
 		
-	replace_env_oldpwd(ptr_env, cwd);
+	update_var(ptr_env, "OLDPWD", cwd);
 	
 	return (CD_NO_ERROR);	
 }
@@ -68,22 +68,10 @@ static int cd_other(char *pathname, t_env **ptr_env)
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
 		return(manage_perror("getcwd() "));
 	
-	replace_env_oldpwd(ptr_env, oldcwd);
-	replace_env_pwd(ptr_env, cwd);
+	update_var(ptr_env, "OLDPWD", oldcwd);
+	update_var(ptr_env, "PWD", cwd);
 
 	return (CD_NO_ERROR);	
 }
 
 /* ************************************************************************** */
-
-/* ************************************************************************** */
-void replace_env_pwd(t_env **ptr_env, char *new_path)
-{
-	update_var(ptr_env, "PWD", new_path);
-}
-
-/* ************************************************************************** */
-void replace_env_oldpwd(t_env **ptr_env, char *new_path)
-{
-	update_var(ptr_env, "OLDPWD", new_path);
-}
