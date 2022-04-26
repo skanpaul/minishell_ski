@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 12:51:29 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 12:54:19 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,4 @@ void	init_var(t_env **child_env, char **parent_env)
 void	env_builtin(t_vars *vars)
 {
 	print_var(vars->env);
-	// t_env	*env;
-
-	// env = vars->env;
-	// while (env)
-	// {
-	// 	ft_putstr_fd(env->name, 1);
-	// 	ft_putstr_fd("=", 1);
-	// 	ft_putstr_fd(env->data, 1);
-	// 	ft_putstr_fd("\n", 1);
-	// 	env = env->next;
-	// }
 }
