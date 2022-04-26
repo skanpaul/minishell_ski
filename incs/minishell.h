@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 13:10:04 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 13:31:10 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	unset_builtin(t_vars *vars, char *name);
 int		cd_builtin(char *pathname, t_env **ptr_env);
 
 void	env_builtin(t_vars *vars);
-void	init_var(t_env **child_env, char **parent_env);
+void	init_env(t_vars *vars, char **envp);
 
 // -------------------------------------------------------------------
 void	add_var(t_env **var_table, char *name, char *data);
