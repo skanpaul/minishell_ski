@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 14:27:07 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 14:28:38 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void print_var(t_env *var_list)
 }
 
 /* ************************************************************************** */
-t_env	*get_var(t_env *env, char *name)
+t_env	*get_var(t_env *var_list, char *name)
 {
 	t_env	*ptr;
 
-	ptr = env;
+	ptr = var_list;
 	while (ptr)
 	{
 		if (!ft_strncmp(name, ptr->name, ft_strlen(name)))
