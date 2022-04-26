@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 13:50:09 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/26 13:55:25 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ bool does_var_exist(t_env *var_list, char *var_name)
 }
 
 /* ************************************************************************** */
-void update_var(t_env **ptr_var_table, char *var_name, char *new_data)
+void update_var(t_env **var_list, char *var_name, char *new_data)
 {
 	t_env *buff;
 
-	buff = get_var(*ptr_var_table, var_name);
+	buff = get_var(*var_list, var_name);
 	
 	if (buff == NULL)
 	{
@@ -69,7 +69,7 @@ void update_var(t_env **ptr_var_table, char *var_name, char *new_data)
 }
 
 /* ************************************************************************** */
-void	add_var(t_env **var_table, char *name, char *data)
+void	add_var(t_env **var_list, char *name, char *data)
 {
 	t_env	*ptr;
 	t_env	*new;
@@ -80,11 +80,11 @@ void	add_var(t_env **var_table, char *name, char *data)
 	new->name = ft_strdup(name);
 	new->data = ft_strdup(data);
 	new->next = NULL;
-	if (!*var_table)
-		*var_table = new;
+	if (!*var_list)
+		*var_list = new;
 	else
 	{
-		ptr = *var_table;
+		ptr = *var_list;
 		while (ptr->next)
 			ptr = ptr->next;
 		ptr->next = new;
