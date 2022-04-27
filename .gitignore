@@ -3,3 +3,5 @@
 *.swp
 .DS_Store
 minishell
+ski_ski
+.ski_ski.dSYM/*

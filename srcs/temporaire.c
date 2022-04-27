@@ -6,33 +6,21 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 18:43:49 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 08:16:45 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/* ************************************************************************** */
 
 /* ************************************************************************** */
 void init_loc(t_vars *vars)
 {
-	ft_printf("AAAAAAAAAA\n");
+	char *temp;
 	
 	if(does_var_exist(vars->loc, "?"))
-	{
-		ft_printf("? DOESNT EXIST\n");
-		update_var(&vars->loc, "?", "0");
-	}
-		
+		update_var(&vars->loc, "?", EXIT_SUCCESS_STR);
 	else
-	{
-		ft_printf("? exist\n");		
-		add_var(&vars->loc, "?", "0");
-	}	
-
-
-
-	ft_printf("BBBBBBB\n");
-	print_var(vars->loc);	
-	
+		add_var(&vars->loc, "?", EXIT_SUCCESS_STR);
 }
+
+/* ************************************************************************** */
