@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 08:05:11 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 09:26:41 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	exec_builtin(char *cmd, t_vars *vars)
 			echo_builtin(cmd+5, ft_strncmp(cmd+5, "-n", 2));
 	else if (!ft_strncmp(cmd, "cd", 2))
 			// ski: jai besoin  du path désiré et de l-environnement du minishell
-			cd_builtin(cmd+3, &vars->env);		
+			cd_builtin(cmd+3, vars);		
 	else if (!ft_strncmp(cmd, "pwd", 3))
 			pwd_builtin();
 	else if (!ft_strncmp(cmd, "export", 6))

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 09:18:30 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 09:21:06 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	exit_builtin(t_vars *vars);
 void	echo_builtin(char *str, int nl);
 int		pwd_builtin(void);
 void	unset_builtin(t_vars *vars, char *name);
-int		cd_builtin(char *pathname, t_env **ptr_env);
+// int		cd_builtin(char *pathname, t_env **ptr_env);
+int		cd_builtin(char *pathname, t_vars *vars);
 
 void	env_builtin(t_vars *vars);
 void	init_env(t_vars *vars, char **envp);
