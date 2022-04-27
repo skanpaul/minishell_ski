@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:38:20 by gudias            #+#    #+#              #
-#    Updated: 2022/03/23 23:56:54 by gudias           ###   ########.fr        #
+#    Updated: 2022/04/26 21:22:54 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ $(addprefix strings/, \
 	convert/ft_itoa.c \
 \
 $(addprefix memory/, \
+	ft_free_array.c \
 	ft_bzero.c \
 	ft_memchr.c \
 	ft_memcmp.c \

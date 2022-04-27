@@ -6,46 +6,20 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/19 16:30:07 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/26 22:05:42 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_all(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		strs[i] = NULL;
-		i++;
-	}
-	free(strs);
-	strs = NULL;
-}
-
-char	*get_path(char **envp)
-{
-	while (*envp)
-	{
-		if (!ft_strncmp(*envp, "PATH=", 5))
-			return (*envp + 5);
-		envp++;
-	}
-	return (NULL);
-}
-
-char	*find_cmd_path(char *cmd, char **envp)
+char	*find_cmd_path(t_env *env, char *cmd)
 {
 	char	**dirs;
 	char	*cmd_path;
 	char	*path;
 	int		i;
 
-	path = get_path(envp);
+	path = get_env(env, "PATH")->data;
 	dirs = ft_split(path, ':');
 	i = 0;
 	while (dirs[i])
@@ -53,17 +27,17 @@ char	*find_cmd_path(char *cmd, char **envp)
 		cmd_path = ft_pathjoin(dirs[i], cmd);
 		if (access(cmd_path, 0) == 0)
 		{
-			free_all(dirs);
+			ft_free_array(dirs);
 			return (cmd_path);
 		}
 		free(cmd_path);
 		i++;
 	}
-	free_all(dirs);
+	ft_free_array(dirs);
 	return (NULL);
 }
 
-void	run_cmd(t_vars *vars, char *cmd, char **envp, int output)
+void	run_cmd(t_vars *vars, char *cmd, int output)
 {
 	int	id;
 	int	pipe_fd[2];
@@ -81,7 +55,7 @@ void	run_cmd(t_vars *vars, char *cmd, char **envp, int output)
 		else
 			dup2(pipe_fd[1], 1);
 		close(pipe_fd[1]);
-		exec_cmd(cmd, envp);
+		exec_cmd(vars, cmd);
 		exit(1);
 	}
 	close(pipe_fd[1]);
@@ -93,7 +67,7 @@ void	run_cmd(t_vars *vars, char *cmd, char **envp, int output)
 	waitpid(id, NULL, 0);
 }
 
-void	exec_cmd(char *cmd, char **envp)
+void	exec_cmd(t_vars *vars, char *cmd)
 {
 	char	**cmd_args;
 	char	*tmp;
@@ -102,16 +76,16 @@ void	exec_cmd(char *cmd, char **envp)
 	if (*cmd_args[0] != '/' && *cmd_args[0] != '.' && *cmd_args[0] != '~')
 	{
 		tmp = cmd_args[0];
-		cmd_args[0] = find_cmd_path(cmd_args[0], envp);
+		cmd_args[0] = find_cmd_path(vars->env, cmd_args[0]);	
 		free(tmp);
 	}
 	if (!cmd_args[0])
 	{
-		free_all(cmd_args);
+		ft_free_array(cmd_args);
 		err_msg(ERR_CMD);
 		return ;
 	}
-	execve(cmd_args[0], cmd_args, envp);
-	free_all(cmd_args);
+	execve(cmd_args[0], cmd_args, NULL);
+	ft_free_array(cmd_args);
 	err_msg(ERR_EXECVE);
 }

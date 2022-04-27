@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/21 17:48:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/26 19:37:09 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_env	*get_env(t_env *env, char *name)
 	ptr = env;
 	while (ptr)
 	{
-		if (!ft_strncmp(name, ptr->name, ft_strlen(name)))
+		if (!ft_strncmp(name, ptr->name, ft_strlen(ptr->name) + 1))
 			return (ptr);
 		ptr = ptr->next;
 	}
