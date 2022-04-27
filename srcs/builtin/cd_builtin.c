@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 09:53:02 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 10:00:58 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int cd_builtin(char *pathname, t_vars *vars)
 	else
 		return (cd_other(pathname, vars));
 
-	return (CD_NO_ERROR);
+	return (BUILTIN_SUCCESS);
 }
 
 /* ************************************************************************** */
@@ -51,7 +51,7 @@ static int cd_point(char *pathname, t_vars *vars)
 		
 	update_var(&vars->env, "OLDPWD", cwd);
 	
-	return (CD_NO_ERROR);	
+	return (BUILTIN_SUCCESS);	
 }
 /* ************************************************************************** */
 static int cd_other(char *pathname, t_vars *vars)
@@ -71,7 +71,7 @@ static int cd_other(char *pathname, t_vars *vars)
 	update_var(&vars->env, "OLDPWD", oldcwd);
 	update_var(&vars->env, "PWD", cwd);
 
-	return (CD_NO_ERROR);	
+	return (BUILTIN_SUCCESS);	
 }
 
 /* ************************************************************************** */
