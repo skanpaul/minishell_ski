@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 08:39:17 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 09:43:45 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ void update_var(t_env **var_head, char *var_name, char *new_data)
 {
 	t_env *buff;
 
-	buff = get_var(*var_head, var_name);
+	buff = NULL;
 	
-	if (buff == NULL)
-	{
-		printf("[ %s ] n'existe pas\n", var_name);	
-	}
+	if (!does_var_exist(*var_head, var_name))
+		add_var(var_head, var_name, new_data);
 	else
 	{
+		buff = get_var(*var_head, var_name);
 		free(buff->data);
 		buff->data = ft_strdup(new_data);
 	}	
