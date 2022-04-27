@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 10:19:19 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 11:18:27 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exit_msg(char *msg)
 int manage_perror(char *remark, t_vars *vars)
 {
 	perror(remark);
-	printf("\n");
+	ft_printf("\n");
 	write_exit_failure(vars);
 	return (BUILTIN_FAILURE);
 }
