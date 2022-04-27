@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 10:00:58 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 10:03:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int cd_point(char *pathname, t_vars *vars)
 		return (manage_perror(pathname, vars));
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
-		return(manage_perror("getcwd() ", vars));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
 		
 	update_var(&vars->env, "OLDPWD", cwd);
 	
@@ -60,13 +60,13 @@ static int cd_other(char *pathname, t_vars *vars)
 	char oldcwd[CWD_BUF_SIZE];
 	
 	if(getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
-		return(manage_perror("getcwd() ", vars));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
 		
 	if (chdir(pathname) == CHDIR_ERROR)
 		return (manage_perror(pathname, vars));
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
-		return(manage_perror("getcwd() ", vars));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
 	
 	update_var(&vars->env, "OLDPWD", oldcwd);
 	update_var(&vars->env, "PWD", cwd);
