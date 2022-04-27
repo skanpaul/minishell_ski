@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 17:26:08 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 07:49:01 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(int argc, char **argv, char **envp)
 	t_vars	vars;
 	char	*new_line;
 
+	(void)argv;
 	if (argc > 1)
 		exit_msg(ERR_ARGS);
 	if (!isatty(0) || !isatty(1) || !isatty(2))
@@ -78,6 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	init_sigaction_main(&vars.sig);
 
 	struct termios attributes;
+	(void)attributes;
 	//tcgetattr(STDIN_FILENO, &saved);
 	//atexit(restore);
 	//tcgetattr(STDIN_FILENO, &attributes);

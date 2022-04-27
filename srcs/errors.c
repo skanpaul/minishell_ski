@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/25 16:28:06 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 07:54:08 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,11 @@ int manage_perror(char *remark)
 	perror(remark);
 	printf("\n");
 	return (CD_ERROR);
+}
+
+void err_quit(int n) 
+// A EFFACER: est utilise dans here_doc.c, mais ou est la definition
+{
+	(void)n;
+	return ;
 }

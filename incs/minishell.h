@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 17:24:09 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 07:53:46 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	run_cmd(t_vars *vars, char *cmd, char **envp, int output);
 void	exec_cmd(char *cmd, char **envp);
 
 void	here_doc(char *limiter);
+void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la definition
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
