@@ -6,17 +6,17 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/26 18:41:53 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 08:39:17 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_var(t_env *var_list)
+void print_var(t_env *var_head)
 {
 	t_env	*temp;
 	
-	temp = var_list;
+	temp = var_head;
 	while (temp)
 	{
 		ft_putstr_fd(temp->name, 1);
@@ -28,11 +28,11 @@ void print_var(t_env *var_list)
 }
 
 /* ************************************************************************** */
-t_env	*get_var(t_env *var_list, char *name)
+t_env	*get_var(t_env *var_head, char *name)
 {
 	t_env	*ptr;
 	
-	ptr = var_list;
+	ptr = var_head;
 	while (ptr)
 	{
 		if (!ft_strncmp(name, ptr->name, ft_strlen(name)))
@@ -43,19 +43,19 @@ t_env	*get_var(t_env *var_list, char *name)
 }
 
 /* ************************************************************************** */
-bool does_var_exist(t_env *var_list, char *var_name)
+bool does_var_exist(t_env *var_head, char *var_name)
 {
-	if (get_var(var_list, var_name) == NULL)
+	if (get_var(var_head, var_name) == NULL)
 		return (false);
 	return (true);
 }
 
 /* ************************************************************************** */
-void update_var(t_env **var_list, char *var_name, char *new_data)
+void update_var(t_env **var_head, char *var_name, char *new_data)
 {
 	t_env *buff;
 
-	buff = get_var(*var_list, var_name);
+	buff = get_var(*var_head, var_name);
 	
 	if (buff == NULL)
 	{
@@ -69,7 +69,7 @@ void update_var(t_env **var_list, char *var_name, char *new_data)
 }
 
 /* ************************************************************************** */
-void	add_var(t_env **var_list, char *name, char *data)
+void	add_var(t_env **var_head, char *name, char *data)
 {
 	t_env	*ptr;
 	t_env	*new;
@@ -80,11 +80,11 @@ void	add_var(t_env **var_list, char *name, char *data)
 	new->name = ft_strdup(name);
 	new->data = ft_strdup(data);
 	new->next = NULL;
-	if (!*var_list)
-		*var_list = new;
+	if (!*var_head)
+		*var_head = new;
 	else
 	{
-		ptr = *var_list;
+		ptr = *var_head;
 		while (ptr->next)
 			ptr = ptr->next;
 		ptr->next = new;
@@ -92,13 +92,13 @@ void	add_var(t_env **var_list, char *name, char *data)
 }
 
 /* ************************************************************************** */
-void remove_var(t_env **var_list, char *var_name)
+void remove_var(t_env **var_head, char *var_name)
 {
 	t_env	*ptr;
 	t_env	*prev;
 
 	prev = NULL;
-	ptr = *var_list;
+	ptr = *var_head;
 	while (ptr)
 	{
 		if (!ft_strncmp(var_name, ptr->name, ft_strlen(ptr->name)))
@@ -106,7 +106,7 @@ void remove_var(t_env **var_list, char *var_name)
 			if (prev)
 				prev->next = ptr->next;
 			else
-				*var_list = ptr->next;
+				*var_head = ptr->next;
 			free(ptr->name);
 			free(ptr->data);
 			free(ptr);
@@ -118,12 +118,12 @@ void remove_var(t_env **var_list, char *var_name)
 }
 
 /* ************************************************************************** */
-void	free_var_list(t_env **var_list)
+void	free_var_list(t_env **var_head)
 {
 	t_env	*tmp;
 	t_env	*ptr;
 
-	ptr = *var_list;
+	ptr = *var_head;
 	while (ptr)
 	{
 		free(ptr->name);
@@ -132,7 +132,7 @@ void	free_var_list(t_env **var_list)
 		free(ptr);
 		ptr = tmp;
 	}
-	*var_list = NULL;
+	*var_head = NULL;
 }
 
 /* ************************************************************************** */
