@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   unset_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:14:09 by gudias            #+#    #+#             */
 /*   Updated: 2022/04/26 18:01:29 by gudias           ###   ########.fr       */
@@ -22,6 +22,7 @@ void	unset_builtin(t_vars *vars, char **cmd_args)
 	while (cmd_args[i])
 	{
 		//sera remplacer par la fonction remove_var
+    //remove_var(&vars->env, name);
 		//il faudra supprimer aussi dans var_loc
 		prev = NULL;
 		ptr = vars->env;

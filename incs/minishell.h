@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 17:38:49 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/27 10:21:05 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef struct	s_vars
 	int		stdout_fd;
 	int		stderr_fd;
 	t_env	*env;
+	t_env	*loc;
 	t_sig	sig;
 }	t_vars;
-/* ************************************************************************** */
 /* ************************************************************************** */
 # define MSG_SIGINT_MAIN	"\nminishell ski> "
 # define MSG_SIGQUIT_MAIN	""
@@ -74,30 +74,39 @@ int		is_builtin(char *cmd);
 void	exec_builtin(t_vars *vars, char **cmd_args);
 
 void	exit_builtin(t_vars *vars);
+
 void	echo_builtin(char **cmd_args);
-int		pwd_builtin(void);
+int		pwd_builtin(t_vars *vars);
 void	export_builtin(t_vars *vars, char **cmd_args);
 void	unset_builtin(t_vars *vars, char **cmd_args);
-int		cd_builtin(char *pathname, t_env **ptr_env);
+int		cd_builtin(char *pathname, t_vars *vars);
 void	env_builtin(t_vars *vars);
-
+void	loc_builtin(t_vars *vars);
 void	init_env(t_vars *vars, char **envp);
-void	add_to_env(t_vars *vars, char *name, char *data);
-t_env	*get_env(t_env *env, char *name);
-void	free_env(t_vars *vars);
+void 	init_loc(t_vars *vars);
 
-void	print_maillon(t_env **ptr_env); // SKI
-void	replace_env_pwd(t_env **ptr_env, char *new_path); // SKI
-void	replace_env_oldpwd(t_env **ptr_env, char *new_path); // SKI
+// -------------------------------------------------------------------
+void	write_exit_success(t_vars *vars);
+void	write_exit_failure(t_vars *vars);
+// -------------------------------------------------------------------
+void	print_var(t_env *var_head);
+t_env	*get_var(t_env *var_head, char *name);
+bool	does_var_exist(t_env *var_head, char *var_name);
+void	update_var(t_env **var_head, char *var_name, char *new_data);
+void	add_var(t_env **var_head, char *name, char *data);
+void	remove_var(t_env **var_head, char *var_name);
+void	free_var_list(t_env **var_head);
+// -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);
 void	run_cmd(t_vars *vars, char *cmd, int output);
 void	exec_cmd(t_vars *vars, char *cmd);
 
 void	here_doc(char *limiter);
+void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la definition
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
-
+int		manage_perror(char *remark, t_vars *vars);
 /* ************************************************************************** */
 #endif

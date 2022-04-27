@@ -6,84 +6,75 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/21 17:48:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/27 10:18:10 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
-static int manage_error(char *remark);
-static int cd_empty(t_env **ptr_env);
-static int cd_point(char *pathname, t_env **ptr_env);
-static int cd_other();
+static int cd_empty(t_vars *vars);
+static int cd_point(char *pathname, t_vars *vars);
+static int cd_other(char *pathname, t_vars *vars);
 /* ************************************************************************** */
-int cd_builtin(char *pathname, t_env **ptr_env)
+int cd_builtin(char *pathname, t_vars *vars)
 {
 	if (pathname == NULL || pathname[0] == '\0')
-		return (cd_empty(ptr_env));
+		return (cd_empty(vars));
 
 	//*pathname == '.';
 	else if (ft_strncmp(pathname, ".", 2)  == 0)
-		return (cd_point(pathname, ptr_env));
+		return (cd_point(pathname, vars));
 
 	else
-		return (cd_other(pathname, ptr_env));
-
-	return (CD_NO_ERROR);
+		return (cd_other(pathname, vars));
+	
+	write_exit_success(vars);
+	return (BUILTIN_SUCCESS);
 }
 
 /* ************************************************************************** */
-static int manage_error(char *remark)
+static int cd_empty(t_vars *vars)
 {
-	perror(remark);
-	printf("\n");
-	return (CD_ERROR);
-}
-
-/* ************************************************************************** */
-static int cd_empty(t_env **ptr_env)
-{
-	/*write(1, CD_MSG_ERR_NO_ARG, ft_strlen(CD_MSG_ERR_NO_ARG));
-	write(1, "\n", 1);
-	write(1, "\n", 1);*/
 	char	*path;
 
-	path = get_env(*ptr_env, "HOME")->data; 
-	return (cd_other(path, ptr_env));
+	path = get_var(vars->env, "HOME")->data; 
+	return (cd_other(path, vars));
 }
 /* ************************************************************************** */
-static int cd_point(char *pathname, t_env **ptr_env)
+static int cd_point(char *pathname, t_vars *vars)
 {
 	char cwd[CWD_BUF_SIZE];
 	if (chdir(pathname) == CHDIR_ERROR)
-		return (manage_error(pathname));
+		return (manage_perror(pathname, vars));
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
-		return(manage_error("getcwd() "));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
 		
-	replace_env_oldpwd(ptr_env, cwd);
+	update_var(&vars->env, "OLDPWD", cwd);
 	
-	return (CD_NO_ERROR);	
+	write_exit_success(vars);
+	return (BUILTIN_SUCCESS);	
 }
 /* ************************************************************************** */
-static int cd_other(char *pathname, t_env **ptr_env)
+static int cd_other(char *pathname, t_vars *vars)
 {
 	char cwd[CWD_BUF_SIZE];
 	char oldcwd[CWD_BUF_SIZE];
 	
 	if(getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
-		return(manage_error("getcwd() "));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
 		
 	if (chdir(pathname) == CHDIR_ERROR)
-		return (manage_error(pathname));
+		return (manage_perror(pathname, vars));
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
-		return(manage_error("getcwd() "));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
 	
-	replace_env_oldpwd(ptr_env, oldcwd);
-	replace_env_pwd(ptr_env, cwd);
+	update_var(&vars->env, "OLDPWD", oldcwd);
+	update_var(&vars->env, "PWD", cwd);
 
-	return (CD_NO_ERROR);	
+	write_exit_success(vars);
+	return (BUILTIN_SUCCESS);	
 }
 
 /* ************************************************************************** */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/13 16:23:39 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/27 11:18:27 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,19 @@ void	exit_msg(char *msg)
 {
 	err_msg(msg);
 	exit(0);
+}
+
+int manage_perror(char *remark, t_vars *vars)
+{
+	perror(remark);
+	ft_printf("\n");
+	write_exit_failure(vars);
+	return (BUILTIN_FAILURE);
+}
+
+void err_quit(int n) 
+// A EFFACER: est utilise dans here_doc.c, mais ou est la definition ?
+{
+	(void)n;
+	return ;
 }
