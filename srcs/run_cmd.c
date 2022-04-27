@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 22:05:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/27 16:21:30 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*find_cmd_path(t_env *env, char *cmd)
 	char	*path;
 	int		i;
 
-	path = get_env(env, "PATH")->data;
+	path = get_var(env, "PATH")->data;
 	dirs = ft_split(path, ':');
 	i = 0;
 	while (dirs[i])

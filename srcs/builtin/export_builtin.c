@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 21:09:45 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/27 17:31:33 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,12 @@ void	export_builtin(t_vars *vars, char **cmd_args)
 		else
 		{
 			name = ft_strdup(cmd_args[i]); 
-			data = NULL;//check data in local_vars
+			data = get_var(vars->loc, name)->data;
 		}
 		if (ft_strlen(name) < 1)
 			err_msg("export: not a valid identifier");
-		else if (data)
-		{
-			if (get_env(vars->env, name))
-			{
-				free(get_env(vars->env, name)->data);
-				get_env(vars->env, name)->data = ft_strdup(data);
-			}
-			else
-				add_to_env(vars, name, data);
-		}	
+		else if (data) //enlever data?
+			update_var(&vars->env, name, data);
 		free(data);
 		free(name);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 10:22:18 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 16:13:34 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,7 @@ static void	init_vars(t_vars *vars, char **envp)
 	init_sigaction_main(&vars->sig);
 	init_loc(vars);
 }
-
-//	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", "loc", NULL};
-
-
-	//pwd_builtin(vars);
 	
-	//else if (!ft_strncmp(cmd, "loc", 3))
-			//loc_builtin(vars);
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;

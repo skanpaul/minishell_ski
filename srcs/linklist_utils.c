@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 09:43:45 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 17:34:04 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void print_var(t_env *var_head)
 	temp = var_head;
 	while (temp)
 	{
+		if (!temp->data)
+			return ;
 		ft_putstr_fd(temp->name, 1);
 		ft_putstr_fd("=", 1);
 		ft_putstr_fd(temp->data, 1);
@@ -77,7 +79,10 @@ void	add_var(t_env **var_head, char *name, char *data)
 	if (!new)
 		return ;
 	new->name = ft_strdup(name);
-	new->data = ft_strdup(data);
+	if (data)
+		new->data = ft_strdup(data);
+	else
+		new->data = NULL;
 	new->next = NULL;
 	if (!*var_head)
 		*var_head = new;
@@ -100,7 +105,7 @@ void remove_var(t_env **var_head, char *var_name)
 	ptr = *var_head;
 	while (ptr)
 	{
-		if (!ft_strncmp(var_name, ptr->name, ft_strlen(ptr->name)))
+		if (!ft_strncmp(var_name, ptr->name, ft_strlen(ptr->name) + 1))
 		{
 			if (prev)
 				prev->next = ptr->next;
