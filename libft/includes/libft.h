@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:26:31 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/23 23:56:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/04/26 21:22:08 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+void	ft_free_array(char **array);
 char	*get_next_line(int fd);
 int		openfile(char *filepath, int o_flag);
 int		ft_isalpha(int c);

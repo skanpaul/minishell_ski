@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_builtin.c                                     :+:      :+:    :+:   */
+/*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 15:05:21 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 17:26:24 by gudias           ###   ########.fr       */
+/*   Created: 2022/04/26 21:16:17 by gudias            #+#    #+#             */
+/*   Updated: 2022/04/26 21:18:44 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	echo_builtin(char **cmd_args)
+void	ft_free_array(char **array)
 {
-	int	nl;
 	int	i;
 
-	nl = 1;
-	i = 1;
-	if (cmd_args[1] && !ft_strncmp(cmd_args[1], "-n", 3))
+	i = 0;
+	while (array[i])
 	{
-		nl = 0;
+		free(array[i]);
+		array[i] = NULL;
 		i++;
 	}
-	while (cmd_args[i])
-	{
-		if (nl && i > 1 || !nl && i > 2)
-			ft_putstr_fd(" ", 1);
-		ft_putstr_fd(cmd_args[i], 1);
-		i++;
-	}	
-	if (nl)
-		write(1, "\n", 1);
+	free(array);
+	array = NULL;
 }

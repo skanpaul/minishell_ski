@@ -44,7 +44,7 @@ void	init_env(t_vars *vars, char **envp)
 
 	// AJOUTER le path de [./minishell] dans la variable d'environnement $PATH
 	
-	update_var(&vars->env, "OLDPWD", "/");
+	update_var(&vars->env, "OLDPWD", "/"); //a reflechir
 	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
 	//sinon -> les ajouter
 	

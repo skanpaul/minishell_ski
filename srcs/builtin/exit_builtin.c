@@ -16,5 +16,9 @@ void	exit_builtin(t_vars *vars)
 {
 	//----> free all here to exit properly <----
 	free_var_list(&vars->env);
+  //free var_locals
+  
+	//free(newline) ??
+  
 	exit(0);
 }

@@ -68,12 +68,18 @@ void	handler_signal_main(int sig_code);
 void	init_sigaction_main(t_sig *s);
 /* ************************************************************************** */
 
-void	exit_builtin(t_vars *vars);
-void	echo_builtin(char *str, int nl);
-int		pwd_builtin(t_vars *vars);
-void	unset_builtin(t_vars *vars, char *name);
-int		cd_builtin(char *pathname, t_vars *vars);
+void	parse_line(t_vars *vars, char *line);
 
+int		is_builtin(char *cmd);
+void	exec_builtin(t_vars *vars, char **cmd_args);
+
+void	exit_builtin(t_vars *vars);
+
+void	echo_builtin(char **cmd_args);
+int		pwd_builtin(t_vars *vars);
+void	export_builtin(t_vars *vars, char **cmd_args);
+void	unset_builtin(t_vars *vars, char **cmd_args);
+int		cd_builtin(char *pathname, t_vars *vars);
 void	env_builtin(t_vars *vars);
 void	loc_builtin(t_vars *vars);
 void	init_env(t_vars *vars, char **envp);
@@ -92,10 +98,9 @@ void	remove_var(t_env **var_head, char *var_name);
 void	free_var_list(t_env **var_head);
 // -------------------------------------------------------------------
 
-char	*get_path(char **envp);
-char	*find_cmd_path(char *cmd, char **envp);
-void	run_cmd(t_vars *vars, char *cmd, char **envp, int output);
-void	exec_cmd(char *cmd, char **envp);
+char	*find_cmd_path(t_env *env, char *cmd);
+void	run_cmd(t_vars *vars, char *cmd, int output);
+void	exec_cmd(t_vars *vars, char *cmd);
 
 void	here_doc(char *limiter);
 void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la definition

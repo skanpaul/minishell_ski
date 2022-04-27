@@ -29,43 +29,18 @@ static void	init_vars(t_vars *vars, char **envp)
 	vars->env = NULL;
 	vars->loc = NULL;
 	init_env(vars, envp);
+  init_sa_struc_main(&vars->sig);
+	init_sigaction_main(&vars->sig);
 	init_loc(vars);
 }
 
-int	is_builtin(char *cmd)
-{
-	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", "loc", NULL};
+//	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", "loc", NULL};
 
-	int i = 0;
-	while (builtins[i])
-	{
-		if (!ft_strncmp(cmd, builtins[i], ft_strlen(builtins[i])))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
-void	exec_builtin(char *cmd, t_vars *vars)
-{
-	if (!ft_strncmp(cmd, "echo", 4))
-			echo_builtin(cmd+5, ft_strncmp(cmd+5, "-n", 2));
-	else if (!ft_strncmp(cmd, "cd", 2))
-			// ski: jai besoin  du path désiré et de l-environnement du minishell
-			cd_builtin(cmd+3, vars);		
-	else if (!ft_strncmp(cmd, "pwd", 3))
-			pwd_builtin(vars);
-	else if (!ft_strncmp(cmd, "export", 6))
-			(void)cmd;//export_builtin();
-	else if (!ft_strncmp(cmd, "unset", 5))
-			unset_builtin(vars, cmd+6);
-	else if (!ft_strncmp(cmd, "env", 3))
-			env_builtin(vars);
-	else if (!ft_strncmp(cmd, "loc", 3))
-			loc_builtin(vars);
-	else if (!ft_strncmp(cmd, "exit", 4))
-			exit_builtin(vars);
-}
+	//pwd_builtin(vars);
+	
+	//else if (!ft_strncmp(cmd, "loc", 3))
+			//loc_builtin(vars);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -76,10 +51,9 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		exit_msg(ERR_ARGS);
 	if (!isatty(0) || !isatty(1) || !isatty(2))
-		exit_msg(ERR_TTY);	
+		exit_msg(ERR_TTY);
+
 	init_vars(&vars, envp);
-	init_sa_struc_main(&vars.sig);
-	init_sigaction_main(&vars.sig);
 
 	struct termios attributes;
 	(void)attributes;
@@ -94,13 +68,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		new_line = readline("minishell> ");
 		if (new_line)
-		{
-			add_history(new_line);
-			if (is_builtin(new_line))
-					exec_builtin(new_line, &vars);
-			else
-				run_cmd(&vars, new_line, envp, 1);
-		}
+			parse_line(&vars, new_line);
 		new_line = NULL;
 		free(new_line);
 	}	

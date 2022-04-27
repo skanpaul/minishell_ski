@@ -23,10 +23,10 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS	= minishell.c lexing.c run_cmd.c errors.c signal_utils_main.c \
+SRCS	= minishell.c lexing.c parsing.c run_cmd.c errors.c signal_utils_main.c \
 		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
-		  builtin/cd_builtin.c builtin/env_builtin.c \
-		 builtin/unset_builtin.c linklist_utils.c temporaire.c
+		  builtin/cd_builtin.c builtin/env_builtin.c builtin/export_builtin.c \
+		 builtin/unset_builtin.c linklist_utils.c temporaire.c builtin_utils.c 
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
