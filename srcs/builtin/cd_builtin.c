@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 09:25:45 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 09:53:02 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 static int cd_empty(t_vars *vars);
 static int cd_point(char *pathname, t_vars *vars);
 static int cd_other(char *pathname, t_vars *vars);
-// static int cd_empty(t_env **ptr_env);
-// static int cd_point(char *pathname, t_env **ptr_env);
-// static int cd_other(char *pathname, t_env **ptr_env);
 /* ************************************************************************** */
 int cd_builtin(char *pathname, t_vars *vars)
-// int cd_builtin(char *pathname, t_env **ptr_env)
 {
 	if (pathname == NULL || pathname[0] == '\0')
 		return (cd_empty(vars));
@@ -37,7 +33,6 @@ int cd_builtin(char *pathname, t_vars *vars)
 
 /* ************************************************************************** */
 static int cd_empty(t_vars *vars)
-// static int cd_empty(t_env **ptr_env)
 {
 	char	*path;
 
@@ -46,7 +41,6 @@ static int cd_empty(t_vars *vars)
 }
 /* ************************************************************************** */
 static int cd_point(char *pathname, t_vars *vars)
-// static int cd_point(char *pathname, t_env **ptr_env)
 {
 	char cwd[CWD_BUF_SIZE];
 	if (chdir(pathname) == CHDIR_ERROR)
@@ -61,7 +55,6 @@ static int cd_point(char *pathname, t_vars *vars)
 }
 /* ************************************************************************** */
 static int cd_other(char *pathname, t_vars *vars)
-// static int cd_other(char *pathname, t_env **ptr_env)
 {
 	char cwd[CWD_BUF_SIZE];
 	char oldcwd[CWD_BUF_SIZE];
