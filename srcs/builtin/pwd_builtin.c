@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 09:58:57 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 10:10:01 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int pwd_builtin(t_vars *vars)
 		write(1, "\n", 1);
 	}
 	
+	update_var(&vars->loc, "?", EXIT_SUCCESS_STR);
 	return (BUILTIN_SUCCESS);
 }
 
