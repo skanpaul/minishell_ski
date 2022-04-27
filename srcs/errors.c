@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 09:19:31 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 10:01:54 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int manage_perror(char *remark, t_vars *vars)
 	perror(remark);
 	printf("\n");
 	update_var(&vars->loc, "?", EXIT_FAILURE_STR);
-	return (CD_ERROR);
+	return (BUILTIN_FAILURE);
 }
 
 void err_quit(int n) 
