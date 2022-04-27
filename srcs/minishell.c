@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 09:33:41 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/27 10:22:18 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	init_vars(t_vars *vars, char **envp)
 
 int	is_builtin(char *cmd)
 {
-	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", NULL};
+	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", "loc", NULL};
 
 	int i = 0;
 	while (builtins[i])
@@ -61,6 +61,8 @@ void	exec_builtin(char *cmd, t_vars *vars)
 			unset_builtin(vars, cmd+6);
 	else if (!ft_strncmp(cmd, "env", 3))
 			env_builtin(vars);
+	else if (!ft_strncmp(cmd, "loc", 3))
+			loc_builtin(vars);
 	else if (!ft_strncmp(cmd, "exit", 4))
 			exit_builtin(vars);
 }
