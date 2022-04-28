@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 10:21:05 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/28 16:33:43 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <dirent.h>
 /* ************************************************************************** */
 typedef struct s_sig
 {
@@ -88,6 +89,9 @@ void 	init_loc(t_vars *vars);
 // -------------------------------------------------------------------
 void	write_exit_success(t_vars *vars);
 void	write_exit_failure(t_vars *vars);
+// -------------------------------------------------------------------
+char	*manage_tild(char *pathname, t_vars *vars);
+bool	is_good_path(char *pathname, t_vars *vars);
 // -------------------------------------------------------------------
 void	print_var(t_env *var_head);
 t_env	*get_var(t_env *var_head, char *name);
