@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 17:34:04 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/28 18:05:12 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_env	*get_var(t_env *var_head, char *name)
 	ptr = var_head;
 	while (ptr)
 	{
-		if (!ft_strncmp(name, ptr->name, ft_strlen(name)))
+		if (!ft_strncmp(name, ptr->name, ft_strlen(ptr->name) + 1))
 			return (ptr);
 		ptr = ptr->next;
 	}

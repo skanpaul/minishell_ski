@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 17:31:33 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/28 17:50:40 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,17 @@ void	export_builtin(t_vars *vars, char **cmd_args)
 		else
 		{
 			name = ft_strdup(cmd_args[i]); 
-			data = get_var(vars->loc, name)->data;
+			if (does_var_exist(vars->loc, name))
+				data = ft_strdup(get_var(vars->loc, name)->data);
+			else
+				data = NULL;
 		}
 		if (ft_strlen(name) < 1)
 			err_msg("export: not a valid identifier");
-		else if (data) //enlever data?
+		else
 			update_var(&vars->env, name, data);
+		if (does_var_exist(vars->loc, name))
+				update_var(&vars->loc, name, data);
 		free(data);
 		free(name);
 		i++;
