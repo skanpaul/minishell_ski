@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 10:21:05 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/28 15:25:06 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	parse_line(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
 void	exec_builtin(t_vars *vars, char **cmd_args);
+int		is_assignation(char *cmd);
+void	add_local_var(t_vars *vars, char **cmd_args);
 
 void	exit_builtin(t_vars *vars);
 

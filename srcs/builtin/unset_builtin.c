@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:14:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 16:19:17 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/28 17:55:04 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	unset_builtin(t_vars *vars, char **cmd_args)
 	i = 1;
 	while (cmd_args[i])
 	{
-		//il faudra supprimer aussi dans var_loc
-	
     	remove_var(&vars->env, cmd_args[i]);
-
+    	remove_var(&vars->loc, cmd_args[i]);
 		i++;
 	}
 }
