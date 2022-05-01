@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/29 20:42:15 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/01 04:36:38 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,16 @@ static char	*replace_vars(t_vars *vars, char *line)
 			else if (does_var_exist(vars->loc, name))
 				var_value = get_var(vars->loc, name)->data;
 			if (var_value)
-				begin = ft_strjoin(begin, var_value);
+				begin = ft_strjoin(begin, var_value); //free
 		}
 		else
-			begin = ft_strjoin(begin, "$");
+			begin = ft_strjoin(begin, "$"); //free
 		end = ft_substr(var_name_end, 0, ft_strlen(var_name_end));
 		result = ft_strjoin(begin, end);
 		dollar_ptr = ft_strchr(result + ft_strlen(begin), '$');
+		free(begin);
+		free(name);
+		free(end);
 	}
 	//pas oublier les free
 
