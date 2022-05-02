@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 13:15:25 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 15:17:27 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_vars
 	int		stderr_fd;
 	t_env	*env;
 	t_env	*loc;
+	char	**env_char_array;
 	t_sig	sig;
 }	t_vars;
 /* ************************************************************************** */
@@ -102,7 +103,12 @@ bool	does_var_exist(t_env *var_head, char *var_name);
 void	update_var(t_env **var_head, char *var_name, char *new_data);
 void	add_var(t_env **var_head, char *name, char *data);
 void	remove_var(t_env **var_head, char *var_name);
+int		size_var_list(t_env *var_head);
 void	free_var_list(t_env **var_head);
+// -------------------------------------------------------------------
+char	**conv_list_to_array(t_env *var_head);
+void	print_array(char **array);
+void	free_array(char **array);
 // -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);

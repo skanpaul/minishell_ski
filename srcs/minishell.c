@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 15:36:41 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_vars(t_vars *vars, char **envp)
 	vars->stderr_fd = dup(2);
 	vars->env = NULL;
 	vars->loc = NULL;
+	vars->env_char_array = NULL;
 	init_env(vars, envp);
 	init_sa_struc_main(&vars->sig);
 	init_sigaction_main(&vars->sig);
@@ -46,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 		exit_msg(ERR_TTY);
 
 	init_vars(&vars, envp);
-
+	
 	struct termios attributes;
 	(void)attributes;
 	//tcgetattr(STDIN_FILENO, &saved);

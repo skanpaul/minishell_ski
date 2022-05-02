@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:31:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/02 14:17:17 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 15:24:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ bool is_good_path(char *pathname, t_vars *vars)
 {
 	DIR	*folder;
 	
+	(void)vars;
 	folder = opendir(pathname);
 	if (folder == NULL)
 		return (false);	
