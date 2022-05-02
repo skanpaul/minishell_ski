@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:41:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 11:25:51 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 12:55:44 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /* ************************************************************************** */
 int	is_builtin(char *cmd)
 {
-	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", "loc", NULL};
+	const char	*builtins[] = {"echo", "cd", "pwd", "export",
+								"unset", "env", "exit", "loc", NULL};
 
 	int i = 0;
 	while (builtins[i])
@@ -31,12 +32,9 @@ int	is_builtin(char *cmd)
 void	exec_builtin(t_vars *vars, char **cmd_args)
 {
 	if (!ft_strncmp(cmd_args[0], "echo", 4))
-			echo_builtin(cmd_args);		
-				
-	else if (!ft_strncmp(cmd_args[0], "cd", 2))
-			// cd_builtin(cmd_args[1], vars); //add error if cmd_args[2]		
+			echo_builtin(cmd_args);				
+	else if (!ft_strncmp(cmd_args[0], "cd", 2))	
 			cd_builtin(vars, cmd_args); 
-							
 	else if (!ft_strncmp(cmd_args[0], "pwd", 3))
 			pwd_builtin(vars);
 	else if (!ft_strncmp(cmd_args[0], "export", 6))
