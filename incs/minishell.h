@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/28 16:33:43 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 11:32:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	echo_builtin(char **cmd_args);
 int		pwd_builtin(t_vars *vars);
 void	export_builtin(t_vars *vars, char **cmd_args);
 void	unset_builtin(t_vars *vars, char **cmd_args);
-int		cd_builtin(char *pathname, t_vars *vars);
+// int		cd_builtin(t_vars *vars, char *pathname);
+int		cd_builtin(t_vars *vars, char **cmd_args);
 void	env_builtin(t_vars *vars);
 void	loc_builtin(t_vars *vars);
 void	init_env(t_vars *vars, char **envp);
@@ -89,6 +90,8 @@ void 	init_loc(t_vars *vars);
 // -------------------------------------------------------------------
 void	write_exit_success(t_vars *vars);
 void	write_exit_failure(t_vars *vars);
+// -------------------------------------------------------------------
+bool	does_word_match(char *str1, char *str2);
 // -------------------------------------------------------------------
 char	*manage_tild(char *pathname, t_vars *vars);
 bool	is_good_path(char *pathname, t_vars *vars);

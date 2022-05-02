@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 11:09:01 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 11:33:03 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ void write_exit_failure(t_vars *vars)
 }
 
 /* ************************************************************************** */
+bool does_word_match(char *str1, char *str2)
+{
+	int res;
+
+	res = ft_strncmp(str1, str2, ft_strlen(str2) + 1);
+	if (res == 0)
+		return (true);
+	return (false);	
+}
+
+/* ************************************************************************** */
 char *dollar_translate(t_vars *vars, char *dollar_var)
 {
 	char *var_name;
@@ -48,3 +59,4 @@ char *dollar_translate(t_vars *vars, char *dollar_var)
 }
 
 /* ************************************************************************** */
+

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 11:18:27 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 10:31:44 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int manage_perror(char *remark, t_vars *vars)
 	write_exit_failure(vars);
 	return (BUILTIN_FAILURE);
 }
+
+
+
 
 void err_quit(int n) 
 // A EFFACER: est utilise dans here_doc.c, mais ou est la definition ?

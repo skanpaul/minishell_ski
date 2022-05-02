@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/28 16:32:23 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 11:33:35 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,48 @@ static int	cd_point(char *pathname, t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
 
 /* ************************************************************************** */
-int cd_builtin(char *pathname, t_vars *vars)
+static void print_cmd_args(char **cmd_args)
 {
-	if (pathname == NULL || pathname[0] == '\0')
+	int i;
+	
+	ft_printf("\n");
+	i = 0;
+	while (cmd_args[i] != NULL)
+	{
+		ft_printf("cmd_args[%d]: %s\n", i, cmd_args[i]);
+		i++;
+	}	
+	ft_printf("\n");	
+}
+
+/* ************************************************************************** */
+int cd_builtin(t_vars *vars, char **cmd_args)
+{
+	if(!cmd_args[0] || !does_word_match(cmd_args[0], "cd"))
+		goto failed;
+	
+	if (cmd_args[1] == NULL || cmd_args[1][0] == '\0')
 		return (cd_empty(vars));
+	
+	cmd_args[1] = manage_tild(cmd_args[1], vars);
+	
+	if (is_good_path(cmd_args[1], vars) == false)
+	{
+		ft_printf("minishell: cd: ");
+		ft_printf("%s: No such file or directory\n", cmd_args[1]);
+		goto failed;
+	}
 
-	pathname = manage_tild(pathname, vars);
-
-	//*pathname == '.';
-	if (ft_strncmp(pathname, ".", 2)  == 0)
-		return (cd_point(pathname, vars));		
+	if (ft_strncmp(cmd_args[1], ".", 2)  == 0)
+		return (cd_point(cmd_args[1], vars));		
 	else
-		return (cd_other(pathname, vars));
+		return (cd_other(cmd_args[1], vars));
 	
 	write_exit_success(vars);
 	return (BUILTIN_SUCCESS);
+failed:
+	write_exit_failure(vars);
+	return BUILTIN_FAILURE;		
 }
 
 /* ************************************************************************** */

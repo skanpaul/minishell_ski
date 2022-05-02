@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/26 22:18:12 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/02 10:19:36 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	parse_line(t_vars *vars, char *line)
 {
 	char	**cmd_args;
+	
+	//check space: [ ... >file ] vs. [ ... > file ]
 	
 	//check single quotes
 

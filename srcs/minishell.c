@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 16:13:34 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 10:18:13 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	init_vars(t_vars *vars, char **envp)
 	vars->env = NULL;
 	vars->loc = NULL;
 	init_env(vars, envp);
-  init_sa_struc_main(&vars->sig);
+	init_sa_struc_main(&vars->sig);
 	init_sigaction_main(&vars->sig);
 	init_loc(vars);
 }
