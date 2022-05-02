@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 12:40:13 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 13:15:25 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	exec_builtin(t_vars *vars, char **cmd_args);
 void	exit_builtin(t_vars *vars);
 
 void	echo_builtin(char **cmd_args);
-int		pwd_builtin(t_vars *vars);
+int		pwd_builtin(t_vars *vars, char **cmd_args);
 void	export_builtin(t_vars *vars, char **cmd_args);
 void	unset_builtin(t_vars *vars, char **cmd_args);
 int		cd_builtin(t_vars *vars, char **cmd_args);
@@ -97,7 +97,7 @@ char	*manage_tild(char *pathname, t_vars *vars);
 bool	is_good_path(char *pathname, t_vars *vars);
 // -------------------------------------------------------------------
 void	print_var(t_env *var_head);
-t_env	*get_var(t_env *var_head, char *name);
+t_env	*get_var(t_env *var_head, char *var_name);
 bool	does_var_exist(t_env *var_head, char *var_name);
 void	update_var(t_env **var_head, char *var_name, char *new_data);
 void	add_var(t_env **var_head, char *name, char *data);

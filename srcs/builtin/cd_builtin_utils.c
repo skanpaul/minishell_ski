@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:31:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 14:17:17 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ char *manage_tild(char *pathname, t_vars *vars)
 	buff1 = NULL;
 	buff2 = NULL;
 
-	len = 0;
-	
+	len = 0;	
 	if (pathname[0] == '~')
 	{
-		buff1 = get_var(vars->env, "HOME")->data;		
+		buff1 = get_var(vars->env, "HOME")->data;
 		len = ft_strlen(pathname);
-		buff2 = ft_substr(pathname, 1, len - 1);		
-		ft_free_null((void**)&pathname); //ATTENTION: faut-il free() ou pas, à voir par la suite
-		pathname = ft_strjoin(buff1, buff2);	
-		ft_free_null((void**)&buff2);	
+		buff2 = ft_substr(pathname, 1, len - 1);
+		ft_free_null((void**)&pathname);
+		pathname = ft_strjoin(buff1, buff2);
+		ft_free_null((void**)&buff2);		
 	}
 	return (pathname);	
 }
@@ -41,12 +40,10 @@ char *manage_tild(char *pathname, t_vars *vars)
 bool is_good_path(char *pathname, t_vars *vars)
 {
 	DIR	*folder;
-		
-	folder = opendir(pathname);	
-
+	
+	folder = opendir(pathname);
 	if (folder == NULL)
 		return (false);	
-
 	closedir(folder);	
 	return (true);	
 }

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:41:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 12:55:44 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 13:00:42 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ int	is_builtin(char *cmd)
 /* ************************************************************************** */
 void	exec_builtin(t_vars *vars, char **cmd_args)
 {
-	if (!ft_strncmp(cmd_args[0], "echo", 4))
+	if (!ft_strncmp(cmd_args[0], "echo", 4)) // Faut-il le [+1] ou pas?
 			echo_builtin(cmd_args);				
-	else if (!ft_strncmp(cmd_args[0], "cd", 2))	
+	else if (!ft_strncmp(cmd_args[0], "cd", 2))	 // Faut-il le [+1] ou pas?
 			cd_builtin(vars, cmd_args); 
-	else if (!ft_strncmp(cmd_args[0], "pwd", 3))
-			pwd_builtin(vars);
-	else if (!ft_strncmp(cmd_args[0], "export", 6))
+	else if (!ft_strncmp(cmd_args[0], "pwd", 3)) // Faut-il le [+1] ou pas?
+			pwd_builtin(vars, cmd_args);
+	else if (!ft_strncmp(cmd_args[0], "export", 6)) // Faut-il le [+1] ou pas?
 			export_builtin(vars, cmd_args);
-	else if (!ft_strncmp(cmd_args[0], "unset", 5))
+	else if (!ft_strncmp(cmd_args[0], "unset", 5)) // Faut-il le [+1] ou pas?
 			unset_builtin(vars, cmd_args);
-	else if (!ft_strncmp(cmd_args[0], "env", 3))
+	else if (!ft_strncmp(cmd_args[0], "env", 3)) // Faut-il le [+1] ou pas?
 			env_builtin(vars);
-	else if (!ft_strncmp(cmd_args[0], "exit", 4))
+	else if (!ft_strncmp(cmd_args[0], "exit", 4)) // Faut-il le [+1] ou pas?
 			exit_builtin(vars);
-	else if (!ft_strncmp(cmd_args[0], "loc", 3))
+	else if (!ft_strncmp(cmd_args[0], "loc", 3)) // Faut-il le [+1] ou pas?
 			loc_builtin(vars);
 }
 

@@ -6,59 +6,42 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/02 11:33:35 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 14:36:25 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
 static int	cd_empty(t_vars *vars);
+static int	cd_bad_path(char *pathname, t_vars *vars);
 static int	cd_point(char *pathname, t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
 
 /* ************************************************************************** */
-static void print_cmd_args(char **cmd_args)
+int cd_builtin(t_vars *vars, char **cmd_args)
 {
-	int i;
+	if (cmd_args[1] == NULL || cmd_args[1][0] == '\0')
+		return (cd_empty(vars));	
+		
+	if (is_good_path(cmd_args[1], vars) == false)
+		return (cd_bad_path(cmd_args[1], vars));	
+
+	cmd_args[1] = manage_tild(cmd_args[1], vars);	
 	
-	ft_printf("\n");
-	i = 0;
-	while (cmd_args[i] != NULL)
-	{
-		ft_printf("cmd_args[%d]: %s\n", i, cmd_args[i]);
-		i++;
-	}	
-	ft_printf("\n");	
+	if (ft_strncmp(cmd_args[1], ".", 2)  == 0)
+		return (cd_point(cmd_args[1], vars));
+	
+	return (cd_other(cmd_args[1], vars));
 }
 
 /* ************************************************************************** */
-int cd_builtin(t_vars *vars, char **cmd_args)
+static int	cd_bad_path(char *pathname, t_vars *vars)
 {
-	if(!cmd_args[0] || !does_word_match(cmd_args[0], "cd"))
-		goto failed;
+	ft_printf("minishell: cd: ");
+	ft_printf("%s: No such file or directory\n", pathname);
 	
-	if (cmd_args[1] == NULL || cmd_args[1][0] == '\0')
-		return (cd_empty(vars));
-	
-	cmd_args[1] = manage_tild(cmd_args[1], vars);
-	
-	if (is_good_path(cmd_args[1], vars) == false)
-	{
-		ft_printf("minishell: cd: ");
-		ft_printf("%s: No such file or directory\n", cmd_args[1]);
-		goto failed;
-	}
-
-	if (ft_strncmp(cmd_args[1], ".", 2)  == 0)
-		return (cd_point(cmd_args[1], vars));		
-	else
-		return (cd_other(cmd_args[1], vars));
-	
-	write_exit_success(vars);
-	return (BUILTIN_SUCCESS);
-failed:
 	write_exit_failure(vars);
-	return BUILTIN_FAILURE;		
+	return BUILTIN_FAILURE;	
 }
 
 /* ************************************************************************** */
@@ -95,7 +78,10 @@ static int cd_other(char *pathname, t_vars *vars)
 		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
 	
 	if (chdir(pathname) == CHDIR_ERROR)
+	{
+		ft_printf("minishell: cd: ");
 		return (manage_perror(pathname, vars));
+	}
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
 		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
@@ -106,5 +92,20 @@ static int cd_other(char *pathname, t_vars *vars)
 	write_exit_success(vars);
 	return (BUILTIN_SUCCESS);	
 }
+
+/* ************************************************************************** */
+// static void print_cmd_args(char **cmd_args)
+// {
+// 	int i;
+	
+// 	ft_printf("\n");
+// 	i = 0;
+// 	while (cmd_args[i] != NULL)
+// 	{
+// 		ft_printf("cmd_args[%d]: %s\n", i, cmd_args[i]);
+// 		i++;
+// 	}	
+// 	ft_printf("\n");	
+// }
 
 /* ************************************************************************** */

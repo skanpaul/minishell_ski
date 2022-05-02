@@ -6,16 +6,17 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 10:17:16 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 13:02:07 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
-int pwd_builtin(t_vars *vars)
+int pwd_builtin(t_vars *vars, char **cmd_args)
 {
 	char	cwd_name[CWD_BUF_SIZE];
 	
+	(void)cmd_args;
 	if (getcwd(cwd_name, CWD_BUF_SIZE) == NULL)	
 		return (manage_perror("pwd_builtin", vars));
 	else

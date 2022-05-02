@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 14:13:15 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void print_var(t_env *var_head)
 }
 
 /* ************************************************************************** */
-t_env	*get_var(t_env *var_head, char *name)
+t_env	*get_var(t_env *var_head, char *var_name)
 {
 	t_env	*ptr;
 	
 	ptr = var_head;
 	while (ptr)
 	{
-		if (!ft_strncmp(name, ptr->name, ft_strlen(name)))
+		if (does_word_match(var_name, ptr->name))
 			return (ptr);
 		ptr = ptr->next;
 	}
