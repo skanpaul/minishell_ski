@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 10:18:13 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 		if (new_line)
 			parse_line(&vars, new_line);
 		new_line = NULL;
-		free(new_line);
+		ft_free_null((void**)&new_line);
 	}	
 	//------------------------------------
 	return (0);

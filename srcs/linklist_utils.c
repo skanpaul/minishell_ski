@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/27 17:34:04 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void update_var(t_env **var_head, char *var_name, char *new_data)
 	else
 	{
 		buff = get_var(*var_head, var_name);
-		free(buff->data);
+		ft_free_null((void**)&buff->data);
 		buff->data = ft_strdup(new_data);
 	}	
 }
@@ -111,9 +111,9 @@ void remove_var(t_env **var_head, char *var_name)
 				prev->next = ptr->next;
 			else
 				*var_head = ptr->next;
-			free(ptr->name);
-			free(ptr->data);
-			free(ptr);
+			ft_free_null((void**)&ptr->name);
+			ft_free_null((void**)&ptr->data);
+			ft_free_null((void**)&ptr);
 			return ;
 		}
 		prev = ptr;
@@ -130,10 +130,10 @@ void	free_var_list(t_env **var_head)
 	ptr = *var_head;
 	while (ptr)
 	{
-		free(ptr->name);
-		free(ptr->data);
+		ft_free_null((void**)&ptr->name);
+		ft_free_null((void**)&ptr->data);
 		tmp = ptr->next;
-		free(ptr);
+		ft_free_null((void**)&ptr);
 		ptr = tmp;
 	}
 	*var_head = NULL;

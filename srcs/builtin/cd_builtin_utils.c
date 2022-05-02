@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:31:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/02 10:59:01 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ char *manage_tild(char *pathname, t_vars *vars)
 		buff1 = get_var(vars->env, "HOME")->data;		
 		len = ft_strlen(pathname);
 		buff2 = ft_substr(pathname, 1, len - 1);		
-		free(pathname); //ATTENTION: faut-il free() ou pas, à voir par la suite
+		ft_free_null((void**)&pathname); //ATTENTION: faut-il free() ou pas, à voir par la suite
 		pathname = ft_strjoin(buff1, buff2);	
-		free(buff2);	
+		ft_free_null((void**)&buff2);	
 	}
 	return (pathname);	
 }
