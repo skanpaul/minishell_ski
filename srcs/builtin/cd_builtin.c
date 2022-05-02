@@ -6,14 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/02 14:36:25 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 14:38:39 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
 static int	cd_empty(t_vars *vars);
-static int	cd_bad_path(char *pathname, t_vars *vars);
 static int	cd_point(char *pathname, t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
 
@@ -21,10 +20,7 @@ static int	cd_other(char *pathname, t_vars *vars);
 int cd_builtin(t_vars *vars, char **cmd_args)
 {
 	if (cmd_args[1] == NULL || cmd_args[1][0] == '\0')
-		return (cd_empty(vars));	
-		
-	if (is_good_path(cmd_args[1], vars) == false)
-		return (cd_bad_path(cmd_args[1], vars));	
+		return (cd_empty(vars));		
 
 	cmd_args[1] = manage_tild(cmd_args[1], vars);	
 	
@@ -32,16 +28,6 @@ int cd_builtin(t_vars *vars, char **cmd_args)
 		return (cd_point(cmd_args[1], vars));
 	
 	return (cd_other(cmd_args[1], vars));
-}
-
-/* ************************************************************************** */
-static int	cd_bad_path(char *pathname, t_vars *vars)
-{
-	ft_printf("minishell: cd: ");
-	ft_printf("%s: No such file or directory\n", pathname);
-	
-	write_exit_failure(vars);
-	return BUILTIN_FAILURE;	
 }
 
 /* ************************************************************************** */
