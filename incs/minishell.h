@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 15:17:27 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/03 07:41:03 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void 	init_loc(t_vars *vars);
 void	write_exit_success(t_vars *vars);
 void	write_exit_failure(t_vars *vars);
 // -------------------------------------------------------------------
-bool	does_word_match(char *str1, char *str2);
+bool	does_word_match(char *str, char *hard_text);
 void	ft_free_null(void **ptr);
 // -------------------------------------------------------------------
 char	*manage_tild(char *pathname, t_vars *vars);
