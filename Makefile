@@ -27,7 +27,8 @@ SRCS	= minishell.c lexing.c parsing.c run_cmd.c errors.c signal_utils_main.c \
 		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
 		  builtin/cd_builtin.c builtin/env_builtin.c builtin/export_builtin.c \
 		 builtin/unset_builtin.c linklist_utils.c temporaire.c builtin_utils.c \
-		replace_vars.c 
+		replace_vars.c builtin/cd_builtin_utils.c array_utils.c pipeline_space_maker.c \
+		 chevron_space_maker.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 

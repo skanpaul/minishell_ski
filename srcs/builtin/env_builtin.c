@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 10:20:40 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void copy_parent_env(t_env **child_env, char **parent_env)
 		name = ft_substr(*parent_env, 0, len);
 		data = ft_substr(*parent_env, len + 1, ft_strlen(*parent_env));
 		add_var(child_env, name, data);
-		free(name);
-		free(data);
+		ft_free_null((void**)&name);
+		ft_free_null((void**)&data);
 		parent_env++;
 	}
 }

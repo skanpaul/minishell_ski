@@ -6,23 +6,26 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 11:18:27 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/02 12:36:02 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* ************************************************************************** */
 void	err_msg(char *msg)
 {
 	ft_putendl_fd(msg, 2);
 }
 
+/* ************************************************************************** */
 void	exit_msg(char *msg)
 {
 	err_msg(msg);
 	exit(0);
 }
 
+/* ************************************************************************** */
 int manage_perror(char *remark, t_vars *vars)
 {
 	perror(remark);
@@ -31,6 +34,7 @@ int manage_perror(char *remark, t_vars *vars)
 	return (BUILTIN_FAILURE);
 }
 
+/* ************************************************************************** */
 void err_quit(int n) 
 // A EFFACER: est utilise dans here_doc.c, mais ou est la definition ?
 {

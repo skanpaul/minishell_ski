@@ -6,12 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/04/28 18:05:12 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/02 15:00:51 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* ************************************************************************** */
 void print_var(t_env *var_head)
 {
 	t_env	*temp;
@@ -30,13 +31,14 @@ void print_var(t_env *var_head)
 }
 
 /* ************************************************************************** */
-t_env	*get_var(t_env *var_head, char *name)
+t_env	*get_var(t_env *var_head, char *var_name)
 {
 	t_env	*ptr;
 	
 	ptr = var_head;
 	while (ptr)
 	{
+
 		if (!ft_strncmp(name, ptr->name, ft_strlen(ptr->name) + 1))
 			return (ptr);
 		ptr = ptr->next;
@@ -64,7 +66,7 @@ void update_var(t_env **var_head, char *var_name, char *new_data)
 	else
 	{
 		buff = get_var(*var_head, var_name);
-		free(buff->data);
+		ft_free_null((void**)&buff->data);
 		buff->data = ft_strdup(new_data);
 	}	
 }
@@ -111,14 +113,31 @@ void remove_var(t_env **var_head, char *var_name)
 				prev->next = ptr->next;
 			else
 				*var_head = ptr->next;
-			free(ptr->name);
-			free(ptr->data);
-			free(ptr);
+			ft_free_null((void**)&ptr->name);
+			ft_free_null((void**)&ptr->data);
+			ft_free_null((void**)&ptr);
 			return ;
 		}
 		prev = ptr;
 		ptr = ptr->next;	
 	}
+}
+
+/* ************************************************************************** */
+int size_var_list(t_env *var_head)
+{
+	int i;
+	t_env *temp;
+	
+	temp = var_head;
+
+	i = 0;
+	while(temp != NULL)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return (i);
 }
 
 /* ************************************************************************** */
@@ -130,10 +149,10 @@ void	free_var_list(t_env **var_head)
 	ptr = *var_head;
 	while (ptr)
 	{
-		free(ptr->name);
-		free(ptr->data);
+		ft_free_null((void**)&ptr->name);
+		ft_free_null((void**)&ptr->data);
 		tmp = ptr->next;
-		free(ptr);
+		ft_free_null((void**)&ptr);
 		ptr = tmp;
 	}
 	*var_head = NULL;
