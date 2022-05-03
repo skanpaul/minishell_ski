@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/28 15:25:06 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:41:43 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	init_sigaction_main(t_sig *s);
 /* ************************************************************************** */
 
 void	parse_line(t_vars *vars, char *line);
+char	*replace_vars(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
 void	exec_builtin(t_vars *vars, char **cmd_args);
