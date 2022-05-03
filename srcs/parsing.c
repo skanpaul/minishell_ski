@@ -6,11 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/03 13:59:46 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/03 15:40:19 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
 
 void	parse_line(t_vars *vars, char *line)
 {
@@ -25,13 +27,17 @@ void	parse_line(t_vars *vars, char *line)
 	
 	//check redirs
 
-	//replace $value
-
+	//replace $values
+	line = replace_vars(vars, line);
+	ft_putendl(line);
+	
+	
 	cmd_args = ft_split(line, ' ');
 	if (!cmd_args[0])
 		return ;
 
 	add_history(line); // ski a besoin d effacer
+
 	i = 0;
 	if (is_assignation(cmd_args[i]))
 	{
