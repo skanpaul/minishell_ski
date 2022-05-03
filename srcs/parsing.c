@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 12:31:47 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/03 13:59:46 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	parse_line(t_vars *vars, char *line)
 	cmd_args = ft_split(line, ' ');
 	if (!cmd_args[0])
 		return ;
-	add_history(line);
+	// add_history(line);
 	if (is_builtin(cmd_args[0]))
 	{
 		write_exit_success(vars);	

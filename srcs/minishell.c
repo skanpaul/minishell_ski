@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 15:36:41 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/03 13:59:22 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int	main(int argc, char **argv, char **envp)
 	{
 		new_line = readline("minishell> ");
 		if (new_line)
+			add_history(new_line);
+			new_line = chevron_space_maker(new_line);
+			new_line = pipeline_space_maker(new_line);
 			parse_line(&vars, new_line);
 		new_line = NULL;
 		ft_free_null((void**)&new_line);
