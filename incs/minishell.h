@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/03 07:41:03 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/03 10:25:43 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	free_var_list(t_env **var_head);
 char	**conv_list_to_array(t_env *var_head);
 void	print_array(char **array);
 void	free_array(char **array);
+// -------------------------------------------------------------------
+char	*chevron_space_maker(char *line);
 // -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);
