@@ -31,14 +31,21 @@ void	export_builtin(t_vars *vars, char **cmd_args)
 		else
 		{
 			name = ft_strdup(cmd_args[i]); 
-			data = get_var(vars->loc, name)->data;
+			if (does_var_exist(vars->loc, name))
+				data = ft_strdup(get_var(vars->loc, name)->data);
+			else
+				data = NULL;
 		}
 		if (ft_strlen(name) < 1)
 			err_msg("export: not a valid identifier");
-		else if (data) //enlever data?
-			update_var(&vars->env, name, data);
+		else
+			update_var(&vars->env, name, data); 
+  
+		if (does_var_exist(vars->loc, name))
+				update_var(&vars->loc, name, data);
+    
 		ft_free_null((void**)&data);
-		ft_free_null((void**)&name);
+		ft_free_null((void**)&name);      
 		i++;
 	}
 }	

@@ -49,3 +49,37 @@ void	exec_builtin(t_vars *vars, char **cmd_args)
 			loc_builtin(vars);
 }
 
+int	is_assignation(char *cmd)
+{
+	char	*equal;
+
+	equal = ft_strchr(cmd, '=');
+	if (equal && equal - cmd > 0)
+		return (1);
+	return (0);
+}
+
+void	add_local_var(t_vars *vars, char **cmd_args)
+{
+	char	*name;
+	char	*equal;
+	char	*data;
+	int		i;
+
+	i = 0;
+	while (cmd_args[i])
+	{
+		equal = ft_strchr(cmd_args[i], '=');
+		if (equal && equal - cmd_args[i] > 0)
+		{
+			name = ft_substr(cmd_args[i], 0, equal - cmd_args[i]);
+			data = ft_substr(equal, 1, ft_strlen(equal + 1));
+			update_var(&vars->loc, name, data);
+			if (does_var_exist(vars->env, name))
+					update_var(&vars->env, name, data);
+			free(name);
+			free(data);
+		}
+		i++;
+	}
+}

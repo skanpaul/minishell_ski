@@ -38,7 +38,8 @@ t_env	*get_var(t_env *var_head, char *var_name)
 	ptr = var_head;
 	while (ptr)
 	{
-		if (does_word_match(var_name, ptr->name))
+
+		if (!ft_strncmp(name, ptr->name, ft_strlen(ptr->name) + 1))
 			return (ptr);
 		ptr = ptr->next;
 	}

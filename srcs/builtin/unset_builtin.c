@@ -21,10 +21,8 @@ void	unset_builtin(t_vars *vars, char **cmd_args)
 	i = 1;
 	while (cmd_args[i])
 	{
-		//il faudra supprimer aussi dans var_loc
-	
     	remove_var(&vars->env, cmd_args[i]);
-
+    	remove_var(&vars->loc, cmd_args[i]);
 		i++;
 	}
 }

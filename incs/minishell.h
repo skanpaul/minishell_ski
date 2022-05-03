@@ -74,6 +74,8 @@ void	parse_line(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
 void	exec_builtin(t_vars *vars, char **cmd_args);
+int		is_assignation(char *cmd);
+void	add_local_var(t_vars *vars, char **cmd_args);
 
 void	exit_builtin(t_vars *vars);
 
