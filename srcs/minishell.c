@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 16:13:34 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/03 13:59:22 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ static void	init_vars(t_vars *vars, char **envp)
 	vars->stderr_fd = dup(2);
 	vars->env = NULL;
 	vars->loc = NULL;
+	vars->env_char_array = NULL;
 	init_env(vars, envp);
-  init_sa_struc_main(&vars->sig);
+	init_sa_struc_main(&vars->sig);
 	init_sigaction_main(&vars->sig);
 	init_loc(vars);
 }
@@ -46,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 		exit_msg(ERR_TTY);
 
 	init_vars(&vars, envp);
-
+	
 	struct termios attributes;
 	(void)attributes;
 	//tcgetattr(STDIN_FILENO, &saved);
@@ -60,9 +61,12 @@ int	main(int argc, char **argv, char **envp)
 	{
 		new_line = readline("minishell> ");
 		if (new_line)
+			add_history(new_line);
+			new_line = chevron_space_maker(new_line);
+			new_line = pipeline_space_maker(new_line);
 			parse_line(&vars, new_line);
 		new_line = NULL;
-		free(new_line);
+		ft_free_null((void**)&new_line);
 	}	
 	//------------------------------------
 	return (0);

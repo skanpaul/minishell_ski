@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/28 17:50:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ void	export_builtin(t_vars *vars, char **cmd_args)
 		if (ft_strlen(name) < 1)
 			err_msg("export: not a valid identifier");
 		else
-			update_var(&vars->env, name, data);
+			update_var(&vars->env, name, data); 
+  
 		if (does_var_exist(vars->loc, name))
 				update_var(&vars->loc, name, data);
-		free(data);
-		free(name);
+    
+		ft_free_null((void**)&data);
+		ft_free_null((void**)&name);      
 		i++;
 	}
 }	

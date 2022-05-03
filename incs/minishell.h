@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/28 15:25:06 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/03 12:54:40 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <dirent.h>
 /* ************************************************************************** */
 typedef struct s_sig
 {
@@ -54,6 +55,7 @@ typedef struct	s_vars
 	int		stderr_fd;
 	t_env	*env;
 	t_env	*loc;
+	char	**env_char_array;
 	t_sig	sig;
 }	t_vars;
 /* ************************************************************************** */
@@ -78,10 +80,10 @@ void	add_local_var(t_vars *vars, char **cmd_args);
 void	exit_builtin(t_vars *vars);
 
 void	echo_builtin(char **cmd_args);
-int		pwd_builtin(t_vars *vars);
+int		pwd_builtin(t_vars *vars, char **cmd_args);
 void	export_builtin(t_vars *vars, char **cmd_args);
 void	unset_builtin(t_vars *vars, char **cmd_args);
-int		cd_builtin(char *pathname, t_vars *vars);
+int		cd_builtin(t_vars *vars, char **cmd_args);
 void	env_builtin(t_vars *vars);
 void	loc_builtin(t_vars *vars);
 void	init_env(t_vars *vars, char **envp);
@@ -91,13 +93,27 @@ void 	init_loc(t_vars *vars);
 void	write_exit_success(t_vars *vars);
 void	write_exit_failure(t_vars *vars);
 // -------------------------------------------------------------------
+bool	does_word_match(char *str, char *hard_text);
+void	ft_free_null(void **ptr);
+// -------------------------------------------------------------------
+char	*manage_tild(char *pathname, t_vars *vars);
+bool	is_good_path(char *pathname, t_vars *vars);
+// -------------------------------------------------------------------
 void	print_var(t_env *var_head);
-t_env	*get_var(t_env *var_head, char *name);
+t_env	*get_var(t_env *var_head, char *var_name);
 bool	does_var_exist(t_env *var_head, char *var_name);
 void	update_var(t_env **var_head, char *var_name, char *new_data);
 void	add_var(t_env **var_head, char *name, char *data);
 void	remove_var(t_env **var_head, char *var_name);
+int		size_var_list(t_env *var_head);
 void	free_var_list(t_env **var_head);
+// -------------------------------------------------------------------
+char	**conv_list_to_array(t_env *var_head);
+void	print_array(char **array);
+void	free_array(char **array);
+// -------------------------------------------------------------------
+char	*chevron_space_maker(char *line);
+char	*pipeline_space_maker(char *line);
 // -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);

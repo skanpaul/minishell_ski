@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/28 18:06:12 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/03 13:59:46 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	parse_line(t_vars *vars, char *line)
 {
 	char	**cmd_args;
 	int		i;
+	
+	//check space: [ ... >file ] vs. [ ... > file ]
 	
 	//check single quotes
 
@@ -29,7 +31,7 @@ void	parse_line(t_vars *vars, char *line)
 	if (!cmd_args[0])
 		return ;
 
-	add_history(line);
+	add_history(line); // ski a besoin d effacer
 	i = 0;
 	if (is_assignation(cmd_args[i]))
 	{
@@ -55,6 +57,6 @@ void	parse_line(t_vars *vars, char *line)
 	//il faut recuperer cette valeur peu importe ce qu'on a fait et mettre a jour apres
 	// (ca me semble plus coherent)
 	// 	!!! -->modifier fonction pour qu'elle retourne le code erreur
-	
+
 	ft_free_array(cmd_args);
 }
