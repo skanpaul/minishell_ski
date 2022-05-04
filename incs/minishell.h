@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 17:29:59 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/04 18:46:20 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ char	*pipeline_space_maker(char *line);
 // -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);
-void	run_cmd(t_vars *vars, char *cmd, int output);
-void	exec_cmd(t_vars *vars, char *cmd);
+int	run_cmd(t_vars *vars, char **cmd_args, int output);
+void	exec_cmd(t_vars *vars, char **cmd_args);
 
 void	here_doc(char *limiter);
 void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la definition

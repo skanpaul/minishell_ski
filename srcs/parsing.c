@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 18:00:41 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/04 18:45:57 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	parse_line(t_vars *vars, char *line)
 {
 	char	**cmd_args;
 	int		i;
-	int		return_code = -1;
+	int		return_code;
+       
+	return_code = -1;
 	
 	//check space: [ ... >file ] vs. [ ... > file ]
 	
@@ -52,7 +54,7 @@ void	parse_line(t_vars *vars, char *line)
 	if (cmd_args[i] && is_builtin(cmd_args[i]))
 		return_code = exec_builtin(vars, cmd_args + i);
 	else if (cmd_args[i])
-		run_cmd(vars, line, 1);  //modif line ---> cmd_args (changer parsing dans exec_cmd)
+		return_code = run_cmd(vars, cmd_args + i, 1);
 	
 	update_var(&vars->loc, "?", ft_itoa(return_code)); //free le itoa
 
