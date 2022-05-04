@@ -6,13 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:05:21 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/28 13:27:42 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/04 17:23:08 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	echo_builtin(char **cmd_args)
+int	echo_builtin(char **cmd_args)
 {
 	int	nl;
 	int	i;
@@ -34,4 +34,5 @@ void	echo_builtin(char **cmd_args)
 	}	
 	if (nl)
 		write(1, "\n", 1);
+	return (0);
 }

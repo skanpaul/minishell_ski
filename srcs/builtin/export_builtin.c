@@ -6,13 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 12:51:53 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/04 16:26:03 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	export_builtin(t_vars *vars, char **cmd_args)
+int	export_builtin(t_vars *vars, char **cmd_args)
 {
 	char	*name;
 	char	*equal;
@@ -36,8 +36,11 @@ void	export_builtin(t_vars *vars, char **cmd_args)
 			else
 				data = NULL;
 		}
-		if (ft_strlen(name) < 1)
+		if (ft_strlen(name) < 1) //check name_is_valid (char special, chiffre, etc..)
+		{
 			err_msg("export: not a valid identifier");
+			return (1);
+		}
 		else
 			update_var(&vars->env, name, data); 
   
@@ -48,4 +51,5 @@ void	export_builtin(t_vars *vars, char **cmd_args)
 		ft_free_null((void**)&name);      
 		i++;
 	}
+	return (0);
 }	

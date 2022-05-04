@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:41:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/02 13:00:42 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/04 17:36:26 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,26 @@ int	is_builtin(char *cmd)
 }
 
 /* ************************************************************************** */
-void	exec_builtin(t_vars *vars, char **cmd_args)
+int	exec_builtin(t_vars *vars, char **cmd_args)
 {
+	int	res;
+
 	if (!ft_strncmp(cmd_args[0], "echo", 4)) // Faut-il le [+1] ou pas?
-			echo_builtin(cmd_args);				
+			res = echo_builtin(cmd_args);				
 	else if (!ft_strncmp(cmd_args[0], "cd", 2))	 // Faut-il le [+1] ou pas?
-			cd_builtin(vars, cmd_args); 
+			res = cd_builtin(vars, cmd_args); 
 	else if (!ft_strncmp(cmd_args[0], "pwd", 3)) // Faut-il le [+1] ou pas?
-			pwd_builtin(vars, cmd_args);
+			res = pwd_builtin(vars, cmd_args);
 	else if (!ft_strncmp(cmd_args[0], "export", 6)) // Faut-il le [+1] ou pas?
-			export_builtin(vars, cmd_args);
+			res = export_builtin(vars, cmd_args);
 	else if (!ft_strncmp(cmd_args[0], "unset", 5)) // Faut-il le [+1] ou pas?
-			unset_builtin(vars, cmd_args);
+			res = unset_builtin(vars, cmd_args);
 	else if (!ft_strncmp(cmd_args[0], "env", 3)) // Faut-il le [+1] ou pas?
-			env_builtin(vars);
+			res = env_builtin(vars);
 	else if (!ft_strncmp(cmd_args[0], "exit", 4)) // Faut-il le [+1] ou pas?
 			exit_builtin(vars);
 	else if (!ft_strncmp(cmd_args[0], "loc", 3)) // Faut-il le [+1] ou pas?
-			loc_builtin(vars);
+			res = loc_builtin(vars);
 }
 
 int	is_assignation(char *cmd)
@@ -54,12 +56,12 @@ int	is_assignation(char *cmd)
 	char	*equal;
 
 	equal = ft_strchr(cmd, '=');
-	if (equal && equal - cmd > 0)
+	if (equal && equal - cmd > 0) //check name_is_valid ici?
 		return (1);
 	return (0);
 }
 
-void	add_local_var(t_vars *vars, char **cmd_args)
+int	add_local_var(t_vars *vars, char **cmd_args)
 {
 	char	*name;
 	char	*equal;
@@ -82,4 +84,5 @@ void	add_local_var(t_vars *vars, char **cmd_args)
 		}
 		i++;
 	}
+	return (0);
 }

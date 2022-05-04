@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:40:32 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 15:55:26 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/04 17:43:31 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*replace_vars(t_vars *vars, char *line)
 	{
 		var_value = NULL;
 		begin = ft_substr(result, 0, dollar_ptr - result);
-		var_name_end = ft_strchr(dollar_ptr, ' '); //should also look for $ et " ..
+		var_name_end = ft_strchr(dollar_ptr, ' '); //should also look for $ " = ..
 		if (!var_name_end)
 			var_name_end = dollar_ptr + ft_strlen(dollar_ptr);
 		name = ft_substr(dollar_ptr, 1, var_name_end - (dollar_ptr + 1));
