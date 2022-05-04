@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:40:32 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/03 15:41:03 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/04 15:55:26 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*replace_vars(t_vars *vars, char *line)
 		if (!var_name_end)
 			var_name_end = dollar_ptr + ft_strlen(dollar_ptr);
 		name = ft_substr(dollar_ptr, 1, var_name_end - (dollar_ptr + 1));
-		if (ft_strlen(name) > 1)
+		if (ft_strlen(name) > 0)
 		{
 			if (does_var_exist(vars->env, name))
 				var_value = get_var(vars->env, name)->data;
