@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 10:22:30 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/05 10:49:19 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,24 @@ void	parse_line(t_vars *vars, char *line)
 	// 	return ;
 	// add_history(line); // ski a besoin d effacer
 
-	// i = 0;
-	// if (is_assignation(cmd_args[i]))
-	// {
-	// 	while (cmd_args[++i])
-	// 	{
-	// 		if (!is_assignation(cmd_args[i]))
-	// 			break ;
-	// 	}
-	// 	if (!cmd_args[i])
-	// 		add_local_var(vars, cmd_args);
-	// }
-
+	// ---------------------------------
 	i = 0;
 	cmd_args = parsing_ski(vars, line);
+	if (!cmd_args[0])
+		return ;
+	// ---------------------------------
+	
+	i = 0;
+	if (is_assignation(cmd_args[i]))
+	{
+		while (cmd_args[++i])
+		{
+			if (!is_assignation(cmd_args[i]))
+				break ;
+		}
+		if (!cmd_args[i])
+			add_local_var(vars, cmd_args);
+	}
 
 	
 	if (cmd_args[i] && is_builtin(cmd_args[i]))
