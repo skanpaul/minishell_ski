@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/03 15:41:25 by gudias           ###   ########.fr        #
+#    Updated: 2022/05/05 08:52:31 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,33 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS	= minishell.c lexing.c parsing.c run_cmd.c errors.c signal_utils_main.c \
-		  builtin/exit_builtin.c builtin/echo_builtin.c builtin/pwd_builtin.c \
-		  builtin/cd_builtin.c builtin/env_builtin.c builtin/export_builtin.c \
-		 builtin/unset_builtin.c linklist_utils.c temporaire.c builtin_utils.c \
-		replace_vars.c builtin/cd_builtin_utils.c array_utils.c pipeline_space_maker.c \
-		 chevron_space_maker.c
+SRCS	=	minishell.c \
+			parsing.c \
+			run_cmd.c \
+			errors.c \
+			signal_utils_main.c \
+			builtin_utils.c \
+			replace_vars.c \
+			builtin/unset_builtin.c \
+			builtin/cd_builtin.c \
+			builtin/env_builtin.c \
+			builtin/exit_builtin.c \
+			builtin/echo_builtin.c \
+			builtin/pwd_builtin.c \
+			builtin/export_builtin.c \
+			builtin/cd_builtin_utils.c \
+			utils/array_utils.c \
+			utils/chevron_space_maker.c \
+			utils/lexing.c \
+			utils/linklist_utils.c \
+			utils/pipeline_space_maker.c \
+			utils/temporaire.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c
 	@echo "$(YELLOW)Compiling $(DEFAULT)$<"
-	@mkdir -p $(OBJSDIR) $(OBJSDIR)/builtin
+	@mkdir -p $(OBJSDIR) $(OBJSDIR)/builtin $(OBJSDIR)/utils
 	@$(CC) $(CLFAGS) $(INCL) -c $< -o $@
 
 all: $(NAME)
