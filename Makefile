@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/05 15:04:23 by ski              ###   ########.fr        #
+#    Updated: 2022/05/05 15:55:52 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,12 @@ SRCS	=	minishell.c \
 			builtin/pwd_builtin.c \
 			builtin/export_builtin.c \
 			builtin/cd_builtin_utils.c \
-			utils/array_utils.c \
-			utils/chevron_space_maker.c \
-			utils/lexing.c \
-			utils/linklist_utils.c \
-			utils/pipeline_space_maker.c \
-			utils/temporaire.c \
+			array_utils.c \
+			chevron_space_maker.c \
+			lexing.c \
+			linklist_utils.c \
+			pipeline_space_maker.c \
+			temporaire.c \
 			utils/quote_info_utils_01.c \
 			utils/quote_info_utils_02.c \
 			utils/split_shell_line.c \
