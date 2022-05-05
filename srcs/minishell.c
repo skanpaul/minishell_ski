@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 19:34:36 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/05 19:27:56 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 	char	*new_line;
+	char	**segments;
 
 	//------------------------------------
 	(void)argv;
@@ -50,15 +51,25 @@ int	main(int argc, char **argv, char **envp)
 	
 	new_line = NULL;
 	ft_putendl("HELLO MINISHELL");
-	while(1)
+	while (1)
 	{
 		new_line = readline("minishell> ");		
-		ft_add_history(new_line);
-				
+		ft_add_history(new_line);	
 		if (new_line)
 		{
 			if (is_line_with_correct_quote(new_line) == true)
-				parse_line(&vars, new_line);				
+			{
+			/*	
+				//split segments
+				segments = ft_split(new_line, '|');
+				while (*(segments + 1))
+					parse_line(&vars, *(segments++), 0);
+				parse_line(&vars, *segments, 1);
+				*/
+				parse_line(&vars, new_line, 1);
+			
+				
+			}
 			else
 				ft_printf("\n ---------- !!! BAD QUOTING !!! ---------- \n");			
 		}
