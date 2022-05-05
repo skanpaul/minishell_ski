@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/03 15:41:43 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/04 19:24:03 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <dirent.h>
+/* ************************************************************************** */
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define CYAN "\033[1;36m"
+# define DEFAULT "\033[0m"
 /* ************************************************************************** */
 typedef struct s_sig
 {
@@ -74,19 +80,19 @@ void	parse_line(t_vars *vars, char *line);
 char	*replace_vars(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
-void	exec_builtin(t_vars *vars, char **cmd_args);
+int	exec_builtin(t_vars *vars, char **cmd_args);
 int		is_assignation(char *cmd);
-void	add_local_var(t_vars *vars, char **cmd_args);
+int	add_local_var(t_vars *vars, char **cmd_args);
 
 void	exit_builtin(t_vars *vars);
-
-void	echo_builtin(char **cmd_args);
+int	echo_builtin(char **cmd_args);
 int		pwd_builtin(t_vars *vars, char **cmd_args);
-void	export_builtin(t_vars *vars, char **cmd_args);
-void	unset_builtin(t_vars *vars, char **cmd_args);
+int	export_builtin(t_vars *vars, char **cmd_args);
+int	unset_builtin(t_vars *vars, char **cmd_args);
 int		cd_builtin(t_vars *vars, char **cmd_args);
-void	env_builtin(t_vars *vars);
-void	loc_builtin(t_vars *vars);
+int	env_builtin(t_vars *vars);
+int	loc_builtin(t_vars *vars);
+
 void	init_env(t_vars *vars, char **envp);
 void 	init_loc(t_vars *vars);
 
@@ -118,8 +124,8 @@ char	*pipeline_space_maker(char *line);
 // -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);
-void	run_cmd(t_vars *vars, char *cmd, int output);
-void	exec_cmd(t_vars *vars, char *cmd);
+int	run_cmd(t_vars *vars, char **cmd_args, int output);
+void	exec_cmd(t_vars *vars, char **cmd_args);
 
 void	here_doc(char *limiter);
 void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la definition
