@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 11:32:55 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/05 14:24:55 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,11 @@ char	**split_shell_line(char *line, char separator);
 int		count_words(char *line, char separator);
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
-
+// ------------------------------------------------ translate_dollar.c
+void translate_dollar_all_token(char **token_array, t_vars *vars);
+// char *translate_dollar_1_token(char *token, t_vars *vars);
+void translate_dollar_1_token(char **token, t_vars *vars);
+bool is_dollar_variable(char *ptr_dollar);
 // ------------------------------------------------ quote_info_utils.c
 void	init_quote_info(t_quote_info *qti);
 void	refresh_quote_info(t_quote_info *qti, char actual_char);

@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/05 11:26:16 by ski              ###   ########.fr        #
+#    Updated: 2022/05/05 15:04:23 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRCS	=	minishell.c \
 			utils/temporaire.c \
 			utils/quote_info_utils_01.c \
 			utils/quote_info_utils_02.c \
-			utils/split_shell_line.c
+			utils/split_shell_line.c \
+			utils/translate_dollar.c 
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
