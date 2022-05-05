@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_info_utils.c                                 :+:      :+:    :+:   */
+/*   quote_info_utils_01.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 10:28:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/05 10:03:07 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/05 11:26:00 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,57 +54,6 @@ void	refresh_quote_info(t_quote_info *qti, char actual_char)
 }
 
 /* ************************************************************************** */
-bool	is_entering_realquote(t_quote_info *qti)
-{
-	if (qti->flag_entering_realquote)
-		return (true);
-	return (false);
-}
-
-/* ************************************************************************** */
-bool	is_exiting_realquote(t_quote_info *qti)
-{
-	if (qti->flag_exiting_realquote)
-		return (true);
-	return (false);
-}
-
-/* ************************************************************************** */
-// To used with: [ refresh_info_quote() ]
-bool	is_good_number_of_realquote(t_quote_info *qti)
-{
-	if (qti->cnt_char_realquote % 2 == 0)
-		return (true);
-	return (false);
-}
-
-/* ************************************************************************** */
-// To used in the same scope than: [ refresh_info_quote() ]
-bool	is_inside_realquote(t_quote_info *qti)
-{
-	if (qti->flag_inside_realquote)
-		return (true);
-	return (false);
-}
-
-/* ************************************************************************** */
-// To used in the same scope than: [ refresh_info_quote() ]
-bool	is_outside_realquote(t_quote_info *qti)
-{
-	if (qti->flag_inside_realquote)
-		return (false);
-	return (true);
-}
-
-/* ************************************************************************** */
-static bool	is_quote_char(char c)
-{
-	if (c == '\'' || c == '\"')
-		return (true);
-	return (false);
-}
-
-/* ************************************************************************** */
 bool is_line_with_correct_quote(char *line)
 {
 	int i;	
@@ -122,6 +71,14 @@ bool is_line_with_correct_quote(char *line)
 	if (is_good_number_of_realquote(&qti))
 		return (true);
 		
+	return (false);
+}
+
+/* ************************************************************************** */
+static bool	is_quote_char(char c)
+{
+	if (c == '\'' || c == '\"')
+		return (true);
 	return (false);
 }
 

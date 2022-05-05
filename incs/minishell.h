@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 09:57:01 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/05 11:32:55 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,10 @@ void	free_array(char **array);
 // -------------------------------------------------------------------
 char	**split_shell_line(char *line, char separator);
 int		count_words(char *line, char separator);
+char	*chevron_space_maker(char *line);
+char	*pipeline_space_maker(char *line);
 
-bool 	is_line_with_correct_quote(char *line);
-// ----------------------------------------------
+// ------------------------------------------------ quote_info_utils.c
 void	init_quote_info(t_quote_info *qti);
 void	refresh_quote_info(t_quote_info *qti, char actual_char);
 bool	is_good_number_of_realquote(t_quote_info *qti);
@@ -138,9 +139,10 @@ bool	is_inside_realquote(t_quote_info *qti);
 bool	is_outside_realquote(t_quote_info *qti);
 bool	is_entering_realquote(t_quote_info *qti);
 bool	is_exiting_realquote(t_quote_info *qti);
-// ----------------------------------------------
-char	*chevron_space_maker(char *line);
-char	*pipeline_space_maker(char *line);
+bool	is_inside_double_realquote(t_quote_info *qti);
+bool	is_inside_single_realquote(t_quote_info *qti);
+
+bool 	is_line_with_correct_quote(char *line);
 // -------------------------------------------------------------------
 void	ft_add_history(char *new_line);
 // -------------------------------------------------------------------
