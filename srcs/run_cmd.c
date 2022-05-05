@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 19:00:03 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/05 15:02:28 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 	close(pipe_fd[0]);
 	if (waitpid(id, &status, 0) == -1)
 		return -1;
-	if (WIFEXITED(status))
+	//if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 }
 
