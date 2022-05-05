@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/03 15:41:43 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/05 09:02:37 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,30 @@
 #include <sys/wait.h>
 #include <dirent.h>
 /* ************************************************************************** */
+typedef struct s_quote_info
+{
+	int		cnt_char_realquote;
+	char	last_char_realquote;
+	bool	flag_inside_realquote;
+	bool	flag_entering_realquote;
+	bool	flag_exiting_realquote;
+	
+}	t_quote_info;
+// ----------------------------------------
 typedef struct s_sig
 {
-	//-------------------------------------------
 	struct sigaction	sa_sigint_main;
 	struct sigaction	sa_sigquit_main;
-	//-------------------------------------------
 	struct sigaction	sa_signal_prog;
-
 } t_sig;
-
+// ----------------------------------------
 typedef struct	s_env
 {
 	char			*name;
 	char			*data;
 	struct s_env	*next;
 }	t_env;
-
+// ----------------------------------------
 typedef struct	s_vars
 {
 	int		stdin_fd;
@@ -90,16 +97,16 @@ void	loc_builtin(t_vars *vars);
 void	init_env(t_vars *vars, char **envp);
 void 	init_loc(t_vars *vars);
 
-// -------------------------------------------------------------------
+// ------------------------------------------------------ temporaire.c
 void	write_exit_success(t_vars *vars);
 void	write_exit_failure(t_vars *vars);
-// -------------------------------------------------------------------
+// ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
 void	ft_free_null(void **ptr);
-// -------------------------------------------------------------------
+// ------------------------------------------------ cd_builtin_utils.c
 char	*manage_tild(char *pathname, t_vars *vars);
 bool	is_good_path(char *pathname, t_vars *vars);
-// -------------------------------------------------------------------
+// -------------------------------------------------- linklist_utils.c
 void	print_var(t_env *var_head);
 t_env	*get_var(t_env *var_head, char *var_name);
 bool	does_var_exist(t_env *var_head, char *var_name);
@@ -108,11 +115,24 @@ void	add_var(t_env **var_head, char *name, char *data);
 void	remove_var(t_env **var_head, char *var_name);
 int		size_var_list(t_env *var_head);
 void	free_var_list(t_env **var_head);
-// -------------------------------------------------------------------
+// ----------------------------------------------------- array_utils.c
 char	**conv_list_to_array(t_env *var_head);
 void	print_array(char **array);
 void	free_array(char **array);
 // -------------------------------------------------------------------
+char	**split_shell_line(char *line, char separator);
+int		count_words(char *line, char separator);
+
+bool 	is_line_with_correct_quote(char *line);
+// ----------------------------------------------
+void	init_quote_info(t_quote_info *qti);
+void	refresh_quote_info(t_quote_info *qti, char actual_char);
+bool	is_good_number_of_realquote(t_quote_info *qti);
+bool	is_inside_realquote(t_quote_info *qti);
+bool	is_outside_realquote(t_quote_info *qti);
+bool	is_entering_realquote(t_quote_info *qti);
+bool	is_exiting_realquote(t_quote_info *qti);
+// ----------------------------------------------
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
 // -------------------------------------------------------------------

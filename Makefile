@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/05 08:52:31 by ski              ###   ########.fr        #
+#    Updated: 2022/05/05 09:11:36 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRCS	=	minishell.c \
 			utils/lexing.c \
 			utils/linklist_utils.c \
 			utils/pipeline_space_maker.c \
-			utils/temporaire.c
+			utils/temporaire.c \
+			utils/quote_info_utils.c
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
