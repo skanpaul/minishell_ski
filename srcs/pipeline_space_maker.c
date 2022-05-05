@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 06:15:33 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/03 12:54:22 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/05 09:07:19 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@ static char	*insert_space_after_actual_pos(char *line, int *actual_position);
 char *pipeline_space_maker(char *line)
 {
     int i;
+	t_quote_info qti;
+
+	init_quote_info(&qti);
 
 	i = 0;
     while (line[i] != 0)
 	{
-		if (is_pipeline(line[i]))
+		refresh_quote_info(&qti, line[i]);
+		
+		if (is_pipeline(line[i]) && is_outside_realquote(&qti))
 		{
 			if (is_prev_char_correct(line, i) == false)
 				line = insert_space_before_actual_pos(line, &i);
