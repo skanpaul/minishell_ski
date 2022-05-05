@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/05 09:11:36 by ski              ###   ########.fr        #
+#    Updated: 2022/05/05 09:24:32 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRCSDIR	= srcs
 OBJSDIR	= objs
 
 SRCS	=	minishell.c \
+			initialisation.c \
+			clean_program.c \
 			parsing.c \
 			run_cmd.c \
 			errors.c \

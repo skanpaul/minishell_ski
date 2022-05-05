@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 09:02:37 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/05 09:23:40 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	init_sa_struc_main(t_sig *s);
 void	handler_signal_main(int sig_code);
 void	init_sigaction_main(t_sig *s);
 /* ************************************************************************** */
+void	initialisation(t_vars *vars, char **envp);
+void	clean_program(t_vars *vars);
+/* ************************************************************************** */
+
 
 void	parse_line(t_vars *vars, char *line);
 char	*replace_vars(t_vars *vars, char *line);
@@ -135,6 +139,8 @@ bool	is_exiting_realquote(t_quote_info *qti);
 // ----------------------------------------------
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
+// -------------------------------------------------------------------
+void	ft_add_history(char *new_line);
 // -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);
