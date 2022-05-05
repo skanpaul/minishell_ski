@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 09:55:20 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/04 19:34:36 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	main(int argc, char **argv, char **envp)
 	//tcgetattr(STDIN_FILENO, &attributes);
 	//attributes.c_lflag &= ~ ECHO;
 	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);	
+	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
+	ft_printf("\t\t\t%s| %sHELLO %sMINI %sSHELL %s|%s\n\n", CYAN, RED, YELLOW, GREEN, CYAN, DEFAULT);
 	//------------------------------------
 	
 	new_line = NULL;

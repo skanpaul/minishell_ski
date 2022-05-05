@@ -18,6 +18,9 @@ void	parse_line(t_vars *vars, char *line)
 {
 	char	**cmd_args;
 	int		i;
+	int		return_code;
+       
+	return_code = -1;
 	
 	// //check space: [ ... >file ] vs. [ ... > file ]	
 	// //check single quotes
@@ -30,10 +33,10 @@ void	parse_line(t_vars *vars, char *line)
 	// if (!cmd_args[0])
 	// 	return ;
 	// add_history(line); // ski a besoin d effacer
-
 	// ---------------------------------
 	i = 0;
 	cmd_args = parsing_ski(vars, line);
+
 	if (!cmd_args[0])
 		return ;
 	// ---------------------------------
@@ -47,24 +50,16 @@ void	parse_line(t_vars *vars, char *line)
 				break ;
 		}
 		if (!cmd_args[i])
-			add_local_var(vars, cmd_args);
+			return_code = add_local_var(vars, cmd_args);
 	}
 
 	
 	if (cmd_args[i] && is_builtin(cmd_args[i]))
-		exec_builtin(vars, cmd_args + i);
+		return_code = exec_builtin(vars, cmd_args + i);
 	else if (cmd_args[i])
-		run_cmd(vars, line, 1);  //modif line ---> cmd_args (changer parsing dans exec_cmd)
-
-	//update '$?' ici ?? (besoin de valeur de retour d'exec)
-	//pourquoi?
-	//$? est une variable du shell, elle se met a jour apres l'execution de qqch
-	//peu importe quoi
-	//un programme lancer ne doit pas gerer les var de notre shell mais retourne just 
-	//son exit status: exit(0); exit(1); return(-1); etc...
-	//il faut recuperer cette valeur peu importe ce qu'on a fait et mettre a jour apres
-	// (ca me semble plus coherent)
-	// 	!!! -->modifier fonction pour qu'elle retourne le code erreur
+		return_code = run_cmd(vars, cmd_args + i, 1);
+	
+	update_var(&vars->loc, "?", ft_itoa(return_code)); //free le itoa
 
 	ft_free_array(cmd_args);
 }
