@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 09:21:55 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/05 09:55:20 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,26 @@ int	main(int argc, char **argv, char **envp)
 	//attributes.c_lflag &= ~ ECHO;
 	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);	
 	//------------------------------------
+	
+	new_line = NULL;
 	ft_putendl("HELLO MINISHELL");
 	while(1)
 	{
-		new_line = readline("minishell> ");
+		new_line = readline("minishell> ");		
+		ft_add_history(new_line);
+				
 		if (new_line)
-			ft_add_history(new_line);
-			new_line = chevron_space_maker(new_line);
-			new_line = pipeline_space_maker(new_line);
-			parse_line(&vars, new_line);
-		new_line = NULL;
+		{
+			if (is_line_with_correct_quote(new_line) == true)
+				parse_line(&vars, new_line);				
+			else
+				ft_printf("\n ---------- !!! BAD QUOTING !!! ---------- \n");			
+		}
+
 		ft_free_null((void**)&new_line);
 	}	
 	//------------------------------------
 	return (0);
 }
 
+/* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/03 15:40:19 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/05 10:22:30 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,34 @@ void	parse_line(t_vars *vars, char *line)
 	char	**cmd_args;
 	int		i;
 	
-	//check space: [ ... >file ] vs. [ ... > file ]
-	
-	//check single quotes
+	// //check space: [ ... >file ] vs. [ ... > file ]	
+	// //check single quotes
+	// //check double quotes	
+	// //check redirs
+	// //replace $values
+	// line = replace_vars(vars, line);
+	// ft_putendl(line);	
+	// cmd_args = ft_split(line, ' ');
+	// if (!cmd_args[0])
+	// 	return ;
+	// add_history(line); // ski a besoin d effacer
 
-	//check double quotes
-	
-	//check redirs
-
-	//replace $values
-	line = replace_vars(vars, line);
-	ft_putendl(line);
-	
-	
-	cmd_args = ft_split(line, ' ');
-	if (!cmd_args[0])
-		return ;
-
-	add_history(line); // ski a besoin d effacer
+	// i = 0;
+	// if (is_assignation(cmd_args[i]))
+	// {
+	// 	while (cmd_args[++i])
+	// 	{
+	// 		if (!is_assignation(cmd_args[i]))
+	// 			break ;
+	// 	}
+	// 	if (!cmd_args[i])
+	// 		add_local_var(vars, cmd_args);
+	// }
 
 	i = 0;
-	if (is_assignation(cmd_args[i]))
-	{
-		while (cmd_args[++i])
-		{
-			if (!is_assignation(cmd_args[i]))
-				break ;
-		}
-		if (!cmd_args[i])
-			add_local_var(vars, cmd_args);
-	}
+	cmd_args = parsing_ski(vars, line);
+
+	
 	if (cmd_args[i] && is_builtin(cmd_args[i]))
 		exec_builtin(vars, cmd_args + i);
 	else if (cmd_args[i])
