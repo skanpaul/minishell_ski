@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 19:27:56 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:51:38 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,14 @@ int	main(int argc, char **argv, char **envp)
 		if (new_line)
 		{
 			if (is_line_with_correct_quote(new_line) == true)
-			{
-			/*	
+			{	
 				//split segments
 				segments = ft_split(new_line, '|');
 				while (*(segments + 1))
 					parse_line(&vars, *(segments++), 0);
 				parse_line(&vars, *segments, 1);
-				*/
-				parse_line(&vars, new_line, 1);
+				
+				//parse_line(&vars, new_line, 1);
 			
 				
 			}

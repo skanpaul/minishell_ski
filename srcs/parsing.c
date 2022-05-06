@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 19:27:59 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:51:46 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ void	parse_line(t_vars *vars, char *line, int output)
 	}
 
 	
-	if (cmd_args[i] && is_builtin(cmd_args[i]))
-		return_code = exec_builtin(vars, cmd_args + i);
-	else if (cmd_args[i])
+	//if (cmd_args[i] && is_builtin(cmd_args[i]))
+	//	return_code = exec_builtin(vars, cmd_args + i, output);
+	//else
+	 if (cmd_args[i])
 		return_code = run_cmd(vars, cmd_args + i, output);
 	
 	update_var(&vars->loc, "?", ft_itoa(return_code)); //free le itoa

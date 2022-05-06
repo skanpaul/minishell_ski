@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/05 15:02:28 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:51:43 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 		else
 			dup2(pipe_fd[1], 1);
 		close(pipe_fd[1]);
+		
+	if (is_builtin(cmd_args[0]))
+		 exit(exec_builtin(vars, cmd_args));
+	else
 		exec_cmd(vars, cmd_args);
 	}
 	close(pipe_fd[1]);
