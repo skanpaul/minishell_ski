@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/06 17:51:46 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/08 16:25:23 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ void	parse_line(t_vars *vars, char *line, int output)
        
 	return_code = -1;
 	
-	// //check space: [ ... >file ] vs. [ ... > file ]	
-	// //check single quotes
-	// //check double quotes	
-	// //check redirs
-	// //replace $values
-	// line = replace_vars(vars, line);
-	// ft_putendl(line);	
-	// cmd_args = ft_split(line, ' ');
-	// if (!cmd_args[0])
-	// 	return ;
-	// add_history(line); // ski a besoin d effacer
-	// ---------------------------------
-	i = 0;
-	cmd_args = parsing_ski(vars, line);
-
+	//check space: [ ... >file ] vs. [ ... > file ]	
+	//check single quotes
+	//check double quotes	
+	//check redirs
+	//replace $values
+	line = replace_vars(vars, line);
+	ft_putendl(line);	
+	cmd_args = ft_split(line, ' ');
 	if (!cmd_args[0])
 		return ;
+	add_history(line); // ski a besoin d effacer
+	// ---------------------------------
+	// i = 0;
+	// cmd_args = parsing_ski(vars, line);
+
+	// if (!cmd_args[0])
+	// 	return ;
 	// ---------------------------------
 	
 	i = 0;
