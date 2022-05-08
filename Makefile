@@ -6,7 +6,7 @@
 #    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/08 16:24:48 by sorakann         ###   ########.fr        #
+#    Updated: 2022/05/08 17:11:18 by sorakann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ SRCS	=	minishell.c \
 			builtin/echo_builtin.c \
 			builtin/pwd_builtin.c \
 			builtin/export_builtin.c \
-			builtin/cd_builtin_utils.c \
 			array_utils.c \
 			chevron_space_maker.c \
 			lexing.c \

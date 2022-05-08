@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/08 16:33:24 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/08 17:10:41 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,6 @@ void	write_exit_failure(t_vars *vars);
 // ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
 void	ft_free_null(void **ptr);
-// ------------------------------------------------ cd_builtin_utils.c
-char	*manage_tild(char *pathname, t_vars *vars);
-bool	is_good_path(char *pathname, t_vars *vars);
 // -------------------------------------------------- linklist_utils.c
 void	print_var(t_env *var_head);
 t_env	*get_var(t_env *var_head, char *var_name);
@@ -170,6 +167,6 @@ void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la 
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
-int		manage_perror(char *remark, t_vars *vars);
+int		manage_perror(char *remark, int error_code);
 /* ************************************************************************** */
 #endif
