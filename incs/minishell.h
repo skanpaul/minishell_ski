@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/08 16:21:27 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/08 16:33:24 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,8 @@ void	initialisation(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
 /* ************************************************************************** */
 
-
 void	parse_line(t_vars *vars, char *line, int output);
 char	*replace_vars(t_vars *vars, char *line);
-
-char 	**parsing_ski(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
 int	exec_builtin(t_vars *vars, char **cmd_args);
