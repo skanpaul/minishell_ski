@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/03 07:47:44 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/08 17:10:20 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 /* ************************************************************************** */
 static int	cd_empty(t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
+static char	*manage_tild(char *pathname, t_vars *vars);
+static bool	is_good_path(char *pathname, t_vars *vars);
 
 /* ************************************************************************** */
 int cd_builtin(t_vars *vars, char **cmd_args)
@@ -42,21 +44,20 @@ static int cd_other(char *pathname, t_vars *vars)
 	char oldcwd[CWD_BUF_SIZE];
 	
 	if(getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
-		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	
 	if (chdir(pathname) == CHDIR_ERROR)
 	{
 		ft_printf("minishell: cd: ");
-		return (manage_perror(pathname, vars));
+		return (manage_perror(pathname, errno));
 	}
 		
 	if(getcwd(cwd, CWD_BUF_SIZE) == NULL)
-		return(manage_perror("cd_builtin: [ getcwd() ] ", vars));
+		return(manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	
 	update_var(&vars->env, "OLDPWD", oldcwd);
 	update_var(&vars->env, "PWD", cwd);
 
-	write_exit_success(vars);
 	return (BUILTIN_SUCCESS);	
 }
 
@@ -74,5 +75,43 @@ static int cd_other(char *pathname, t_vars *vars)
 // 	}	
 // 	ft_printf("\n");	
 // }
+
+/* ************************************************************************** */
+static char *manage_tild(char *pathname, t_vars *vars)
+{
+	int len;
+	char *buff1;
+	char *buff2;
+	
+	buff1 = NULL;
+	buff2 = NULL;
+
+	len = 0;	
+	if (pathname[0] == '~')
+	{
+		buff1 = get_var(vars->env, "HOME")->data;
+		len = ft_strlen(pathname);
+		buff2 = ft_substr(pathname, 1, len - 1);
+		ft_free_null((void**)&pathname);
+		pathname = ft_strjoin(buff1, buff2);
+		ft_free_null((void**)&buff2);		
+	}
+	return (pathname);	
+}
+
+/* ************************************************************************** */
+// ATTENTION: il faut donner un PATH ABSOLUE
+/* ************************************************************************** */
+static bool is_good_path(char *pathname, t_vars *vars)
+{
+	DIR	*folder;
+	
+	(void)vars;
+	folder = opendir(pathname);
+	if (folder == NULL)
+		return (false);	
+	closedir(folder);	
+	return (true);	
+}
 
 /* ************************************************************************** */

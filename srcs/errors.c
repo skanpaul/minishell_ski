@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 17:18:43 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/08 17:25:29 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ void	exit_msg(char *msg)
 }
 
 /* ************************************************************************** */
-int manage_perror(char *remark, t_vars *vars)
+int manage_perror(char *remark, int error_code)
 {
 	perror(remark);
-	ft_printf("\n");
-	write_exit_failure(vars);
-	return (BUILTIN_FAILURE);
+	ft_printf("\n"); // a effacer, si besoin
+	return (error_code);
 }
 
 /* ************************************************************************** */

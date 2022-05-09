@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 19:24:03 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/08 17:10:41 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,8 @@ void	initialisation(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
 /* ************************************************************************** */
 
-
-void	parse_line(t_vars *vars, char *line);
+void	parse_line(t_vars *vars, char *line, int output);
 char	*replace_vars(t_vars *vars, char *line);
-
-char 	**parsing_ski(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
 int	exec_builtin(t_vars *vars, char **cmd_args);
@@ -118,9 +115,6 @@ void	write_exit_failure(t_vars *vars);
 // ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
 void	ft_free_null(void **ptr);
-// ------------------------------------------------ cd_builtin_utils.c
-char	*manage_tild(char *pathname, t_vars *vars);
-bool	is_good_path(char *pathname, t_vars *vars);
 // -------------------------------------------------- linklist_utils.c
 void	print_var(t_env *var_head);
 t_env	*get_var(t_env *var_head, char *var_name);
@@ -140,10 +134,14 @@ int		count_words(char *line, char separator);
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
 // ------------------------------------------------ translate_dollar.c
-void translate_dollar_all_token(char **token_array, t_vars *vars);
-// char *translate_dollar_1_token(char *token, t_vars *vars);
-void translate_dollar_1_token(char **token, t_vars *vars);
-bool is_dollar_variable(char *ptr_dollar);
+void	translate_dollars_all(char **array, t_vars *vars);
+char	*translate_dollar(char *str, t_vars *vars);
+bool	is_char_for_dolvar_name(char c);
+bool	is_vardol(char *str, int i);
+int		get_end_pos_vardol(char *str, int start_pos);
+char	*substitute_vardol(char *str, int *start_pos, t_vars *vars);
+char	*delete_char(char *str, int *i);
+
 // ------------------------------------------------ quote_info_utils.c
 void	init_quote_info(t_quote_info *qti);
 void	refresh_quote_info(t_quote_info *qti, char actual_char);
@@ -169,6 +167,6 @@ void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la 
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
-int		manage_perror(char *remark, t_vars *vars);
+int		manage_perror(char *remark, int error_code);
 /* ************************************************************************** */
 #endif
