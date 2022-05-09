@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/06 17:51:38 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/09 12:01:07 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,21 @@ int	main(int argc, char **argv, char **envp)
 	ft_putendl("HELLO MINISHELL");
 	while (1)
 	{
-		new_line = readline("minishell> ");		
+		new_line = readline("minishell> ");
+				
 		ft_add_history(new_line);	
+		
 		if (new_line)
 		{
 			if (is_line_with_correct_quote(new_line) == true)
 			{	
 				//split segments
-				segments = ft_split(new_line, '|');
+				// segments = ft_split(new_line, '|');
+				
+				new_line = chevron_space_maker(new_line);
+				new_line = pipeline_space_maker(new_line);
+				segments = split_shell_line(new_line, '|');
+				
 				while (*(segments + 1))
 					parse_line(&vars, *(segments++), 0);
 				parse_line(&vars, *segments, 1);

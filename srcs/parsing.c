@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/08 16:25:23 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:03:57 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,17 @@ void	parse_line(t_vars *vars, char *line, int output)
 	//check double quotes	
 	//check redirs
 	//replace $values
-	line = replace_vars(vars, line);
-	ft_putendl(line);	
-	cmd_args = ft_split(line, ' ');
+	
+	// line = replace_vars(vars, line);
+	// line = replace_vars(vars, line);
+	// ft_putendl(line);		
+	// cmd_args = ft_split(line, ' ');
+	
+	cmd_args = split_shell_line(line, ' ');
+	translate_dollars_all(cmd_args, vars);
+	
 	if (!cmd_args[0])
 		return ;
-	add_history(line); // ski a besoin d effacer
-	// ---------------------------------
-	// i = 0;
-	// cmd_args = parsing_ski(vars, line);
-
-	// if (!cmd_args[0])
-	// 	return ;
-	// ---------------------------------
 	
 	i = 0;
 	if (is_assignation(cmd_args[i]))
