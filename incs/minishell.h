@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/08 17:10:41 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:34:32 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct	s_vars
 	t_env	*loc;
 	char	**env_char_array;
 	t_sig	sig;
+	int		segments_count;
 }	t_vars;
 /* ************************************************************************** */
 # define MSG_SIGINT_MAIN	"\nminishell ski> "

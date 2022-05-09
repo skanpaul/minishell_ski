@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/09 12:03:57 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/09 15:45:06 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	parse_line(t_vars *vars, char *line, int output)
 	// cmd_args = ft_split(line, ' ');
 	
 	cmd_args = split_shell_line(line, ' ');
-	translate_dollars_all(cmd_args, vars);
 	
-	if (!cmd_args[0])
+	if (!cmd_args || !cmd_args[0])
 		return ;
 	
+	translate_dollars_all(cmd_args, vars);
 	i = 0;
 	if (is_assignation(cmd_args[i]))
 	{
@@ -47,15 +47,13 @@ void	parse_line(t_vars *vars, char *line, int output)
 			if (!is_assignation(cmd_args[i]))
 				break ;
 		}
-		if (!cmd_args[i])
+		if (!cmd_args[i] && vars->segments_count == 1)
 			return_code = add_local_var(vars, cmd_args);
 	}
-
 	
-	//if (cmd_args[i] && is_builtin(cmd_args[i]))
-	//	return_code = exec_builtin(vars, cmd_args + i, output);
-	//else
-	 if (cmd_args[i])
+	if (cmd_args[i] && vars->segments_count == 1 && is_builtin(cmd_args[i]))
+		return_code = exec_builtin(vars, cmd_args + i);
+	else if (cmd_args[i])
 		return_code = run_cmd(vars, cmd_args + i, output);
 	
 	update_var(&vars->loc, "?", ft_itoa(return_code)); //free le itoa

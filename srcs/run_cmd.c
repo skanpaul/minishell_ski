@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/06 17:51:43 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/09 14:34:17 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ void	exec_cmd(t_vars *vars, char **cmd_args)
 		err_msg(ERR_CMD);
 		exit(127);
 	}
-	execve(cmd_args[0], cmd_args, NULL);
+	vars->env_char_array = conv_list_to_array(vars->env);
+	execve(cmd_args[0], cmd_args, vars->env_char_array);
 	err_msg(ERR_EXECVE);
+	ft_free_array(vars->env_char_array);
 	exit(1);
 }
