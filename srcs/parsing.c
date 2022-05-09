@@ -33,12 +33,14 @@ void	parse_line(t_vars *vars, char *line, int output)
 	// ft_putendl(line);		
 	// cmd_args = ft_split(line, ' ');
 	
+
 	cmd_args = split_shell_line(line, ' ');
 	
 	if (!cmd_args || !cmd_args[0])
 		return ;
 	
 	translate_dollars_all(cmd_args, vars);
+
 	i = 0;
 	if (is_assignation(cmd_args[i]))
 	{

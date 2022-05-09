@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate_dollar_utils_01.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:22:02 by ski               #+#    #+#             */
-/*   Updated: 2022/05/08 16:22:39 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:54:08 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	translate_dollars_all(char **array, t_vars *vars)
 	int	i;
 
 	i = 0;
+	if (array == NULL || array[0] == NULL)
+		return ;
 	while (array[i])
 	{
 		array[i] = translate_dollar(*(array + i), vars);
