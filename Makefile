@@ -50,8 +50,8 @@ SRCS	=	minishell.c \
 			utils/quote_info_utils_02.c \
 			utils/split_shell_line.c \
 			utils/translate_dollar_utils_01.c \
-			utils/translate_dollar_utils_02.c
-			
+			utils/translate_dollar_utils_02.c \
+			utils/chevron_segment_utils.c			
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 DBG_OBJS = $(SRCS:%.c=$(OBJSDIR)/%_dbg.o)
