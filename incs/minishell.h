@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/09 14:34:32 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/10 17:14:32 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <string.h>
+# include <fcntl.h>
 /* ************************************************************************** */
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -156,7 +157,12 @@ bool	is_inside_single_realquote(t_quote_info *qti);
 
 bool 	is_line_with_correct_quote(char *line);
 // -------------------------------------------------------------------
-void	ft_add_history(char *new_line);
+void	ft_add_history(char *new_line); // ski peut-être à effacer
+
+// ------------------------------------------- chevron_segment_utils.c
+int		get_segment_fd_in(char **array);
+int		get_segment_fd_out(char **array);
+void	clear_chevron_segment(char **array);
 // -------------------------------------------------------------------
 
 char	*find_cmd_path(t_env *env, char *cmd);
@@ -168,6 +174,6 @@ void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la 
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
-int		manage_perror(char *remark, int error_code);
+int		manage_perror(char *remark, int error_code); 
 /* ************************************************************************** */
 #endif

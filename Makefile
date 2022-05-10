@@ -6,14 +6,14 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/09 11:51:13 by ski              ###   ########.fr        #
+#    Updated: 2022/05/10 17:10:34 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror 
+CFLAGS	= -Wall -Wextra -Werror -g3
 
 INCL	= -I incs
 RM		= rm -f
@@ -50,8 +50,8 @@ SRCS	=	minishell.c \
 			utils/quote_info_utils_02.c \
 			utils/split_shell_line.c \
 			utils/translate_dollar_utils_01.c \
-			utils/translate_dollar_utils_02.c
-			
+			utils/translate_dollar_utils_02.c \
+			utils/chevron_segment_utils.c			
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 
