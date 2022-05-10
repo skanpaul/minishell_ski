@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/10 17:14:32 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/10 17:23:52 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,9 @@ void	init_env(t_vars *vars, char **envp);
 void 	init_loc(t_vars *vars);
 
 // ------------------------------------------------------ temporaire.c
-void	write_exit_success(t_vars *vars);
-void	write_exit_failure(t_vars *vars);
-// ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
 void	ft_free_null(void **ptr);
+int		openfilex(char *filepath, int o_flag);
 // -------------------------------------------------- linklist_utils.c
 void	print_var(t_env *var_head);
 t_env	*get_var(t_env *var_head, char *var_name);

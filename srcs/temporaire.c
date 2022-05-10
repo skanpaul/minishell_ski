@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/05/05 09:50:32 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/10 17:23:38 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,7 @@
 /* ************************************************************************** */
 void init_loc(t_vars *vars)
 {
-	write_exit_success(vars);
-}
-
-/* ************************************************************************** */
-void write_exit_success(t_vars *vars)
-{
 	update_var(&vars->loc, "?", EXIT_SUCCESS_STR);
-}
-
-/* ************************************************************************** */
-void write_exit_failure(t_vars *vars)
-{
-	update_var(&vars->loc, "?", EXIT_FAILURE_STR);
 }
 
 /* ************************************************************************** */
@@ -56,21 +44,18 @@ void ft_add_history(char *new_line)
 }
 
 /* ************************************************************************** */
-char *dollar_translate(t_vars *vars, char *dollar_var)
+int	openfilex(char *filepath, int o_flag)
 {
-	char *var_name;
+	int	fd;
 
-	// var_name = foreign_word;		// exclus le signe $
-	var_name = dollar_var + 1;	// inclus le signe $   
-		
-	if (does_var_exist(vars->env, var_name))
-		return (get_var(vars->env, var_name)->data);
-
-	if (does_var_exist(vars->loc, var_name))
-		return (get_var(vars->loc, var_name)->data);
-
-	return (NULL);
+	fd = -1;
+	if (o_flag == 0)
+		fd = open(filepath, O_RDONLY);
+	else if (o_flag == 1)
+		fd = open(filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	else if (o_flag == 2)
+		fd = open(filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	return (fd);
 }
 
 /* ************************************************************************** */
-
