@@ -3,6 +3,7 @@
 *.swp
 .DS_Store
 minishell
+debug_minishell
 ski_ski
 ski_ski.dSYM/*
 .vscode/*
