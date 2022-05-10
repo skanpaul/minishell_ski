@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/09 20:17:31 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/10 16:25:42 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,25 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 
 	if (pipe(pipe_fd) == -1)
 		err_msg(ERR_PIPE);
-	id = fork();
-	if (id == -1)
-		err_msg(ERR_FORK);
-	if (id == 0)
-	{	
-		close(pipe_fd[0]);
-		if (output)
-			dup2(output, 1);
-		else
-			dup2(pipe_fd[1], 1);
-		close(pipe_fd[1]);
+	if (cmd_args[0])
+	{
+		id = fork();
+		if (id == -1)
+			err_msg(ERR_FORK);
+		if (id == 0)
+		{	
+			close(pipe_fd[0]);
+			if (output)
+				dup2(output, 1);
+			else
+				dup2(pipe_fd[1], 1);
+			close(pipe_fd[1]);
 		
-	if (is_builtin(cmd_args[0]))
-		 exit(exec_builtin(vars, cmd_args));
-	else
-		exec_cmd(vars, cmd_args);
+		if (is_builtin(cmd_args[0]))
+			exit(exec_builtin(vars, cmd_args));
+		else
+			exec_cmd(vars, cmd_args);
+		}
 	}
 	close(pipe_fd[1]);
 	if (!output)

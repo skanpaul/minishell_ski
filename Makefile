@@ -6,14 +6,14 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/09 11:51:13 by ski              ###   ########.fr        #
+#    Updated: 2022/05/10 17:25:26 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror 
+CFLAGS	= -Wall -Wextra -Werror
 
 INCL	= -I incs
 RM		= rm -f
@@ -54,6 +54,7 @@ SRCS	=	minishell.c \
 			
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
+DBG_OBJS = $(SRCS:%.c=$(OBJSDIR)/%_dbg.o)
 
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c
 	@echo "$(YELLOW)Compiling $(DEFAULT)$<"
@@ -83,6 +84,17 @@ fclean: clean
 libclean: 
 	@make fclean -C libft 1>/dev/null 2>/dev/null
 	@echo "$(RED)Removed $(CYAN)Libft$(DEFAULT)"
+
+debug: $(DBG_OBJS) $(LIBFT)
+	@echo "$(YELLOW)Preparing files for debug...$(DEFAULT)"
+	@$(CC) $(CFLAGS) $^ -lreadline -o debug_$(NAME)
+	@echo "$(GREEN)----> ./debug_$(NAME) is ready$(DEFAULT)"
+	@echo "$(CYAN)Launching LLDB...$(DEFAULT)"
+	@lldb ./debug_$(NAME)
+
+$(OBJSDIR)/%_dbg.o: $(SRCSDIR)/%.c
+	@mkdir -p $(OBJSDIR) $(OBJSDIR)/builtin $(OBJSDIR)/utils
+	@$(CC) -g3 $(INCL) -c $< -o $@
 
 fullclean: fclean libclean
 
