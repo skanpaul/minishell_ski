@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/10 17:25:26 by gudias           ###   ########.fr        #
+#    Updated: 2022/05/10 18:05:27 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,8 @@ debug: $(DBG_OBJS) $(LIBFT)
 	@echo "$(GREEN)----> ./debug_$(NAME) is ready$(DEFAULT)"
 	@echo "$(CYAN)Launching LLDB...$(DEFAULT)"
 	@lldb ./debug_$(NAME)
+	@echo "$(RED)Removed $(CYAN)./debug_$(NAME)$(DEFAULT)"
+	@$(RM) debug_$(NAME)
 
 $(OBJSDIR)/%_dbg.o: $(SRCSDIR)/%.c
 	@mkdir -p $(OBJSDIR) $(OBJSDIR)/builtin $(OBJSDIR)/utils

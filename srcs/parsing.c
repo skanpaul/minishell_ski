@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/10 16:30:16 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/10 19:31:42 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ void	parse_line(t_vars *vars, char *line, int output)
 	char	**cmd_args;
 	int		i;
 	int		return_code;
+	int		fd_in;
+	int		fd_out;
        
 	return_code = -1;
+	fd_in = 0;
+	fd_out = 0;
 	
 	//check space: [ ... >file ] vs. [ ... > file ]	
 	//check single quotes
@@ -35,6 +39,16 @@ void	parse_line(t_vars *vars, char *line, int output)
 	
 
 	cmd_args = split_shell_line(line, ' ');
+
+	//get redirs
+	fd_in = get_segment_fd_in(cmd_args);
+	fd_out = get_segment_fd_out(cmd_args);
+	clear_chevron_segment(cmd_args);
+
+	if (fd_in)
+		dup2(fd_in, 0);
+	if (fd_out)
+		dup2(fd_out, 1);
 	
 	if (!cmd_args || !cmd_args[0])
 		return ;
@@ -62,5 +76,17 @@ void	parse_line(t_vars *vars, char *line, int output)
 		return_code = 0;	
 	update_var(&vars->loc, "?", ft_itoa(return_code)); //free le itoa
 
+	//reset redirs and close fds
+	if (fd_in)
+	{
+		if (output)
+			dup2(vars->stdin_fd, 0);
+		close (fd_in);
+	}
+	if (fd_out)
+	{
+		dup2(vars->stdout_fd, 1);
+		close (fd_out);
+	}
 	ft_free_array(cmd_args);
 }
