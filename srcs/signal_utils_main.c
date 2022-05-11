@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/04/21 15:53:30 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 13:08:05 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	handler_signal_main(int sig_code)
 	if (sig_code == SIGINT)
 	{
 		write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
+		// update_var(&vars->loc, "?", 1);
 	}
 	
 	 if (sig_code == SIGQUIT)
