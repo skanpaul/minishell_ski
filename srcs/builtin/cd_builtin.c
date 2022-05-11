@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 10:40:11 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 11:38:42 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,12 @@ static int	cd_other(char *pathname, t_vars *vars)
 	}		
 	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
-	update_var(&vars->env, "OLDPWD", oldcwd);
-	update_var(&vars->env, "PWD", cwd);
+	if (!does_var_exist(vars->env, "OLDPWD"))
+		update_var(&vars->env, "OLDPWD", "");
+	else
+		update_var(&vars->env, "OLDPWD", oldcwd);
+	if (does_var_exist(vars->env, "PWD"))
+		update_var(&vars->env, "PWD", cwd);
 	return (BUILTIN_SUCCESS);
 }
 

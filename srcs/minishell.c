@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/09 20:17:24 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/11 11:35:15 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int	main(int argc, char **argv, char **envp)
 
 		ft_free_null((void**)&new_line);
 	}	
+	//------------------------------------
+	// free les variables d'environnement
+	// free les variables locales
 	//------------------------------------
 	return (0);
 }
