@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/10 16:25:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/11 20:01:56 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,21 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 		if (id == 0)
 		{	
 			close(pipe_fd[0]);
-			if (output)
-				dup2(output, 1);
-			else
+			if (!output)
 				dup2(pipe_fd[1], 1);
 			close(pipe_fd[1]);
 		
-		if (is_builtin(cmd_args[0]))
-			exit(exec_builtin(vars, cmd_args));
-		else
-			exec_cmd(vars, cmd_args);
+			if (is_builtin(cmd_args[0]))
+				exit(exec_builtin(vars, cmd_args));
+			else
+				exec_cmd(vars, cmd_args);
 		}
 	}
 	close(pipe_fd[1]);
-	if (!output)
+//	if (!output)
 		dup2(pipe_fd[0], 0);
-	else
-		dup2(vars->stdin_fd, 0);
+//	else
+//		dup2(vars->stdin_fd, 0);
 	close(pipe_fd[0]);
 	if (waitpid(id, &status, 0) == -1)
 		return -1;

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/10 17:23:52 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 17:41:29 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ bool 	is_line_with_correct_quote(char *line);
 void	ft_add_history(char *new_line); // ski peut-être à effacer
 
 // ------------------------------------------- chevron_segment_utils.c
-int		get_segment_fd_in(char **array);
+int		get_segment_fd_in(t_vars *vars, char **array);
 int		get_segment_fd_out(char **array);
 void	clear_chevron_segment(char **array);
 // -------------------------------------------------------------------
