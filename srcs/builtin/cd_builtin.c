@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 09:46:32 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 10:00:49 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static int	cd_empty(t_vars *vars)
 {
 	char	*path;
 
+	if (!does_var_exist(vars->env, "HOME"))
+	{
+		ft_printf("minishell: cd: PWD not set\n");
+		return (BUILTIN_FAILURE);
+	}
 	path = get_var(vars->env, "HOME")->data;
 	return (cd_other(path, vars));
 }
