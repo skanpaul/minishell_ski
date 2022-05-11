@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/10 17:23:52 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 09:21:11 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void 	init_loc(t_vars *vars);
 
 // ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
+bool	does_wordstart_match(char *str, char *hard_text);
 void	ft_free_null(void **ptr);
 int		openfilex(char *filepath, int o_flag);
 // -------------------------------------------------- linklist_utils.c
