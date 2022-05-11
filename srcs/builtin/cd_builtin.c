@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/08 17:10:20 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/11 09:12:49 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ static int	cd_empty(t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
 static char	*manage_tild(char *pathname, t_vars *vars);
 static bool	is_good_path(char *pathname, t_vars *vars);
+static int	cd_hyphen(t_vars *vars);
 
 /* ************************************************************************** */
 int cd_builtin(t_vars *vars, char **cmd_args)
 {
 	if (cmd_args[1] == NULL || cmd_args[1][0] == '\0')
-		return (cd_empty(vars));		
+		return (cd_empty(vars));
+
+	if (does_word_match(cmd_args[1], "-"))
+		return (cd_hyphen(vars));
 
 	cmd_args[1] = manage_tild(cmd_args[1], vars);
 	
@@ -35,6 +39,26 @@ static int cd_empty(t_vars *vars)
 
 	path = get_var(vars->env, "HOME")->data; 
 	return (cd_other(path, vars));
+}
+
+/* ************************************************************************** */
+static int cd_hyphen(t_vars *vars)
+{
+	t_env *temp_pwd;
+	t_env *temp_oldpwd;
+
+	temp_pwd = NULL;
+	temp_oldpwd = NULL;
+	
+	if(does_var_exist(vars->env, "OLDPWD"))
+	{
+		temp_oldpwd = get_var(vars->env, "OLDPWD");
+		ft_printf("%s\n", temp_oldpwd->data);
+		return (cd_other(temp_oldpwd->data, vars));	
+	}
+	else
+		ft_printf("minishell: cd: OLDPWD not set\n");
+	return (BUILTIN_SUCCESS);
 }
 
 /* ************************************************************************** */
@@ -62,21 +86,7 @@ static int cd_other(char *pathname, t_vars *vars)
 }
 
 /* ************************************************************************** */
-// static void print_cmd_args(char **cmd_args)
-// {
-// 	int i;
-	
-// 	ft_printf("\n");
-// 	i = 0;
-// 	while (cmd_args[i] != NULL)
-// 	{
-// 		ft_printf("cmd_args[%d]: %s\n", i, cmd_args[i]);
-// 		i++;
-// 	}	
-// 	ft_printf("\n");	
-// }
-
-/* ************************************************************************** */
+// Le symbole [ ~ ] n'est pas compris par chdir()
 static char *manage_tild(char *pathname, t_vars *vars)
 {
 	int len;
@@ -101,7 +111,6 @@ static char *manage_tild(char *pathname, t_vars *vars)
 
 /* ************************************************************************** */
 // ATTENTION: il faut donner un PATH ABSOLUE
-/* ************************************************************************** */
 static bool is_good_path(char *pathname, t_vars *vars)
 {
 	DIR	*folder;
