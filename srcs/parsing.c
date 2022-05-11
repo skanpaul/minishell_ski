@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/11 10:06:35 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 11:52:01 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_line(t_vars *vars, char *line, int output)
 	int		return_code;
 	int		fd_in;
 	int		fd_out;
-       
+   
 	return_code = -1;
 	fd_in = 0;
 	fd_out = 0;
@@ -41,7 +41,7 @@ void	parse_line(t_vars *vars, char *line, int output)
 	cmd_args = split_shell_line(line, ' ');
 	
 	if (!cmd_args || !cmd_args[0])
-		return ;
+		return ; // Doit-on free cmd_args[0] ?
 	
 	translate_dollars_all(cmd_args, vars);
 
@@ -88,5 +88,5 @@ void	parse_line(t_vars *vars, char *line, int output)
 		dup2(vars->stdout_fd, 1);
 		close (fd_out);
 	}
-	ft_free_array(cmd_args);
+	ft_free_array(cmd_args); // mettre cmd_args == NULL ?
 }
