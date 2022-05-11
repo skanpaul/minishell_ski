@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 10:00:49 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 10:40:11 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	cd_empty(t_vars *vars)
 	if (!does_var_exist(vars->env, "HOME"))
 	{
 		ft_printf("minishell: cd: PWD not set\n");
-		return (BUILTIN_FAILURE);
+		return (BUILTIN_FAILURE_PLUS);
 	}
 	path = get_var(vars->env, "HOME")->data;
 	return (cd_other(path, vars));
@@ -60,15 +60,14 @@ static int	cd_hyphen(t_vars *vars)
 
 	temp_pwd = NULL;
 	temp_oldpwd = NULL;
-	if (does_var_exist(vars->env, "OLDPWD"))
+	if (!does_var_exist(vars->env, "OLDPWD"))
 	{
-		temp_oldpwd = get_var(vars->env, "OLDPWD");
-		ft_printf("%s\n", temp_oldpwd->data);
-		return (cd_other(temp_oldpwd->data, vars));
-	}
-	else
 		ft_printf("minishell: cd: OLDPWD not set\n");
-	return (BUILTIN_SUCCESS);
+		return (BUILTIN_FAILURE_PLUS);
+	}
+	temp_oldpwd = get_var(vars->env, "OLDPWD");
+	ft_printf("%s\n", temp_oldpwd->data);
+	return (cd_other(temp_oldpwd->data, vars));
 }
 
 /* ************************************************************************** */

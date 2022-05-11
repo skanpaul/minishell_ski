@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/10 19:31:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/11 10:06:35 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	parse_line(t_vars *vars, char *line, int output)
 	
 
 	cmd_args = split_shell_line(line, ' ');
+	
+	if (!cmd_args || !cmd_args[0])
+		return ;
+	
+	translate_dollars_all(cmd_args, vars);
 
 	//get redirs
 	fd_in = get_segment_fd_in(cmd_args);
@@ -49,11 +54,6 @@ void	parse_line(t_vars *vars, char *line, int output)
 		dup2(fd_in, 0);
 	if (fd_out)
 		dup2(fd_out, 1);
-	
-	if (!cmd_args || !cmd_args[0])
-		return ;
-	
-	translate_dollars_all(cmd_args, vars);
 
 	i = 0;
 	if (is_assignation(cmd_args[i]))

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:48:48 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/27 10:06:30 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 10:37:07 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 
 
 /* ************************************************************************** */
-#define BUILTIN_SUCCESS		0
-#define BUILTIN_FAILURE		-1
+#define BUILTIN_SUCCESS			0
+#define BUILTIN_FAILURE			-1
+#define BUILTIN_FAILURE_PLUS	1
 // -------------------------------
 #define CHDIR_NO_ERROR	    0
 #define CHDIR_ERROR		    -1
