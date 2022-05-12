@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 09:17:34 by ski               #+#    #+#             */
-/*   Updated: 2022/05/06 17:51:37 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/11 17:15:12 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	init_vars(t_vars *vars, char **envp)
 	vars->env = NULL;
 	vars->loc = NULL;
 	vars->env_char_array = NULL;
-
+	vars->segments_count = 0;
 }
 
 /* ************************************************************************** */

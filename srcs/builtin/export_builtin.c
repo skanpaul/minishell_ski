@@ -6,11 +6,43 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 16:26:03 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/12 15:33:08 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_env	*sort_env_lst(t_env *env)
+{	
+	t_env	*sorted_env;
+	
+	while (env)
+	{
+		add_var(&sorted_env, env->name, env->data);
+		env = env->next;	
+	}
+	return (sorted_env);
+}
+
+static int	export_print(t_env *env)
+{
+	t_env	*tmp;
+	
+	tmp = sort_env_lst(env);
+	while (tmp)
+	{
+		if (!tmp->data)
+			return (0);
+		ft_putstr_fd("declare -x ",1);
+		ft_putstr_fd(tmp->name, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(tmp->data, 1);
+		ft_putstr_fd("\n", 1);
+		tmp = tmp->next;
+	}
+	free_var_list(&tmp);
+	return (0);
+}
 
 int	export_builtin(t_vars *vars, char **cmd_args)
 {
@@ -18,6 +50,9 @@ int	export_builtin(t_vars *vars, char **cmd_args)
 	char	*equal;
 	char	*data;
 	int	i;
+
+	if (!cmd_args[1])
+		return (export_print(vars->env));
 
 	i = 1;
 	while (cmd_args[i])
