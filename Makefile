@@ -6,7 +6,7 @@
 #    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/13 00:21:31 by sorakann         ###   ########.fr        #
+#    Updated: 2022/05/13 00:32:39 by sorakann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ SRCS	=	minishell.c \
 			utils/quote_info_utils_02.c \
 			utils/pipeline_space_maker.c \
 			utils/chevron_space_maker.c \
-			utils/quote_info_utils_02.c \
 			utils/split_shell_line.c \
 			utils/translate_dollar_utils_01.c \
 			utils/translate_dollar_utils_02.c \
