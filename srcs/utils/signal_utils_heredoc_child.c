@@ -1,50 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialisation.c                                   :+:      :+:    :+:   */
+/*   signal_utils_heredoc_child.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 09:17:34 by ski               #+#    #+#             */
-/*   Updated: 2022/05/13 00:18:51 by sorakann         ###   ########.fr       */
+/*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
+/*   Updated: 2022/05/13 00:16:06 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* ************************************************************************** */
-static void	init_vars(t_vars *vars, char **envp);
-static void	init_loc(t_vars *vars);
-
+static void init_struct_sa_heredoc_child(t_sig *s);
+static void init_sigaction_heredoc_child(t_sig *s);
 /* ************************************************************************** */
-void initialisation(t_vars *vars, char **envp)
+void init_signal_heredoc_child(t_sig *s)
 {
-	init_vars(vars, envp);
-
-	init_env(vars, envp);
-
-	init_signal_main(&vars->sig);
-
-	init_loc(vars);
+	init_struct_sa_heredoc_child(s);
+	init_sigaction_heredoc_child(s);	
 }
 
 /* ************************************************************************** */
-static void init_vars(t_vars *vars, char **envp)
+static void init_struct_sa_heredoc_child(t_sig *s)
 {
-	(void)envp;
-	vars->stdin_fd = dup(0);
-	vars->stdout_fd = dup(1);
-	vars->stderr_fd = dup(2);
-	vars->env = NULL;
-	vars->loc = NULL;
-	vars->env_char_array = NULL;
-	vars->segments_count = 0;
+	// SIGINT -----------------------------------------	
+	s->sa_sigint_main.sa_handler = &handler_signal_heredoc_parent;		// SA_HANDLER	
+	// SIGQUIT -----------------------------------------	
+	s->sa_sigquit_main.sa_handler = SIG_IGN;
 }
 
 /* ************************************************************************** */
-static void init_loc(t_vars *vars)
+static void init_sigaction_heredoc_child(t_sig *s)
 {
-	update_var(&vars->loc, "?", EXIT_SUCCESS_STR);
+	sigaction(SIGINT, &s->sa_sigint_main, NULL);	// [ctrl-C]: SIGINT
+	sigaction(SIGQUIT, &s->sa_sigquit_main, NULL);	// [ctrl-\]: SIGQUIT	
 }
 
 /* ************************************************************************** */

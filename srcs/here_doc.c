@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/11 18:23:18 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/13 00:18:10 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	here_doc(char *limiter)
 {
 	int	id;
 	int	pipe_fd[2];
+	t_sig s; 							//ski
 
 	if (pipe(pipe_fd) == -1)
 		err_msg(ERR_PIPE);
@@ -51,9 +52,15 @@ void	here_doc(char *limiter)
 	if (id == -1)
 		err_msg(ERR_FORK);
 	if (id == 0)
+	{
+		init_signal_heredoc_child(&s); //ski
 		pipe_input(limiter, pipe_fd);
+	}	
+	init_signal_heredoc_parent(&s); //ski
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], 0);
 	close(pipe_fd[0]);
-	waitpid(id, NULL, 0);
+	waitpid(id, NULL, 0);	
+	init_signal_main(&s); //ski
+
 }

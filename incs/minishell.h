@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/12 01:33:12 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/13 00:16:49 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,20 @@ typedef struct	s_vars
 	int		segments_count;
 }	t_vars;
 /* ************************************************************************** */
-# define MSG_SIGINT_MAIN	"\nminishell ski> "
+# define MSG_SIGINT_MAIN	RED"\nminishell> "DEFAULT
 # define MSG_SIGQUIT_MAIN	""
-// ----------------------------------------
-# define MSG_SIGINT_PROG	"\nCCCC "
-# define MSG_SIGQUIT_PROG	"\nDDDD "
+// -------------------------------------------------------------
+# define MSG_SIGINT_HEREDOC_PARENT	"\n"
+# define MSG_SIGQUIT_HEREDOC_PARENT	""
 /* ************************************************************************** */
-void	init_sa_struc_main(t_sig *s);
+void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
-void	init_sigaction_main(t_sig *s);
+// --------------------------------------------
+void	init_signal_heredoc_child(t_sig *s);
+// void	handler_signal_heredoc_child(int sig_code);
+// --------------------------------------------
+void	init_signal_heredoc_parent(t_sig *s);
+void	handler_signal_heredoc_parent(int sig_code);
 /* ************************************************************************** */
 void	initialisation(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
@@ -109,7 +114,6 @@ int	env_builtin(t_vars *vars);
 int	loc_builtin(t_vars *vars);
 
 void	init_env(t_vars *vars, char **envp);
-void 	init_loc(t_vars *vars);
 
 // ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
