@@ -34,17 +34,24 @@ static void copy_parent_env(t_env **child_env, char **parent_env)
 /* ************************************************************************** */
 void	init_env(t_vars *vars, char **envp)
 {
-	t_env	*temp;
+	t_env	*temp_env;
+	char	*temp_str;
+
+	temp_env = 0;
+	temp_str = 0;
 
 	copy_parent_env(&vars->env, envp);
 	
 	// Update: SHLVL
-	temp = get_var(vars->env, "SHLVL");
-	temp->data = ft_itoa(ft_atoi(temp->data) + 1);
+	temp_env = get_var(vars->env, "SHLVL");
+	temp_str = ft_itoa(ft_atoi(temp_env->data) + 1);	
+	ft_free_null((void **)&temp_env->data);	
+	temp_env->data = temp_str;
 
 	// AJOUTER le path de [./minishell] dans la variable d'environnement $PATH
 	
-	update_var(&vars->env, "OLDPWD", "/"); //a reflechir
+	remove_var(&vars->env, "OLDPWD");
+	
 	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
 	//sinon -> les ajouter
 	

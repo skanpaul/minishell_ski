@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-
-
 void	parse_line(t_vars *vars, char *line, int output)
 {
 	char	**cmd_args;
@@ -21,7 +19,7 @@ void	parse_line(t_vars *vars, char *line, int output)
 	int		return_code;
 	int		fd_in;
 	int		fd_out;
-       
+   
 	return_code = -1;
 	fd_in = 0;
 	fd_out = 0;
@@ -39,6 +37,11 @@ void	parse_line(t_vars *vars, char *line, int output)
 	
 
 	cmd_args = split_shell_line(line, ' ');
+	
+	if (!cmd_args || !cmd_args[0])
+		return ; // Doit-on free cmd_args[0] ?
+	
+	translate_dollars_all(cmd_args, vars);
 
 	if (!cmd_args || !cmd_args[0])
 		return ;
@@ -54,7 +57,6 @@ void	parse_line(t_vars *vars, char *line, int output)
 		dup2(fd_out, 1);
 	else
 		fd_out = output;
-		
 
 	i = 0;
 	if (cmd_args[i] && is_assignation(cmd_args[i]))
@@ -90,7 +92,8 @@ void	parse_line(t_vars *vars, char *line, int output)
 		dup2(vars->stdout_fd, 1);
 		close (fd_out);
 	}
-	if (output)
-		dup2(vars->stdin_fd, 0);
-	ft_free_array(cmd_args);
+  if (output)
+	  dup2(vars->stdin_fd, 0);
+	ft_free_array(cmd_args); // mettre cmd_args == NULL ?
+
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate_dollar_utils_02.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:22:02 by ski               #+#    #+#             */
-/*   Updated: 2022/05/08 16:22:45 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/11 10:44:06 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	get_end_pos_vardol(char *str, int start_pos)
 /* ************************************************************************** */
 bool	is_char_for_dolvar_name(char c)
 {
-	if (ft_isalnum(c) || c == '_')
+	if (ft_isalnum(c) || c == '_' || c == '?')
 		return (true);
 	return (false);
 }
@@ -53,7 +53,7 @@ bool	is_char_for_dolvar_name(char c)
 /* ************************************************************************** */
 bool	is_vardol(char *str, int i)
 {
-	if (str[i] == '$' && is_char_for_dolvar_name(str[i + 1]))
+	if (str[i] == '$' && is_char_for_dolvar_name(str[i + 1]))	
 		return (true);
 	return (false);
 }

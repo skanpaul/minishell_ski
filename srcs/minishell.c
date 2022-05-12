@@ -85,6 +85,9 @@ int	main(int argc, char **argv, char **envp)
 		ft_free_null((void**)&new_line);
 	}	
 	//------------------------------------
+	// free les variables d'environnement
+	// free les variables locales
+	//------------------------------------
 	return (0);
 }
 

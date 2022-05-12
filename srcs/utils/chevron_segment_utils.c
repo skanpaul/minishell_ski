@@ -65,15 +65,25 @@ static void	delete_chevron_and_file(char **array, int *i)
 // NEED to close file ONLY if fd > 2
 int	get_segment_fd_out(char **array)
 {
-	int	i;
-	int	fd_out;
+	int		i;
+	int		fd_out;
+	// char 	*temp;
 
+	// temp = NULL;
 	fd_out = 0;
 	i = 0;
 	while (array[i])
 	{
 		if (does_word_match(array[i], ">") || does_word_match(array[i], ">>"))
 		{
+			// PEUT ETRE A EFFACER -----------------------------------------
+			if(array[i + 1] == NULL  || array[i + 1][0] == '\0')
+			{
+				ft_printf("syntax error near unexpected token `newline'\n");
+				fd_out = -1;
+				break ;
+			}
+			// -------------------------------------------------------------
 			if (fd_out != 0)
 				close(fd_out);
 			if (does_word_match(array[i], ">"))
@@ -82,6 +92,9 @@ int	get_segment_fd_out(char **array)
 				fd_out = openfilex(array[i + 1], 2);
 			if (fd_out < 0)
 			{
+				// temp = ft_strjoin("minishell: ", array[i + 1]);
+				// perror(temp);
+				// ft_free_null((void **)&temp);
 				perror(array[i + 1]);
 				break ;
 			}
@@ -98,15 +111,25 @@ int	get_segment_fd_out(char **array)
 // NEED to close file ONLY if fd > 2
 int	get_segment_fd_in(t_vars *vars, char **array)
 {
-	int	i;
-	int	fd_in;
+	int		i;
+	int		fd_in;
+	// char 	*temp;
 
+	// temp = NULL;
 	fd_in = 0;
 	i = 0;
 	while (array[i])
 	{
 		if (does_word_match(array[i], "<") || does_word_match(array[i], "<<"))
 		{
+			// PEUT ETRE A EFFACER -----------------------------------------
+			if(array[i + 1] == NULL  || array[i + 1][0] == '\0')
+			{
+				ft_printf("syntax error near unexpected token `newline'\n");
+				fd_in = -1;
+				break ;
+			}
+			// -------------------------------------------------------------
 			if (fd_in != 0)
 				close(fd_in);
 			if (does_word_match(array[i], "<"))
@@ -119,6 +142,9 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 			}
 			if (fd_in < 0)
 			{
+				// temp = ft_strjoin("minishell: ", array[i + 1]);
+				// perror(temp);
+				// ft_free_null((void **)&temp);
 				perror(array[i + 1]);
 				break ;
 			}

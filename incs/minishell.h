@@ -113,6 +113,7 @@ void 	init_loc(t_vars *vars);
 
 // ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
+bool	does_wordstart_match(char *str, char *hard_text);
 void	ft_free_null(void **ptr);
 int		openfilex(char *filepath, int o_flag);
 // -------------------------------------------------- linklist_utils.c

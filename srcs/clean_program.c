@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 09:23:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/05 09:25:28 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 11:34:46 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,11 @@
 void	clean_program(t_vars *vars)
 {
 	(void)vars;
+	// free les variables d'environnement
+	// free les variables locales
+	// autre encore
+	// ...
+	// ...
+	// exit(n);
 }
 /* ************************************************************************** */
