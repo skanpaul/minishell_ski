@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/13 12:46:41 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/11 18:23:18 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	pipe_input(char *limiter, int pipe_fd[2])
 	close(pipe_fd[0]);
 	while (1)
 	{
-		write(1, "pipex here_doc> ", 16);
+		write(1, "here_doc> ", 10);
 		rd_line = get_next_line(0);
 		if (!rd_line)
 		{
@@ -46,10 +46,10 @@ void	here_doc(char *limiter)
 	int	pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
-		err_quit(5);
+		err_msg(ERR_PIPE);
 	id = fork();
 	if (id == -1)
-		err_quit(6);
+		err_msg(ERR_FORK);
 	if (id == 0)
 		pipe_input(limiter, pipe_fd);
 	close(pipe_fd[1]);

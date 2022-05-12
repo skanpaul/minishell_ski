@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:12:10 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 14:40:19 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/11 17:38:54 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	get_segment_fd_out(char **array)
 // RETURN  0: no file has to be open
 // RETURN >2: a file was open
 // NEED to close file ONLY if fd > 2
-int	get_segment_fd_in(char **array)
+int	get_segment_fd_in(t_vars *vars, char **array)
 {
 	int		i;
 	int		fd_in;
@@ -136,8 +136,9 @@ int	get_segment_fd_in(char **array)
 				fd_in = openfilex(array[i + 1], 0);
 			else
 			{
-				fd_in = 56;
-				ft_printf("BESOIN: heredoc [ << ] with end [ %s ]\n", array[i + 1]);
+				fd_in = 0;
+				dup2(vars->stdin_fd, 0);
+				here_doc(array[i + 1]);
 			}
 			if (fd_in < 0)
 			{
