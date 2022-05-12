@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/12 01:43:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/12 15:33:08 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static t_env	*sort_env_lst(t_env *env)
 		add_var(&sorted_env, env->name, env->data);
 		env = env->next;	
 	}
-
 	return (sorted_env);
 }
 

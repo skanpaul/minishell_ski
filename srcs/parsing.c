@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/11 20:32:21 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/12 16:17:31 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	parse_line(t_vars *vars, char *line, int output)
 	else
 		fd_out = output;
 		
-	translate_dollars_all(cmd_args, vars);
 
 	i = 0;
 	if (cmd_args[i] && is_assignation(cmd_args[i]))
@@ -65,9 +64,13 @@ void	parse_line(t_vars *vars, char *line, int output)
 			if (!is_assignation(cmd_args[i]))
 				break ;
 		}
+
+		translate_dollars_all(cmd_args, vars);
 		if (!cmd_args[i] && vars->segments_count == 1)
 			return_code = add_local_var(vars, cmd_args);
 	}
+
+	translate_dollars_all(cmd_args, vars);
 	if (cmd_args[i] && vars->segments_count == 1 && is_builtin(cmd_args[i]))
 		return_code = exec_builtin(vars, cmd_args + i);
 	else

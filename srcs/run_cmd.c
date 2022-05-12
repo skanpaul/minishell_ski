@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/11 20:01:56 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/12 16:47:30 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 void	exec_cmd(t_vars *vars, char **cmd_args)
 {
 	char	*tmp;
+	char	**char_array;
 
 	if (*cmd_args[0] != '/' && *cmd_args[0] != '.' && *cmd_args[0] != '~')
 	{
@@ -90,9 +91,9 @@ void	exec_cmd(t_vars *vars, char **cmd_args)
 		err_msg(ERR_CMD);
 		exit(127);
 	}
-	vars->env_char_array = conv_list_to_array(vars->env);
-	execve(cmd_args[0], cmd_args, vars->env_char_array);
+	char_array = conv_list_to_array(vars->env);
+	execve(cmd_args[0], cmd_args, char_array);
 	err_msg(ERR_EXECVE);
-	ft_free_array(vars->env_char_array);
+	ft_free_array(char_array);
 	exit(1);
 }
