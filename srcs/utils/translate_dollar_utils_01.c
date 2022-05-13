@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:22:02 by ski               #+#    #+#             */
-/*   Updated: 2022/05/13 18:20:11 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:22:02 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**translate_dollars_all(char **array, t_vars *vars)
 
 	i = 0;
 	if (array == NULL || array[0] == NULL)
-		return ;
+		return (array);
 	while (array[i])
 	{
 		array[i] = translate_dollar(*(array + i), vars);
