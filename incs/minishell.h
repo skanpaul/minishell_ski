@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 16:58:41 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:20:22 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int		count_words(char *line, char separator);
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
 // ------------------------------------------------ translate_dollar.c
-void	translate_dollars_all(char **array, t_vars *vars);
+char	**translate_dollars_all(char **array, t_vars *vars);
 char	*translate_dollar(char *str, t_vars *vars);
 bool	is_char_for_dolvar_name(char c);
 bool	is_vardol(char *str, int i);

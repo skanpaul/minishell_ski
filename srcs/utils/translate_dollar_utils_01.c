@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:22:02 by ski               #+#    #+#             */
-/*   Updated: 2022/05/13 13:27:08 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:20:11 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	part_1(int *start_pos, t_vars *vars, t_sv *s);
 static void	part_2(int *start_pos, t_vars *vars, t_sv *s);
 
 /* ************************************************************************** */
-void	translate_dollars_all(char **array, t_vars *vars)
+char	**translate_dollars_all(char **array, t_vars *vars)
 {
 	int	i;
 
@@ -39,7 +39,8 @@ void	translate_dollars_all(char **array, t_vars *vars)
 	{
 		array[i] = translate_dollar(*(array + i), vars);
 		i++;
-	}	
+	}
+	return (array);	
 }
 
 /* ************************************************************************** */
