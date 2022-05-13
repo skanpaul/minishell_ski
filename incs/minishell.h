@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 00:16:49 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 11:05:59 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ typedef struct	s_vars
 void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
 // --------------------------------------------
-void	init_signal_heredoc_child(t_sig *s);
+void	init_signal_fork_child(t_sig *s);
 // void	handler_signal_heredoc_child(int sig_code);
 // --------------------------------------------
-void	init_signal_heredoc_parent(t_sig *s);
-void	handler_signal_heredoc_parent(int sig_code);
+void	init_signal_fork_parent(t_sig *s);
+void	handler_signal_fork_parent(int sig_code);
 /* ************************************************************************** */
 void	initialisation(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
