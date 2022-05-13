@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 13:48:45 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:52:03 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_quote_info
 
 typedef struct s_sig
 {
-	struct sigaction	sa_sigint;		// ctrl-C
+	struct sigaction	sa_sigint;	// ctrl-C
 	struct sigaction	sa_sigquit;	// ctrl-/
 	// struct sigaction	sa_sig_ctr_D;
 } t_sig;
