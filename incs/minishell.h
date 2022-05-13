@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 13:52:03 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:58:52 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_sig
 {
 	struct sigaction	sa_sigint;	// ctrl-C
 	struct sigaction	sa_sigquit;	// ctrl-/
+	struct sigaction	sa_sigchild;
 	// struct sigaction	sa_sig_ctr_D;
 } t_sig;
 // ----------------------------------------
@@ -80,8 +81,9 @@ typedef struct	s_vars
 # define MSG_SIGINT_MAIN	RED"\nminishell> "DEFAULT
 # define MSG_SIGQUIT_MAIN	""
 // -------------------------------------------------------------
-# define MSG_SIGINT_HEREDOC_PARENT	"\n"
-# define MSG_SIGQUIT_HEREDOC_PARENT	""
+# define MSG_SIGINT_FORK_PARENT		"\n"
+# define MSG_SIGQUIT_FORK_PARENT	""
+# define MSG_SIGCHLD_FORK_PARENT	"SIGCHLD received by the fork-parent\n"
 /* ************************************************************************** */
 void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
