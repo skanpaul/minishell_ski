@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 16:50:36 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:58:41 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,5 +179,8 @@ void	here_doc(char *limiter);
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
 int		manage_perror(char *remark, int error_code); 
+
+
+int		get_child_returned_code(int status);
 /* ************************************************************************** */
 #endif
