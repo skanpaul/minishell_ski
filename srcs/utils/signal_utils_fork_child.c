@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/13 11:08:33 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:49:36 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ void init_signal_fork_child(t_sig *s)
 static void init_struct_sa_fork_child(t_sig *s)
 {
 	// SIGINT -----------------------------------------	
-	s->sa_sigint_main.sa_handler = SIG_DFL;		// SA_HANDLER	
+	s->sa_sigint.sa_handler = SIG_DFL;		// SA_HANDLER	
 	// SIGQUIT -----------------------------------------	
-	s->sa_sigquit_main.sa_handler = SIG_IGN;
+	s->sa_sigquit.sa_handler = SIG_IGN;
 }
 
 /* ************************************************************************** */
 static void init_sigaction_fork_child(t_sig *s)
 {
-	sigaction(SIGINT, &s->sa_sigint_main, NULL);	// [ctrl-C]: SIGINT
-	sigaction(SIGQUIT, &s->sa_sigquit_main, NULL);	// [ctrl-\]: SIGQUIT	
+	sigaction(SIGINT, &s->sa_sigint, NULL);		// [ctrl-C]: SIGINT
+	sigaction(SIGQUIT, &s->sa_sigquit, NULL);	// [ctrl-\]: SIGQUIT	
 }
 
 /* ************************************************************************** */

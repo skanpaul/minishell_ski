@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 11:19:57 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:45:01 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ void	here_doc(char *limiter)
 	waitpid(id, NULL, 0);	
 	init_signal_main(&s); //ski
 
-	// ski: gerer les information retourne par le child
-	// 
+	// 1) ski: gerer les information retourne par le child
+	// 2) ski: peut etre creer un handler au signal SIGCHLD reçu par le parent
+	// lorsque le child est interompu par un signal
+	// pour terminer proprement le child ou parent à réfléchir
 
 }
