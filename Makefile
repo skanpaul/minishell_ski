@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/11 17:11:49 by gudias           ###   ########.fr        #
+#    Updated: 2022/05/13 18:29:59 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS	=	minishell.c \
 			lexing.c \
 			temporaire.c \
 			here_doc.c \
+			prompt.c \
 			utils/linklist_utils.c \
 			utils/quote_info_utils_01.c \
 			utils/quote_info_utils_02.c \
