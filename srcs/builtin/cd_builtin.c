@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 11:38:42 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/13 13:25:51 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	cd_empty(t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
 static char	*manage_tild(char *pathname, t_vars *vars);
-static bool	is_good_path(char *pathname, t_vars *vars);
+// static bool	is_good_path(char *pathname, t_vars *vars);
 static int	cd_hyphen(t_vars *vars);
 
 /* ************************************************************************** */
@@ -55,10 +55,8 @@ static int	cd_empty(t_vars *vars)
 /* ************************************************************************** */
 static int	cd_hyphen(t_vars *vars)
 {
-	t_env	*temp_pwd;
 	t_env	*temp_oldpwd;
 
-	temp_pwd = NULL;
 	temp_oldpwd = NULL;
 	if (!does_var_exist(vars->env, "OLDPWD"))
 	{
@@ -119,16 +117,16 @@ static char	*manage_tild(char *pathname, t_vars *vars)
 
 /* ************************************************************************** */
 // ATTENTION: il faut donner un PATH ABSOLUE
-static bool	is_good_path(char *pathname, t_vars *vars)
-{
-	DIR	*folder;
+// static bool	is_good_path(char *pathname, t_vars *vars)
+// {
+// 	DIR	*folder;
 
-	(void)vars;
-	folder = opendir(pathname);
-	if (folder == NULL)
-		return (false);
-	closedir(folder);
-	return (true);
-}
+// 	(void)vars;
+// 	folder = opendir(pathname);
+// 	if (folder == NULL)
+// 		return (false);
+// 	closedir(folder);
+// 	return (true);
+// }
 
 /* ************************************************************************** */

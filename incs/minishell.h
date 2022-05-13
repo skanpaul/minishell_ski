@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 11:05:59 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:10:55 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef struct s_quote_info
 
 typedef struct s_sig
 {
-	struct sigaction	sa_sigint_main;
-	struct sigaction	sa_sigquit_main;
-	struct sigaction	sa_signal_prog;
+	struct sigaction	sa_sigint_main;		// ctrl-C
+	struct sigaction	sa_sigquit_main;	// ctrl-/
+	// struct sigaction	sa_sig_ctr_D;
 } t_sig;
 // ----------------------------------------
 typedef struct	s_env
@@ -72,7 +72,7 @@ typedef struct	s_vars
 	int		stderr_fd;
 	t_env	*env;
 	t_env	*loc;
-	char	**env_char_array;
+	char	**env_char_array; // à effacer ?
 	t_sig	sig;
 	int		segments_count;
 }	t_vars;

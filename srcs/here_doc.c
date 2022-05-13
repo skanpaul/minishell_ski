@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 11:05:27 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 11:19:57 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ void	here_doc(char *limiter)
 	close(pipe_fd[0]);
 	waitpid(id, NULL, 0);	
 	init_signal_main(&s); //ski
+
+	// ski: gerer les information retourne par le child
+	// 
 
 }
