@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/08 17:25:29 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:50:41 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,3 @@ int manage_perror(char *remark, int error_code)
 }
 
 /* ************************************************************************** */
-void err_quit(int n) 
-// A EFFACER: est utilise dans here_doc.c, mais ou est la definition ?
-{
-	(void)n;
-	return ;
-}

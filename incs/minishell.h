@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 15:58:52 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:50:36 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output);
 void	exec_cmd(t_vars *vars, char **cmd_args);
 
 void	here_doc(char *limiter);
-void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la definition
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
