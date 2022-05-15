@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 13:56:12 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 22:51:15 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 	int	id;
 	int	pipe_fd[2];
 	int	status;
-	t_sig s;	// ski
 
 	if (pipe(pipe_fd) == -1)
 		err_msg(ERR_PIPE);
@@ -53,7 +52,7 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 			err_msg(ERR_FORK);
 		if (id == 0)
 		{	
-			init_signal_fork_child(&s); //ski
+			init_signal_fork_child(&vars->sig); //ski
 			close(pipe_fd[0]);
 			if (!output)
 				dup2(pipe_fd[1], 1);
@@ -65,7 +64,7 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 				exec_cmd(vars, cmd_args);
 		}
 	}
-	init_signal_fork_parent(&s); //ski
+	init_signal_fork_parent(&vars->sig); //ski
 	close(pipe_fd[1]);
 //	if (!output)
 		dup2(pipe_fd[0], 0);
@@ -74,8 +73,6 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 	close(pipe_fd[0]);
 	if (waitpid(id, &status, 0) == -1)
 		return -1;
-	
-	init_signal_main(&s); //ski
 		
 	//if (WIFEXITED(status))
 		return (WEXITSTATUS(status));

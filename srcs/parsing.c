@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/15 22:06:59 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 23:34:54 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	parse_line(t_vars *vars, char *line, int output)
 		return_code = exec_builtin(vars, cmd_args + i);
 	else
 		return_code = run_cmd(vars, cmd_args + i, fd_out);
+		
+	restore_config(vars);
 
 	if (!cmd_args[i])
 		return_code = 0;

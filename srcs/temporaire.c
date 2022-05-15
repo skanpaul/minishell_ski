@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/05/13 17:05:20 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 23:37:12 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ int	openfilex(char *filepath, int o_flag)
 	else if (o_flag == 2)
 		fd = open(filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	return (fd);
+}
+
+/* ************************************************************************** */
+void restore_config(t_vars *vars)
+{
+	init_signal_main(&vars->sig); //ski
+	if(does_var_exist(vars->env, "PWD"))
+		chdir(get_var(vars->env, "PWD")->data);
 }
 
 /* ************************************************************************** */

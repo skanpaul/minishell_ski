@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/13 13:48:56 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 23:27:22 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void init_signal_main(t_sig *s)
 
 /* ************************************************************************** */
 static void init_struc_sa_main(t_sig *s)
-{
+{		
 	// SIGINT -----------------------------------------	
 	s->sa_sigint.sa_handler = &handler_signal_main;	// SA_HANDLER	
 	sigemptyset(&s->sa_sigint.sa_mask);				// SA_MASK
@@ -59,7 +59,7 @@ void	handler_signal_main(int sig_code)
 	if (sig_code == SIGINT)
 	{
 		write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
-		// update_var(&vars->loc, "?", 1);
+		// g_signal_returned_code = 128 + sig_code;
 	}
 	
 	if (sig_code == SIGQUIT)
