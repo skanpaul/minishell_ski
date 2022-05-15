@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/15 22:08:48 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 22:14:55 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,16 @@ int	loc_builtin(t_vars *vars)
 /* ************************************************************************** */
 static void add_minishell_to_path(t_vars *vars)
 {
+	char	*temp_path;
 	char	*temp_str;
 	char	*buff;
 	char	temp_cwd[CWD_BUF_SIZE];
 	
-	buff = ft_strjoin(get_var(vars->env, "PATH")->data, ":");
+	if (!does_var_exist(vars->env, "PATH"))
+		update_var(&vars->env, "PATH", "");
+
+	temp_path = get_var(vars->env, "PATH")->data;
+	buff = ft_strjoin(temp_path, ":");
 	getcwd(temp_cwd, CWD_BUF_SIZE);  // free ?
 	temp_str = ft_strjoin(buff, temp_cwd);
 	ft_free_null((void **)&buff);
