@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/12 01:33:17 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/15 16:07:50 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,29 @@ static void copy_parent_env(t_env **child_env, char **parent_env)
 /* ************************************************************************** */
 void	init_env(t_vars *vars, char **envp)
 {
-	t_env	*temp_env;
 	char	*temp_str;
+	char	*buff;
+	char	temp_cwd[CWD_BUF_SIZE];
 
-	temp_env = 0;
-	temp_str = 0;
+	temp_str = NULL;
+	buff = NULL;
 
 	copy_parent_env(&vars->env, envp);
-	
-	// Update: SHLVL
-	temp_env = get_var(vars->env, "SHLVL");
-	temp_str = ft_itoa(ft_atoi(temp_env->data) + 1);	
-	ft_free_null((void **)&temp_env->data);	
-	temp_env->data = temp_str;
-
-	// AJOUTER le path de [./minishell] dans la variable d'environnement $PATH
-	
 	remove_var(&vars->env, "OLDPWD");
 	
+	// Update: SHLVL
+	temp_str = ft_itoa(ft_atoi(get_var(vars->env, "SHLVL")->data) + 1);
+	update_var(&vars->env, "SHLVL", temp_str);
+	ft_free_null((void **)&temp_str);	
+
+	// AJOUTER le path de [./minishell] dans la variable d'environnement $PATH
+	buff = ft_strjoin(get_var(vars->env, "PATH")->data, ":");
+	getcwd(temp_cwd, CWD_BUF_SIZE);  // free ?
+	temp_str = ft_strjoin(buff, temp_cwd);
+	ft_free_null((void **)&buff);
+	update_var(&vars->env, "PATH", temp_str);
+	ft_free_null((void **)&temp_str);
+
 	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
 	//sinon -> les ajouter
 	

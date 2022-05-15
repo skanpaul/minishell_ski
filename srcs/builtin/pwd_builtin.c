@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/13 13:26:26 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:44:54 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int pwd_builtin(t_vars *vars, char **cmd_args)
 	
 	(void)vars;
 	(void)cmd_args;
-	if (getcwd(cwd_name, CWD_BUF_SIZE) == NULL)	
+	if (getcwd(cwd_name, CWD_BUF_SIZE) == NULL)	 // free ?
 		return (manage_perror("pwd_builtin", errno));
 	else
 		ft_printf("%s\n", cwd_name);

@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/13 13:25:51 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:44:38 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ static int	cd_other(char *pathname, t_vars *vars)
 	char	cwd[CWD_BUF_SIZE];
 	char	oldcwd[CWD_BUF_SIZE];
 
-	if (getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
+	if (getcwd(oldcwd, CWD_BUF_SIZE) == NULL) // free ?
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	if (chdir(pathname) == CHDIR_ERROR)
 	{
 		ft_printf("minishell: cd: ");
 		return (manage_perror(pathname, errno));
 	}		
-	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)
+	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)  // free ?
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	if (!does_var_exist(vars->env, "OLDPWD"))
 		update_var(&vars->env, "OLDPWD", "");
