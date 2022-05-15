@@ -6,11 +6,15 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/15 16:07:50 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/15 22:08:48 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
+/* ************************************************************************** */
+static void add_minishell_to_path(t_vars *vars);
 
 /* ************************************************************************** */
 static void copy_parent_env(t_env **child_env, char **parent_env)
@@ -35,11 +39,8 @@ static void copy_parent_env(t_env **child_env, char **parent_env)
 void	init_env(t_vars *vars, char **envp)
 {
 	char	*temp_str;
-	char	*buff;
-	char	temp_cwd[CWD_BUF_SIZE];
 
 	temp_str = NULL;
-	buff = NULL;
 
 	copy_parent_env(&vars->env, envp);
 	remove_var(&vars->env, "OLDPWD");
@@ -50,12 +51,7 @@ void	init_env(t_vars *vars, char **envp)
 	ft_free_null((void **)&temp_str);	
 
 	// AJOUTER le path de [./minishell] dans la variable d'environnement $PATH
-	buff = ft_strjoin(get_var(vars->env, "PATH")->data, ":");
-	getcwd(temp_cwd, CWD_BUF_SIZE);  // free ?
-	temp_str = ft_strjoin(buff, temp_cwd);
-	ft_free_null((void **)&buff);
-	update_var(&vars->env, "PATH", temp_str);
-	ft_free_null((void **)&temp_str);
+	add_minishell_to_path(vars);
 
 	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
 	//sinon -> les ajouter
@@ -74,6 +70,21 @@ int	loc_builtin(t_vars *vars)
 {
 	print_var(vars->loc);
 	return (0);
+}
+
+/* ************************************************************************** */
+static void add_minishell_to_path(t_vars *vars)
+{
+	char	*temp_str;
+	char	*buff;
+	char	temp_cwd[CWD_BUF_SIZE];
+	
+	buff = ft_strjoin(get_var(vars->env, "PATH")->data, ":");
+	getcwd(temp_cwd, CWD_BUF_SIZE);  // free ?
+	temp_str = ft_strjoin(buff, temp_cwd);
+	ft_free_null((void **)&buff);
+	update_var(&vars->env, "PATH", temp_str);
+	ft_free_null((void **)&temp_str);
 }
 
 /* ************************************************************************** */
