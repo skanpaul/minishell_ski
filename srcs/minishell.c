@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/16 16:49:01 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/16 18:52:24 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ int	main(int argc, char **argv, char **envp)
 				//parse_line(&vars, new_line, 1);
 				vars.segments_count = 0;	
 				ft_free_array(segments);	
-			}
-			else
-				ft_printf("\n ---------- !!! BAD QUOTING !!! ---------- \n");			
+			}						
 		}
 
 		ft_free_null((void**)&new_line);
