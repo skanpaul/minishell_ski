@@ -6,44 +6,60 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:10:05 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 20:52:05 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/16 13:51:19 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// ~/Projects/minishell>
+// [gudias] @ minishell>
+// gudias ~/Projects/minishell>
+
+static char	*get_prompt_line(t_env *env)
+{
+	char	*prompt_line;
+	char	*user;
+	char	*dir;
+	char	*home;
+	char	*tmp;
+
+	//getcwd(dir, CWD_BUF_SIZE) != NULL)
+	if (does_var_exist(env, "USER") && does_var_exist(env, "PWD") && does_var_exist(env, "HOME"))
+	{
+		user = get_var(env, "USER")->data;
+		dir = get_var(env, "PWD")->data;
+		home = get_var(env, "HOME")->data;
+
+		if (!ft_strncmp(dir, home, ft_strlen(home)))
+		{
+			prompt_line = ft_substr(dir, ft_strlen(home), ft_strlen(dir) - ft_strlen(home));
+			//prompt_line = ft_strjoin("~/", user);
+			tmp = prompt_line;
+			prompt_line = ft_strjoin(CYAN"~", prompt_line);
+			free(tmp);
+		}
+		else
+			prompt_line = ft_strjoin(CYAN, dir);
+
+		tmp = prompt_line;
+		prompt_line = ft_strjoin(prompt_line, " > "DEFAULT);
+		free(tmp);
+	}
+	else
+		prompt_line = ft_strdup("minishell> ");	
+
+	return (prompt_line);
+}
 
 char	*show_prompt(t_vars *vars)
 {
-	char	*user;
-	char	*dir;
-	char	*prompt;
+	char	*prompt_line;
 	char	*new_line;
-	char	*to_trim;
 	
-	if (does_var_exist(vars->env, "USER"))
-		user = get_var(vars->env, "USER")->data;
-	if (does_var_exist(vars->env, "PWD"))
-		dir = get_var(vars->env, "PWD")->data;
-	//getcwd(dir, CWD_BUF_SIZE) != NULL)
+	prompt_line = get_prompt_line(vars->env);
+	new_line = readline(prompt_line);
 	
-	if (!ft_strncmp(dir, "/home/", 6))
-	{
-		to_trim = ft_strjoin("/home/", user);
-		ft_putendl(to_trim);
-		ft_putendl(dir);
-		prompt = ft_strtrim(dir, to_trim);
-		ft_putendl(prompt);
-		free(to_trim);
-		prompt = ft_strjoin("~/", prompt);
-	}
-	else
-		prompt = ft_strdup(dir);
-	prompt = ft_strjoin(prompt, "> ");
-	new_line = readline(prompt);
-	
-	free(prompt);
+	free(prompt_line);
 	return (new_line);
 }
 
