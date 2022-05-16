@@ -6,11 +6,11 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:10:05 by ski               #+#    #+#             */
-/*   Updated: 2022/05/12 14:20:48 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/16 15:55:02 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "minishell.h"
 
 /* ************************************************************************** */
 static bool	is_token_chevron_correct(char **array, t_vars *vars);
@@ -24,7 +24,7 @@ char	*check_grammar_chevron(char *line, t_vars *vars)
 {
 	char	**array;
 
-	update_var(&vars->loc, "?", "0"); // à refléchir
+	// update_var(&vars->loc, "?", "0"); // à refléchir
 	if (!line)
 		return (NULL);
 	

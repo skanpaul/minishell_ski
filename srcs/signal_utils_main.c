@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils_main.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/15 23:27:22 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:24:45 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_vars vars;
 
 /* ************************************************************************** */
 static void init_struc_sa_main(t_sig *s);
@@ -59,6 +61,13 @@ void	handler_signal_main(int sig_code)
 	if (sig_code == SIGINT)
 	{
 		write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
+		
+		// int tmp = dup(0);
+		// dup2 (tmp, 0);
+		// write(0, "\n", 1);
+		// close (tmp);
+		
+		// dup2(0, tmp);
 		// g_signal_returned_code = 128 + sig_code;
 	}
 	

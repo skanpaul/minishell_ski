@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 18:12:26 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:49:01 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int g_return_code;
 	tcsetattr(STDIN_FILENO, TCSANOW, &saved);
 }*/
 
+t_vars	vars;
 /* ************************************************************************** */
 int	main(int argc, char **argv, char **envp)
 {
-	t_vars	vars;
 	char	*new_line;
 	char	**segments;
 	int		i;
