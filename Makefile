@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
+#    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/15 16:14:58 by sorakann         ###   ########.fr        #
+#    Updated: 2022/05/17 11:16:55 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,10 @@ SRCS	=	minishell.c \
 			utils/translate_dollar_utils_02.c \
 			utils/chevron_segment_utils.c \
 			utils/signal_utils_fork_child.c \
-			utils/signal_utils_fork_parent.c
+			utils/signal_utils_fork_parent.c \
+			utils/check_grammar.c \
+			utils/check_grammar_chevron.c \
+			utils/check_grammar_pipeline.c			
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 DBG_OBJS = $(SRCS:%.c=$(OBJSDIR)/%_dbg.o)

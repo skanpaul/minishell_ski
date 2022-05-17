@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/17 11:09:44 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/17 11:17:44 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	main(int argc, char **argv, char **envp)
 		if (new_line && *new_line)
 		{
 			add_history(new_line);	
-			if (is_line_with_correct_quote(new_line, &vars) == true)
+			// if (is_line_with_correct_quote(new_line, &vars) == true)
+			if (is_grammar_correct(new_line, &vars))
 			{	
 				//split segments	
 				new_line = chevron_space_maker(new_line);
