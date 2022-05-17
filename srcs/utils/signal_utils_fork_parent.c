@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/17 11:33:07 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/17 11:56:43 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	handler_signal_fork_parent(int sig_code)
 	if (sig_code == SIGINT)
 	{
 		ft_printf(MSG_SIGINT_FORK_PARENT);
-		update_var(&vars.loc, "?", "1");
+		// update_var(&vars.loc, "?", "1");
 	}
 	
 	if (sig_code == SIGQUIT)

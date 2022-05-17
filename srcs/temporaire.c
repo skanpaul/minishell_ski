@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   temporaire.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/05/15 23:37:12 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:55:16 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,37 +71,3 @@ void restore_config(t_vars *vars)
 		chdir(get_var(vars->env, "PWD")->data);
 }
 
-/* ************************************************************************** */
-int get_child_returned_code(int status)
-{
-	if (WIFEXITED(status))
-	{
-		ft_printf("WIFEXITED\n");
-		return (WEXITSTATUS(status));
-	}
-
-	if (WIFSIGNALED(status))
-	{
-		ft_printf("WIFSIGNALED\n");		
-		return (128 + WTERMSIG(status));	
-	}
-
-	// A CLARIFIER ENCORE SELON LES POSSIBILITE CI DESSOUS
-	return (0);
-}
-
-/* ************************************************************************** */
-
-// Pour connaître la RAISON du changement d’état du CHILD depuis la PARENT, 
-// il faut utiliser les les MACRO suivantes avec la variable stat_loc:
-// if(WIFEXITED(stat_loc))	→ fin normale
-// if(WIFSIGNALED(stat_loc))	→ SIGNAL POSIX
-// if(WIFSTOPPED(stat_loc))	→ CHILD en pause ou suspendu
-	
-// En fonction du type de fin du CHILD, 
-//on peut récupérer des informations, avec les MACRO suivante:
-
-// WEXITSTATUS(stat_loc)		→ valeur retourné par CHILD
-// WTERMSIG(stat_loc)		→ numéro du SIGNAL reçu par CHILD
-// WCOREDUMP(stat_loc)		→ à clarifier
-// WSTOPSIG(stat_loc)		→ à clarifier 
