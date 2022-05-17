@@ -6,14 +6,14 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/13 18:29:59 by gudias           ###   ########.fr        #
+#    Updated: 2022/05/17 11:16:55 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -g -Wall -Wextra -Werror
 
 INCL	= -I incs
 RM		= rm -f
@@ -49,11 +49,15 @@ SRCS	=	minishell.c \
 			utils/quote_info_utils_02.c \
 			utils/pipeline_space_maker.c \
 			utils/chevron_space_maker.c \
-			utils/quote_info_utils_02.c \
 			utils/split_shell_line.c \
 			utils/translate_dollar_utils_01.c \
 			utils/translate_dollar_utils_02.c \
-			utils/chevron_segment_utils.c
+			utils/chevron_segment_utils.c \
+			utils/signal_utils_fork_child.c \
+			utils/signal_utils_fork_parent.c \
+			utils/check_grammar.c \
+			utils/check_grammar_chevron.c \
+			utils/check_grammar_pipeline.c			
 
 OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o)
 DBG_OBJS = $(SRCS:%.c=$(OBJSDIR)/%_dbg.o)

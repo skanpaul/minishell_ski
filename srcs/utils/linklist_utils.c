@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linklist_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/05/05 08:48:42 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/15 22:17:14 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ bool does_var_exist(t_env *var_head, char *var_name)
 }
 
 /* ************************************************************************** */
+// update_var():
+//		- free itself the old_data
+//		- malloc itself the new_data
+// ---------------------------------------------------------------
 void update_var(t_env **var_head, char *var_name, char *new_data)
 {
 	t_env *buff;

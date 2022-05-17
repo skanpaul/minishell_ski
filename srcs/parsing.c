@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/12 16:17:31 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/15 23:34:54 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	parse_line(t_vars *vars, char *line, int output)
 	int		return_code;
 	int		fd_in;
 	int		fd_out;
+	char	*buff;
    
 	return_code = -1;
 	fd_in = 0;
@@ -77,10 +78,15 @@ void	parse_line(t_vars *vars, char *line, int output)
 		return_code = exec_builtin(vars, cmd_args + i);
 	else
 		return_code = run_cmd(vars, cmd_args + i, fd_out);
+		
+	restore_config(vars);
 
 	if (!cmd_args[i])
-		return_code = 0;	
-	update_var(&vars->loc, "?", ft_itoa(return_code)); //free le itoa
+		return_code = 0;
+
+	buff = 	ft_itoa(return_code);
+	update_var(&vars->loc, "?", buff);
+	ft_free_null((void **)&buff);
 
 	//reset redirs and close fds
 	if (fd_in)

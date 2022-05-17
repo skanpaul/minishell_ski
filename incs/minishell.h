@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 20:20:36 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/17 11:56:03 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_quote_info
 	
 }	t_quote_info;
 // ----------------------------------------
-
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[1;33m"
@@ -55,9 +54,10 @@ typedef struct s_quote_info
 
 typedef struct s_sig
 {
-	struct sigaction	sa_sigint_main;
-	struct sigaction	sa_sigquit_main;
-	struct sigaction	sa_signal_prog;
+	struct sigaction	sa_sigint;	// ctrl-C
+	struct sigaction	sa_sigquit;	// ctrl-/
+	struct sigaction	sa_sigchild;
+	// struct sigaction	sa_sig_ctr_D;
 } t_sig;
 // ----------------------------------------
 typedef struct	s_env
@@ -74,20 +74,26 @@ typedef struct	s_vars
 	int		stderr_fd;
 	t_env	*env;
 	t_env	*loc;
-	char	**env_char_array;
+	char	**env_char_array; // à effacer ?
 	t_sig	sig;
 	int		segments_count;
 }	t_vars;
 /* ************************************************************************** */
-# define MSG_SIGINT_MAIN	"\nminishell ski> "
+# define MSG_SIGINT_MAIN	RED"\nminishell> "DEFAULT
 # define MSG_SIGQUIT_MAIN	""
-// ----------------------------------------
-# define MSG_SIGINT_PROG	"\nCCCC "
-# define MSG_SIGQUIT_PROG	"\nDDDD "
+// -------------------------------------------------------------
+# define MSG_SIGINT_FORK_PARENT		"\n"
+# define MSG_SIGQUIT_FORK_PARENT	""
+# define MSG_SIGCHLD_FORK_PARENT	"SIGCHLD received by the fork-parent\n"
 /* ************************************************************************** */
-void	init_sa_struc_main(t_sig *s);
+void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
-void	init_sigaction_main(t_sig *s);
+// --------------------------------------------
+void	init_signal_fork_child(t_sig *s);
+// void	handler_signal_heredoc_child(int sig_code);
+// --------------------------------------------
+void	init_signal_fork_parent(t_sig *s);
+void	handler_signal_fork_parent(int sig_code);
 /* ************************************************************************** */
 void	initialisation(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
@@ -111,7 +117,6 @@ int	env_builtin(t_vars *vars);
 int	loc_builtin(t_vars *vars);
 
 void	init_env(t_vars *vars, char **envp);
-void 	init_loc(t_vars *vars);
 
 char	*show_prompt(t_vars *vars);
 void launch_message(void);
@@ -139,7 +144,7 @@ int		count_words(char *line, char separator);
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
 // ------------------------------------------------ translate_dollar.c
-void	translate_dollars_all(char **array, t_vars *vars);
+char	**translate_dollars_all(char **array, t_vars *vars);
 char	*translate_dollar(char *str, t_vars *vars);
 bool	is_char_for_dolvar_name(char c);
 bool	is_vardol(char *str, int i);
@@ -158,25 +163,34 @@ bool	is_exiting_realquote(t_quote_info *qti);
 bool	is_inside_double_realquote(t_quote_info *qti);
 bool	is_inside_single_realquote(t_quote_info *qti);
 
-bool 	is_line_with_correct_quote(char *line);
+bool	is_line_with_correct_quote(char *line, t_vars *vars);
 // -------------------------------------------------------------------
 void	ft_add_history(char *new_line); // ski peut-être à effacer
 
+// -------------------------------------------------------------------
+bool	is_grammar_correct(char *line, t_vars *vars);
+bool	is_grammar_chevron_correct(char *line, t_vars *vars);
+bool	is_grammar_pipeline_correct(char *line, t_vars *vars);
 // ------------------------------------------- chevron_segment_utils.c
 int		get_segment_fd_in(t_vars *vars, char **array);
 int		get_segment_fd_out(char **array);
 void	clear_chevron_segment(char **array);
 // -------------------------------------------------------------------
 
+
+
 char	*find_cmd_path(t_env *env, char *cmd);
 int	run_cmd(t_vars *vars, char **cmd_args, int output);
 void	exec_cmd(t_vars *vars, char **cmd_args);
 
 void	here_doc(char *limiter);
-void	err_quit(int n); // A EFFACER: est utilise dans here_doc.c, mais ou est la definition
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
 int		manage_perror(char *remark, int error_code); 
+
+
+// -------------------------------------------------------------------
+void	restore_config(t_vars *vars);
 /* ************************************************************************** */
 #endif

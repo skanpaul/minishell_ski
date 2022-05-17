@@ -6,11 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/12 16:47:30 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/17 11:55:42 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int get_child_returned_code(int status);
 
 char	*find_cmd_path(t_env *env, char *cmd)
 {
@@ -52,6 +54,7 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 			err_msg(ERR_FORK);
 		if (id == 0)
 		{	
+			init_signal_fork_child(&vars->sig); //ski
 			close(pipe_fd[0]);
 			if (!output)
 				dup2(pipe_fd[1], 1);
@@ -63,6 +66,7 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 				exec_cmd(vars, cmd_args);
 		}
 	}
+	init_signal_fork_parent(&vars->sig); //ski
 	close(pipe_fd[1]);
 //	if (!output)
 		dup2(pipe_fd[0], 0);
@@ -70,9 +74,11 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 //		dup2(vars->stdin_fd, 0);
 	close(pipe_fd[0]);
 	if (waitpid(id, &status, 0) == -1)
-		return -1;
-	//if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
+		return -1;		
+
+	// // if (WIFEXITED(status))
+	// 	return (WEXITSTATUS(status));
+	return (get_child_returned_code(status));
 }
 
 void	exec_cmd(t_vars *vars, char **cmd_args)
@@ -97,3 +103,32 @@ void	exec_cmd(t_vars *vars, char **cmd_args)
 	ft_free_array(char_array);
 	exit(1);
 }
+
+/* ************************************************************************** */
+static int get_child_returned_code(int status)
+{
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+
+	if (WIFSIGNALED(status))
+		return (128 + WTERMSIG(status));	
+
+	// A CLARIFIER ENCORE SELON LES POSSIBILITE
+	return (1);
+}
+
+/* ************************************************************************** */
+
+// Pour connaître la RAISON du changement d’état du CHILD depuis la PARENT, 
+// il faut utiliser les les MACRO suivantes avec la variable stat_loc:
+// if(WIFEXITED(stat_loc))	→ fin normale
+// if(WIFSIGNALED(stat_loc))	→ SIGNAL POSIX
+// if(WIFSTOPPED(stat_loc))	→ CHILD en pause ou suspendu
+	
+// En fonction du type de fin du CHILD, 
+//on peut récupérer des informations, avec les MACRO suivante:
+
+// WEXITSTATUS(stat_loc)		→ valeur retourné par CHILD
+// WTERMSIG(stat_loc)		→ numéro du SIGNAL reçu par CHILD
+// WCOREDUMP(stat_loc)		→ à clarifier
+// WSTOPSIG(stat_loc)		→ à clarifier 

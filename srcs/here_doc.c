@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/11 18:23:18 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/17 12:15:07 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_vars vars;
 
 static void	pipe_input(char *limiter, int pipe_fd[2])
 {
@@ -44,6 +46,9 @@ void	here_doc(char *limiter)
 {
 	int	id;
 	int	pipe_fd[2];
+	// int status; // ski
+	// char *buf; // ski
+	t_sig s; 							//ski
 
 	if (pipe(pipe_fd) == -1)
 		err_msg(ERR_PIPE);
@@ -51,9 +56,35 @@ void	here_doc(char *limiter)
 	if (id == -1)
 		err_msg(ERR_FORK);
 	if (id == 0)
+	{
+		init_signal_fork_child(&s); //ski
 		pipe_input(limiter, pipe_fd);
+	}	
+	init_signal_fork_parent(&s); //ski
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], 0);
 	close(pipe_fd[0]);
-	waitpid(id, NULL, 0);
+	// waitpid(id, &status, 0);		
+	waitpid(id, NULL, 0);		
+	init_signal_main(&s); //ski a mettre au retour
+
 }
+
+	// 1) ski: gerer les information retourne par le child
+	// 2) ski: peut etre creer un handler au signal SIGCHLD reçu par le parent
+	// lorsque le child est interompu par un signal
+	// pour terminer proprement le child ou parent à réfléchir
+
+	// ft_printf("salut\n");
+	// if (WIFEXITED(status))
+	// {
+	// 	ft_printf("aa\n");
+	// 	buf = ft_itoa(WEXITSTATUS(status));
+	// 	update_var(&vars.loc, "?", buf);
+	// 	ft_free_null((void **)&buf);
+	// }
+	// if (WIFSIGNALED(status))
+	// {
+	// 	ft_printf("bb\n");
+	// 	update_var(&vars.loc, "?", "1");	
+	// }

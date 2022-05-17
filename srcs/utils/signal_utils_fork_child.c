@@ -1,50 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialisation.c                                   :+:      :+:    :+:   */
+/*   signal_utils_fork_child.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 09:17:34 by ski               #+#    #+#             */
-/*   Updated: 2022/05/13 00:18:51 by sorakann         ###   ########.fr       */
+/*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
+/*   Updated: 2022/05/13 13:49:36 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* ************************************************************************** */
-static void	init_vars(t_vars *vars, char **envp);
-static void	init_loc(t_vars *vars);
-
+static void init_struct_sa_fork_child(t_sig *s);
+static void init_sigaction_fork_child(t_sig *s);
 /* ************************************************************************** */
-void initialisation(t_vars *vars, char **envp)
+void init_signal_fork_child(t_sig *s)
 {
-	init_vars(vars, envp);
-
-	init_env(vars, envp);
-
-	init_signal_main(&vars->sig);
-
-	init_loc(vars);
+	init_struct_sa_fork_child(s);
+	init_sigaction_fork_child(s);	
 }
 
 /* ************************************************************************** */
-static void init_vars(t_vars *vars, char **envp)
+static void init_struct_sa_fork_child(t_sig *s)
 {
-	(void)envp;
-	vars->stdin_fd = dup(0);
-	vars->stdout_fd = dup(1);
-	vars->stderr_fd = dup(2);
-	vars->env = NULL;
-	vars->loc = NULL;
-	vars->env_char_array = NULL;
-	vars->segments_count = 0;
+	// SIGINT -----------------------------------------	
+	s->sa_sigint.sa_handler = SIG_DFL;		// SA_HANDLER	
+	// SIGQUIT -----------------------------------------	
+	s->sa_sigquit.sa_handler = SIG_IGN;
 }
 
 /* ************************************************************************** */
-static void init_loc(t_vars *vars)
+static void init_sigaction_fork_child(t_sig *s)
 {
-	update_var(&vars->loc, "?", EXIT_SUCCESS_STR);
+	sigaction(SIGINT, &s->sa_sigint, NULL);		// [ctrl-C]: SIGINT
+	sigaction(SIGQUIT, &s->sa_sigquit, NULL);	// [ctrl-\]: SIGQUIT	
 }
 
 /* ************************************************************************** */

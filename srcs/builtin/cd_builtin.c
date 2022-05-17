@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/16 15:15:26 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/15 15:44:38 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	cd_empty(t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
 static char	*manage_tild(char *pathname, t_vars *vars);
-static bool	is_good_path(char *pathname, t_vars *vars);
+// static bool	is_good_path(char *pathname, t_vars *vars);
 static int	cd_hyphen(t_vars *vars);
 
 /* ************************************************************************** */
@@ -55,10 +55,8 @@ static int	cd_empty(t_vars *vars)
 /* ************************************************************************** */
 static int	cd_hyphen(t_vars *vars)
 {
-	t_env	*temp_pwd;
 	t_env	*temp_oldpwd;
 
-	temp_pwd = NULL;
 	temp_oldpwd = NULL;
 	if (!does_var_exist(vars->env, "OLDPWD"))
 	{
@@ -76,14 +74,14 @@ static int	cd_other(char *pathname, t_vars *vars)
 	char	cwd[CWD_BUF_SIZE];
 	char	oldcwd[CWD_BUF_SIZE];
 
-	if (getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
+	if (getcwd(oldcwd, CWD_BUF_SIZE) == NULL) // free ?
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	if (chdir(pathname) == CHDIR_ERROR)
 	{
 		ft_printf("minishell: cd: ");
 		return (manage_perror(pathname, errno));
 	}		
-	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)
+	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)  // free ?
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	if (!does_var_exist(vars->env, "OLDPWD"))
 		update_var(&vars->env, "OLDPWD", "");
@@ -119,16 +117,16 @@ static char	*manage_tild(char *pathname, t_vars *vars)
 
 /* ************************************************************************** */
 // ATTENTION: il faut donner un PATH ABSOLUE
-static bool	is_good_path(char *pathname, t_vars *vars)
-{
-	DIR	*folder;
+// static bool	is_good_path(char *pathname, t_vars *vars)
+// {
+// 	DIR	*folder;
 
-	(void)vars;
-	folder = opendir(pathname);
-	if (folder == NULL)
-		return (false);
-	closedir(folder);
-	return (true);
-}
+// 	(void)vars;
+// 	folder = opendir(pathname);
+// 	if (folder == NULL)
+// 		return (false);
+// 	closedir(folder);
+// 	return (true);
+// }
 
 /* ************************************************************************** */

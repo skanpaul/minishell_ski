@@ -6,17 +6,11 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 09:20:55 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/17 11:55:16 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* ************************************************************************** */
-void init_loc(t_vars *vars)
-{
-	update_var(&vars->loc, "?", EXIT_SUCCESS_STR);
-}
 
 /* ************************************************************************** */
 bool does_word_match(char *str, char *hard_text)
@@ -70,3 +64,10 @@ int	openfilex(char *filepath, int o_flag)
 }
 
 /* ************************************************************************** */
+void restore_config(t_vars *vars)
+{
+	init_signal_main(&vars->sig); //ski
+	if(does_var_exist(vars->env, "PWD"))
+		chdir(get_var(vars->env, "PWD")->data);
+}
+

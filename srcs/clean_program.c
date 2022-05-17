@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 09:23:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 11:34:46 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/15 16:32:47 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 /* ************************************************************************** */
 void	clean_program(t_vars *vars)
 {
-	(void)vars;
+	free_var_list(&vars->env);
+	free_var_list(&vars->loc);
 	// free les variables d'environnement
 	// free les variables locales
 	// autre encore

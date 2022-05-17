@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:20:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 17:22:21 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/15 16:53:49 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ int	exit_builtin(t_vars *vars, char **cmd_args)
 		exit_code = ft_atoi(cmd_args[1]);
 	
 	//----> free all here to exit properly <----
+  //-----> close_program.c
 	free_var_list(&vars->env);
-  	//free var_locals
+	free_var_list(&vars->loc);
+  
 	//free(newline) ??
 
 	exit(exit_code);
