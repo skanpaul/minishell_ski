@@ -87,8 +87,8 @@ static int	cd_other(char *pathname, t_vars *vars)
 		update_var(&vars->env, "OLDPWD", "");
 	else
 		update_var(&vars->env, "OLDPWD", oldcwd);
-	if (does_var_exist(vars->env, "PWD"))
-		update_var(&vars->env, "PWD", cwd);
+	//if (does_var_exist(vars->env, "PWD"))
+	update_var(&vars->env, "PWD", cwd);
 	return (BUILTIN_SUCCESS);
 }
 

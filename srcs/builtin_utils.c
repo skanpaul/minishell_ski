@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:41:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/12 16:44:12 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/13 15:30:33 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	exec_builtin(t_vars *vars, char **cmd_args)
 	else if (!ft_strncmp(cmd_args[0], "env", 4))
 			res = env_builtin(vars);
 	else if (!ft_strncmp(cmd_args[0], "exit", 5))
-			exit_builtin(vars);
+			res = exit_builtin(vars, cmd_args);
 	else if (!ft_strncmp(cmd_args[0], "loc", 4))
 			res = loc_builtin(vars);
 	return (res);

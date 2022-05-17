@@ -46,6 +46,8 @@ typedef struct s_quote_info
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[1;33m"
+# define BLUE "\033[1;34m"
+# define PURPLE "\033[1;35m"
 # define CYAN "\033[1;36m"
 # define DEFAULT "\033[0m"
 /* ************************************************************************** */
@@ -105,7 +107,7 @@ int	exec_builtin(t_vars *vars, char **cmd_args);
 int		is_assignation(char *cmd);
 int	add_local_var(t_vars *vars, char **cmd_args);
 
-void	exit_builtin(t_vars *vars);
+int	exit_builtin(t_vars *vars, char **cmd_args);
 int	echo_builtin(char **cmd_args);
 int		pwd_builtin(t_vars *vars, char **cmd_args);
 int	export_builtin(t_vars *vars, char **cmd_args);
@@ -116,6 +118,8 @@ int	loc_builtin(t_vars *vars);
 
 void	init_env(t_vars *vars, char **envp);
 
+char	*show_prompt(t_vars *vars);
+void launch_message(void);
 // ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
 bool	does_wordstart_match(char *str, char *hard_text);

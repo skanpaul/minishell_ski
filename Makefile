@@ -43,6 +43,7 @@ SRCS	=	minishell.c \
 			lexing.c \
 			temporaire.c \
 			here_doc.c \
+			prompt.c \
 			utils/linklist_utils.c \
 			utils/quote_info_utils_01.c \
 			utils/quote_info_utils_02.c \

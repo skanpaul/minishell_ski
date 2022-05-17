@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 #include <termios.h>
-
-int g_return_code;
 
 //struct termios saved;
 
@@ -49,21 +46,20 @@ int	main(int argc, char **argv, char **envp)
 	//attributes.c_lflag &= ~ ECHO;
 	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);	
 	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
-	ft_printf("\t\t\t%s| %sHELLO %sMINI %sSHELL %s|%s\n\n", CYAN, RED, YELLOW, GREEN, CYAN, DEFAULT);
 	//------------------------------------
-	
+
+	launch_message();
+
 	new_line = NULL;
 	while (1)
 	{
-		new_line = readline(CYAN"minishell> "DEFAULT);
-					
+		new_line = show_prompt(&vars);
+
 		if (new_line && *new_line)
 		{
 			add_history(new_line);	
-			// if (is_line_with_correct_quote(new_line, &vars) == true)
 			if (is_grammar_correct(new_line, &vars))
 			{	
-				//split segments	
 				new_line = chevron_space_maker(new_line);
 				new_line = pipeline_space_maker(new_line);
 				segments = split_shell_line(new_line, '|');
@@ -77,7 +73,6 @@ int	main(int argc, char **argv, char **envp)
 					parse_line(&vars, segments[i++], 0);
 				parse_line(&vars, segments[i], 1);
 				
-				//parse_line(&vars, new_line, 1);
 				vars.segments_count = 0;	
 				ft_free_array(segments);	
 			}						
