@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/11 20:17:24 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/16 18:19:21 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	if (argc > 1)
 		exit_msg(ERR_ARGS);
-	if (!isatty(0) || !isatty(1) || !isatty(2))
-		exit_msg(ERR_TTY);
+	//if (!isatty(0) || !isatty(1) || !isatty(2))
+	//	exit_msg(ERR_TTY);
 	
 	initialisation (&vars, envp);
 	
@@ -47,14 +47,16 @@ int	main(int argc, char **argv, char **envp)
 	//attributes.c_lflag &= ~ ECHO;
 	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);	
 	//tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
-	ft_printf("\t\t\t%s| %sHELLO %sMINI %sSHELL %s|%s\n\n", CYAN, RED, YELLOW, GREEN, CYAN, DEFAULT);
 	//------------------------------------
-	
+
+	launch_message();
+
 	new_line = NULL;
 	while (1)
 	{
-		new_line = readline(CYAN"minishell> "DEFAULT);
-					
+		//new_line = readline(CYAN"minishell> "DEFAULT);
+		new_line = show_prompt(&vars);
+
 		if (new_line && *new_line)
 		{
 			add_history(new_line);	
