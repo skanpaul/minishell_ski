@@ -101,7 +101,7 @@ int	exec_builtin(t_vars *vars, char **cmd_args);
 int		is_assignation(char *cmd);
 int	add_local_var(t_vars *vars, char **cmd_args);
 
-void	exit_builtin(t_vars *vars);
+int	exit_builtin(t_vars *vars, char **cmd_args);
 int	echo_builtin(char **cmd_args);
 int		pwd_builtin(t_vars *vars, char **cmd_args);
 int	export_builtin(t_vars *vars, char **cmd_args);
