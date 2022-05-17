@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/12 15:33:08 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/17 14:47:34 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,33 @@
 static t_env	*sort_env_lst(t_env *env)
 {	
 	t_env	*sorted_env;
-	
-	while (env)
+	t_env	*ptr;
+	t_env	*smallest;
+	char	*last;
+	int		i;
+	int		size;
+
+	last = "\0";
+	sorted_env = NULL;
+	size = size_var_list(env);
+	i = 0;
+	while (i < size)
 	{
-		add_var(&sorted_env, env->name, env->data);
-		env = env->next;	
+		ptr = env;
+		while (ptr && ft_strncmp(ptr->name, last, ft_strlen(ptr->name) + 1) < 0 )
+			ptr = ptr->next;
+		smallest = ptr;
+		while (ptr)
+		{
+			if ((ft_strncmp(ptr->name, smallest->name, ft_strlen(ptr->name) + 1) < 0) &&
+					(ft_strncmp(ptr->name, last, ft_strlen(ptr->name) + 1) > 0))
+				smallest = ptr;
+			ptr = ptr->next;
+		}
+		last = smallest->name;
+		//ft_putendl(last);
+		add_var(&sorted_env, smallest->name, smallest->data);
+		i++;
 	}
 	return (sorted_env);
 }
@@ -29,11 +51,12 @@ static int	export_print(t_env *env)
 	t_env	*tmp;
 	
 	tmp = sort_env_lst(env);
+	//print_var(tmp);
 	while (tmp)
 	{
 		if (!tmp->data)
 			return (0);
-		ft_putstr_fd("declare -x ",1);
+		ft_putstr_fd("declare -x ", 1);
 		ft_putstr_fd(tmp->name, 1);
 		ft_putstr_fd("=", 1);
 		ft_putstr_fd(tmp->data, 1);
