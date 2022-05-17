@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:10:05 by ski               #+#    #+#             */
-/*   Updated: 2022/05/16 15:55:02 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/17 11:12:14 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,27 @@ static bool	is_next_token_correct(char **array, t_vars *vars);
 // return NULL if grammar about chevron is not correct
 // !!! WARNING !!!: exit the main program if NULL is returned
 // -------------------------------------------------
-char	*check_grammar_chevron(char *line, t_vars *vars)
+bool	is_grammar_chevron_correct(char *line, t_vars *vars)
 {
 	char	**array;
 
 	// update_var(&vars->loc, "?", "0"); // à refléchir
 	if (!line)
-		return (NULL);
+		return (false);
 	
 	array = NULL;
 	array = split_shell_line(line, ' ');
-	print_array_in_line(array, "A)   tokens     :\t ");
+	// print_array_in_line(array, "A)   tokens     :\t ");
 	translate_dollars_all(array, vars);
-	print_array_in_line(array, "B)   tok. trans.:\t ");
+	// print_array_in_line(array, "B)   tok. trans.:\t ");
 	
 	if (!is_token_chevron_correct(array, vars)
 		|| !is_next_token_correct(array, vars))
-		ft_free_null((void **)&line);
+		return (false);
 		
-	free_array(&array);
-	return (line);
+	// free_array(&array);
+	free_array(array);
+	return (true);
 }
 
 /* ************************************************************************** */
@@ -105,5 +106,31 @@ static bool	is_next_token_correct(char **array, t_vars *vars)
 	}
 	return (true);
 }
+
+/* ************************************************************************** */
+// return NULL if grammar about chevron is not correct
+// !!! WARNING !!!: exit the main program if NULL is returned
+// -------------------------------------------------
+// char	*check_grammar_chevron(char *line, t_vars *vars)
+// {
+// 	char	**array;
+
+// 	// update_var(&vars->loc, "?", "0"); // à refléchir
+// 	if (!line)
+// 		return (NULL);
+	
+// 	array = NULL;
+// 	array = split_shell_line(line, ' ');
+// 	// print_array_in_line(array, "A)   tokens     :\t ");
+// 	translate_dollars_all(array, vars);
+// 	// print_array_in_line(array, "B)   tok. trans.:\t ");
+	
+// 	if (!is_token_chevron_correct(array, vars)
+// 		|| !is_next_token_correct(array, vars))
+// 		ft_free_null((void **)&line);
+		
+// 	free_array(&array);
+// 	return (line);
+// }
 
 /* ************************************************************************** */

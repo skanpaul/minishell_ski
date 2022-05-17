@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:09:45 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/16 15:55:18 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/17 11:12:29 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@ static bool is_previous_token_correct(char **array, t_vars *vars);
 static bool	is_next_token_correct(char **array, t_vars *vars);
 
 /* ************************************************************************** */
-// RETURN: NULL if grammar is not correct and 
-// !!! WARNING: exit the main program if NULL is returned
-char	*check_grammar_pipeline(char *line, t_vars *vars)
+// return: FALSE if grammar is not correct and 
+bool	is_grammar_pipeline_correct(char *line, t_vars *vars)
 {
     char	**array;
 
 	if (!line)
-		return (NULL);
+		return (false);
 	
 	array = NULL;
 	array = split_shell_line(line, ' ');
-	print_array_in_line(array, "A)   tokens     :\t ");
+	// print_array_in_line(array, "A)   tokens     :\t ");
 	translate_dollars_all(array, vars);
-	print_array_in_line(array, "B)   tok. trans.:\t ");
+	// print_array_in_line(array, "B)   tok. trans.:\t ");
 
     if (!is_token_pipeline_correct(array, vars)
 		|| !is_previous_token_correct(array, vars)
 		|| !is_next_token_correct(array, vars))
-		ft_free_null((void **)&line);
+		return (false);
     
-    free_array(&array);
-    return (line);
+    free_array(array);
+    // free_array(&array);
+    return (true);
 }
 
 /* ************************************************************************** */
@@ -124,5 +124,30 @@ static bool is_next_token_correct(char **array, t_vars *vars)
 
 	return (true);
 }
+
+/* ************************************************************************** */
+// RETURN: NULL if grammar is not correct and 
+// !!! WARNING: exit the main program if NULL is returned
+// char	*check_grammar_pipeline(char *line, t_vars *vars)
+// {
+//     char	**array;
+
+// 	if (!line)
+// 		return (NULL);
+	
+// 	array = NULL;
+// 	array = split_shell_line(line, ' ');
+// 	// print_array_in_line(array, "A)   tokens     :\t ");
+// 	translate_dollars_all(array, vars);
+// 	// print_array_in_line(array, "B)   tok. trans.:\t ");
+
+//     if (!is_token_pipeline_correct(array, vars)
+// 		|| !is_previous_token_correct(array, vars)
+// 		|| !is_next_token_correct(array, vars))
+// 		ft_free_null((void **)&line);
+    
+//     free_array(&array);
+//     return (line);
+// }
 
 /* ************************************************************************** */

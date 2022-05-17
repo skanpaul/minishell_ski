@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_info_utils_01.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 10:28:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/16 18:52:40 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:06:36 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	refresh_quote_info(t_quote_info *qti, char actual_char)
 }
 
 /* ************************************************************************** */
-bool is_line_with_correct_quote(char *line)
+bool is_line_with_correct_quote(char *line, t_vars *vars)
 {
 	int i;	
 	t_quote_info	qti;
@@ -70,8 +70,9 @@ bool is_line_with_correct_quote(char *line)
 	
 	if (is_good_number_of_realquote(&qti))
 		return (true);
-	
-	ft_printf("\n ---------- !!! BAD QUOTING !!! ---------- \n");
+		
+	ft_printf("minishell: syntax error in quoting line\n");
+	update_var(&vars->loc, "?", "1");
 	return (false);
 }
 

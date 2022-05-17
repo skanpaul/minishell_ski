@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/16 14:32:05 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/17 11:11:08 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,15 +159,21 @@ bool	is_exiting_realquote(t_quote_info *qti);
 bool	is_inside_double_realquote(t_quote_info *qti);
 bool	is_inside_single_realquote(t_quote_info *qti);
 
-bool 	is_line_with_correct_quote(char *line);
+bool	is_line_with_correct_quote(char *line, t_vars *vars);
 // -------------------------------------------------------------------
 void	ft_add_history(char *new_line); // ski peut-être à effacer
 
+// -------------------------------------------------------------------
+bool	is_grammar_correct(char *line, t_vars *vars);
+bool	is_grammar_chevron_correct(char *line, t_vars *vars);
+bool	is_grammar_pipeline_correct(char *line, t_vars *vars);
 // ------------------------------------------- chevron_segment_utils.c
 int		get_segment_fd_in(t_vars *vars, char **array);
 int		get_segment_fd_out(char **array);
 void	clear_chevron_segment(char **array);
 // -------------------------------------------------------------------
+
+
 
 char	*find_cmd_path(t_env *env, char *cmd);
 int	run_cmd(t_vars *vars, char **cmd_args, int output);
