@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/17 11:16:55 by ski              ###   ########.fr        #
+#    Updated: 2022/05/18 15:48:37 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS	=	minishell.c \
 			errors.c \
 			signal_utils_main.c \
 			builtin_utils.c \
-			replace_vars.c \
 			builtin/unset_builtin.c \
 			builtin/cd_builtin.c \
 			builtin/env_builtin.c \
@@ -44,6 +43,7 @@ SRCS	=	minishell.c \
 			temporaire.c \
 			here_doc.c \
 			prompt.c \
+			utils/termios_utils.c \
 			utils/linklist_utils.c \
 			utils/quote_info_utils_01.c \
 			utils/quote_info_utils_02.c \

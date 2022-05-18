@@ -6,13 +6,26 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:48:06 by gudias            #+#    #+#             */
-/*   Updated: 2022/04/13 14:17:44 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/18 16:03:36 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**lexing(char *line)
+char	**lexing(t_vars *vars, char *line)
 {
-	return (ft_split(line, '|'));
+	int		i;
+	char	**segments;
+
+	segments = NULL;
+	if (is_grammar_correct(line, vars))
+	{
+		line = chevron_space_maker(line);
+		line = pipeline_space_maker(line);
+		segments = split_shell_line(line, '|');
+		i = -1;
+		while (segments[++i])
+			vars->segments_count++;
+	}
+	return (segments);
 }

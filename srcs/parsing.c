@@ -6,11 +6,25 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/15 23:34:54 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/18 15:55:31 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	handle_segments(t_vars *vars, char **segments)
+{
+	int	i;
+
+	i = 0;
+	while (segments[i + 1])
+		parse_line(vars, segments[i++], 0);
+	parse_line(vars, segments[i], 1);
+	
+	//reset
+	vars->segments_count = 0;	
+	ft_free_array(segments);					
+}
 
 void	parse_line(t_vars *vars, char *line, int output)
 {

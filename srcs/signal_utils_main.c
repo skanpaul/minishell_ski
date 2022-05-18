@@ -6,13 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/17 11:31:08 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/18 15:57:40 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_vars vars;
+extern t_vars g_vars;
 
 /* ************************************************************************** */
 static void init_struc_sa_main(t_sig *s);
@@ -61,7 +61,7 @@ void	handler_signal_main(int sig_code)
 	if (sig_code == SIGINT)
 	{
 		write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
-		update_var(&vars.loc, "?", "1");
+		update_var(&g_vars.loc, "?", "1");
 		
 		// int tmp = dup(0);
 		// dup2 (tmp, 0);

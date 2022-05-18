@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/17 11:56:03 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/18 15:58:26 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <sys/wait.h>
 # include <signal.h>
 #include <sys/types.h>
-#include <sys/wait.h>
 #include <dirent.h>
+#include <termios.h>
 /* ************************************************************************** */
 
 typedef struct s_quote_info
@@ -98,9 +98,9 @@ void	handler_signal_fork_parent(int sig_code);
 void	initialisation(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
 /* ************************************************************************** */
-
+char	**lexing(t_vars *vars, char * line);
+void	handle_segments(t_vars *vars, char **segments);
 void	parse_line(t_vars *vars, char *line, int output);
-char	*replace_vars(t_vars *vars, char *line);
 
 int		is_builtin(char *cmd);
 int	exec_builtin(t_vars *vars, char **cmd_args);
@@ -189,7 +189,7 @@ void	err_msg(char *msg);
 void	exit_msg(char *msg);
 int		manage_perror(char *remark, int error_code); 
 
-
+void	clean_program(t_vars *vars);
 // -------------------------------------------------------------------
 void	restore_config(t_vars *vars);
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 09:23:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/15 16:32:47 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/18 15:44:03 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void	clean_program(t_vars *vars)
 {
 	free_var_list(&vars->env);
 	free_var_list(&vars->loc);
-	// free les variables d'environnement
-	// free les variables locales
-	// autre encore
 	// ...
 	// ...
 	// exit(n);
