@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/18 15:55:31 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/18 18:42:26 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	parse_line(t_vars *vars, char *line, int output)
 	else
 		return_code = run_cmd(vars, cmd_args + i, fd_out);
 		
-	restore_config(vars);
-
+	init_signal_main(&vars->sig);
+	
 	if (!cmd_args[i])
 		return_code = 0;
 

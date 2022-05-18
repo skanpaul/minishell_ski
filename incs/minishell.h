@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/18 15:58:26 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/18 18:25:47 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ char	**lexing(t_vars *vars, char * line);
 void	handle_segments(t_vars *vars, char **segments);
 void	parse_line(t_vars *vars, char *line, int output);
 
+void	get_redirections(t_vars *vars, char **cmd_args, int *fd_in, int *fd_out, int output);
+
 int		is_builtin(char *cmd);
 int	exec_builtin(t_vars *vars, char **cmd_args);
 int		is_assignation(char *cmd);
@@ -165,7 +167,6 @@ bool	is_inside_single_realquote(t_quote_info *qti);
 
 bool	is_line_with_correct_quote(char *line, t_vars *vars);
 // -------------------------------------------------------------------
-void	ft_add_history(char *new_line); // ski peut-être à effacer
 
 // -------------------------------------------------------------------
 bool	is_grammar_correct(char *line, t_vars *vars);
@@ -191,6 +192,4 @@ int		manage_perror(char *remark, int error_code);
 
 void	clean_program(t_vars *vars);
 // -------------------------------------------------------------------
-void	restore_config(t_vars *vars);
-/* ************************************************************************** */
 #endif

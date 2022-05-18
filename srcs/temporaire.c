@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/05/17 11:55:16 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/18 17:57:09 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,13 @@ bool does_wordstart_match(char *str, char *hard_text)
 		return (true);
 	return (false);	
 }
+
 /* ************************************************************************** */
 void ft_free_null(void **ptr)
 {
 	if (*ptr != NULL)
 		free(*ptr);
 	*ptr = NULL;
-}
-
-/* ************************************************************************** */
-void ft_add_history(char *new_line)
-{
-	if (new_line[0] != '\0' || new_line != NULL)
-		add_history(new_line);
 }
 
 /* ************************************************************************** */
@@ -62,12 +56,3 @@ int	openfilex(char *filepath, int o_flag)
 		fd = open(filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	return (fd);
 }
-
-/* ************************************************************************** */
-void restore_config(t_vars *vars)
-{
-	init_signal_main(&vars->sig); //ski
-	if(does_var_exist(vars->env, "PWD"))
-		chdir(get_var(vars->env, "PWD")->data);
-}
-

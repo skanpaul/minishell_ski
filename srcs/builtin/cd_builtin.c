@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/15 15:44:38 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:53:35 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,7 @@ static int	cd_other(char *pathname, t_vars *vars)
 	}		
 	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)  // free ?
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
-	if (!does_var_exist(vars->env, "OLDPWD"))
-		update_var(&vars->env, "OLDPWD", "");
-	else
-		update_var(&vars->env, "OLDPWD", oldcwd);
-	//if (does_var_exist(vars->env, "PWD"))
+	update_var(&vars->env, "OLDPWD", oldcwd);
 	update_var(&vars->env, "PWD", cwd);
 	return (BUILTIN_SUCCESS);
 }
