@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/17 19:04:49 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/18 14:59:23 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ static t_env	*get_smallest(t_env *env, t_env *last_small)
 
 	ptr = env;
 	while (last_small && ptr
-		&& (ft_strncmp(ptr->name, last_small->name, ft_strlen(ptr->name)) <= 0))
+		&& (ft_strncmp(ptr->name, last_small->name,
+				ft_strlen(ptr->name) + 1) <= 0))
 		ptr = ptr->next;
 	smallest = ptr;
 	while (ptr)
 	{
-		if (ft_strncmp(ptr->name, smallest->name, ft_strlen(ptr->name)) < 0)
+		if (ft_strncmp(ptr->name, smallest->name, ft_strlen(ptr->name) + 1) < 0)
 		{
-			if (!last_small || (last_small && ft_strncmp(ptr->name,
-						last_small->name, ft_strlen(ptr->name)) > 0))
+			if (!last_small || (last_small && (ft_strncmp(ptr->name,
+							last_small->name, ft_strlen(ptr->name) + 1) > 0)))
 				smallest = ptr;
 		}
 		ptr = ptr->next;
