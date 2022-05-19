@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:41:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/13 15:30:33 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/19 13:28:37 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,35 @@ int	exec_builtin(t_vars *vars, char **cmd_args)
 int	is_assignation(char *cmd)
 {
 	char	*equal;
+	char	*name;
 
 	equal = ft_strchr(cmd, '=');
-	if (equal && equal - cmd > 0) //check name_is_valid ici?
-		return (1);
+	if (equal && (equal - cmd > 0))
+	{
+		name = ft_substr(cmd, 0, equal - cmd);
+		ft_printf("%s\n", name);
+		if (name_is_valid(name))
+		{
+			free(name);
+			return (1);
+		}
+
+		free(name);
+	}
 	return (0);
+}
+
+int	name_is_valid(char *name)
+{
+	if (!*name || !ft_isalpha(*name))
+		return (0);
+	while (*name)
+	{
+		if (!ft_isalnum(*name))
+			return (0);
+		name++;
+	}
+	return (1);
 }
 
 int	add_local_var(t_vars *vars, char **cmd_args)

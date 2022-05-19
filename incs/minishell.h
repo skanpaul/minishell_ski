@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/18 18:25:47 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/19 13:28:35 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	get_redirections(t_vars *vars, char **cmd_args, int *fd_in, int *fd_out, in
 int		is_builtin(char *cmd);
 int	exec_builtin(t_vars *vars, char **cmd_args);
 int		is_assignation(char *cmd);
+int		name_is_valid(char *name);
 int	add_local_var(t_vars *vars, char **cmd_args);
 
 int	exit_builtin(t_vars *vars, char **cmd_args);
