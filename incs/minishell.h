@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/19 13:28:35 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:11:13 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,24 +105,24 @@ void	parse_line(t_vars *vars, char *line, int output);
 void	get_redirections(t_vars *vars, char **cmd_args, int *fd_in, int *fd_out, int output);
 
 int		is_builtin(char *cmd);
-int	exec_builtin(t_vars *vars, char **cmd_args);
+int		exec_builtin(t_vars *vars, char **cmd_args);
 int		is_assignation(char *cmd);
 int		name_is_valid(char *name);
-int	add_local_var(t_vars *vars, char **cmd_args);
+int		add_local_var(t_vars *vars, char **cmd_args);
 
-int	exit_builtin(t_vars *vars, char **cmd_args);
-int	echo_builtin(char **cmd_args);
+int		exit_builtin(t_vars *vars, char **cmd_args);
+int		echo_builtin(char **cmd_args);
 int		pwd_builtin(t_vars *vars, char **cmd_args);
-int	export_builtin(t_vars *vars, char **cmd_args);
-int	unset_builtin(t_vars *vars, char **cmd_args);
+int		export_builtin(t_vars *vars, char **cmd_args);
+int		unset_builtin(t_vars *vars, char **cmd_args);
 int		cd_builtin(t_vars *vars, char **cmd_args);
-int	env_builtin(t_vars *vars);
-int	loc_builtin(t_vars *vars);
+int		env_builtin(t_vars *vars);
+int		loc_builtin(t_vars *vars);
 
 void	init_env(t_vars *vars, char **envp);
 
 char	*show_prompt(t_vars *vars);
-void launch_message(void);
+void	launch_message(void);
 // ------------------------------------------------------ temporaire.c
 bool	does_word_match(char *str, char *hard_text);
 bool	does_wordstart_match(char *str, char *hard_text);
@@ -182,7 +182,7 @@ void	clear_chevron_segment(char **array);
 
 
 char	*find_cmd_path(t_env *env, char *cmd);
-int	run_cmd(t_vars *vars, char **cmd_args, int output);
+int		run_cmd(t_vars *vars, char **cmd_args, int output);
 void	exec_cmd(t_vars *vars, char **cmd_args);
 
 void	here_doc(char *limiter);

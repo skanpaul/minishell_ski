@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/18 18:26:48 by gudias           ###   ########.fr        #
+#    Updated: 2022/05/19 15:32:31 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= minishell
 CC		= gcc
 CFLAGS	= -g -Wall -Wextra -Werror
 
-INCL	= -I incs
+INCL	= -I incs -I $(HOME)/.brew/opt/readline/include
 RM		= rm -f
 
 LIBFT	= libft/libft.a
@@ -72,7 +72,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	@echo "$(YELLOW)Creating executable..$(DEFAULT)"
-	@$(CC) $(CFLAGS) $^ -lreadline -o $@
+	@$(CC) $(CFLAGS) $^  -L$(HOME)/.brew/opt/readline/lib -lreadline -o $@
 	@echo "$(GREEN)---> ./$@ is ready$(DEFAULT)"
 
 $(LIBFT):

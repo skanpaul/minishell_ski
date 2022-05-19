@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/13 13:49:36 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:10:16 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void init_struct_sa_fork_child(t_sig *s)
 	// SIGINT -----------------------------------------	
 	s->sa_sigint.sa_handler = SIG_DFL;		// SA_HANDLER	
 	// SIGQUIT -----------------------------------------	
-	s->sa_sigquit.sa_handler = SIG_IGN;
+	s->sa_sigquit.sa_handler = SIG_DFL;
 }
 
 /* ************************************************************************** */
