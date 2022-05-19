@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/19 14:11:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/19 17:06:01 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,11 @@ typedef struct	s_vars
 	int		segments_count;
 }	t_vars;
 /* ************************************************************************** */
-# define MSG_SIGINT_MAIN	RED"\nminishell> "DEFAULT
-# define MSG_SIGQUIT_MAIN	""
-// -------------------------------------------------------------
-# define MSG_SIGINT_FORK_PARENT		"\n"
-# define MSG_SIGQUIT_FORK_PARENT	""
-# define MSG_SIGCHLD_FORK_PARENT	"SIGCHLD received by the fork-parent\n"
-/* ************************************************************************** */
 void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
 // --------------------------------------------
 void	init_signal_fork_child(t_sig *s);
-// void	handler_signal_heredoc_child(int sig_code);
+// void	handler_signal_fork_child(int sig_code);
 // --------------------------------------------
 void	init_signal_fork_parent(t_sig *s);
 void	handler_signal_fork_parent(int sig_code);
@@ -192,5 +185,9 @@ void	exit_msg(char *msg);
 int		manage_perror(char *remark, int error_code); 
 
 void	clean_program(t_vars *vars);
+
+
+void	stop_echoctl(void);
+void	start_echoctl(void);
 // -------------------------------------------------------------------
 #endif

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/18 16:00:46 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/19 16:41:26 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	main(int argc, char **argv, char **envp)
 	new_line = NULL;
 	while (1)
 	{
+		stop_echoctl();
 		new_line = show_prompt(&g_vars);
+		start_echoctl();
 		if (new_line && *new_line)
 		{
 			add_history(new_line);

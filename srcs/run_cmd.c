@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/17 11:55:42 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/19 17:37:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 	if (waitpid(id, &status, 0) == -1)
 		return -1;		
 
-	// // if (WIFEXITED(status))
-	// 	return (WEXITSTATUS(status));
 	return (get_child_returned_code(status));
 }
 
@@ -109,16 +107,16 @@ static int get_child_returned_code(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
-
 	if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));	
-
-	// A CLARIFIER ENCORE SELON LES POSSIBILITE
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_printf("Quit: 3\n");
+		return (128 + WTERMSIG(status));
+	}
 	return (1);
 }
 
 /* ************************************************************************** */
-
 // Pour connaître la RAISON du changement d’état du CHILD depuis la PARENT, 
 // il faut utiliser les les MACRO suivantes avec la variable stat_loc:
 // if(WIFEXITED(stat_loc))	→ fin normale
