@@ -6,11 +6,20 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/22 15:06:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 00:59:19 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	update_return_code(t_vars *vars, int return_code)
+{
+	char	*buff;
+
+	buff = 	ft_itoa(return_code);
+	update_var(&vars->loc, "?", buff);
+	ft_free_null((void **)&buff);
+}
 
 void	handle_segments(t_vars *vars, char **segments)
 {
@@ -26,85 +35,93 @@ void	handle_segments(t_vars *vars, char **segments)
 	ft_free_array(segments);					
 }
 
+int	check_assignations(t_vars *vars, t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmd->args[i] && is_assignation(cmd->args[i]))
+	{
+		while (cmd->args[++i])
+		{
+			if (!is_assignation(cmd->args[i]))
+				break ;
+		}
+		if (!(cmd->args[i]) && vars->segments_count == 1)
+		{
+			translate_dollars_all(cmd->args, vars);	
+			add_local_var(vars, cmd->args);
+		}
+	
+		//refresh cmd->args ? or return i ...
+	}
+	return (i);
+}
+
 void	parse_line(t_vars *vars, char *line, int output)
 {
-	char	**cmd_args;
+	t_cmd		cmd;
 	int		i;
 	int		return_code;
-	int		fd_in;
-	int		fd_out;
-	char	*buff;
    
-	return_code = -1;
-	fd_in = 0;
-	fd_out = 0;
+	return_code = 0;
 	
-	cmd_args = split_shell_line(line, ' ');
-	if (!cmd_args || !cmd_args[0])
+	cmd.args = split_shell_line(line, ' ');
+	if (!(cmd.args) || !(cmd.args[0]))
 		return ; 
 	
-
 	//get redirs
-	fd_in = get_segment_fd_in(vars, cmd_args);
-	fd_out = get_segment_fd_out(cmd_args);
-	clear_chevron_segment(cmd_args);
+	get_redirections(vars, &cmd);
 
 	//exec redirs
-	if (fd_in)
-		dup2(fd_in, 0);
-	if (fd_out)
-		dup2(fd_out, 1);
+	if (cmd.fd_in)
+		dup2(cmd.fd_in, 0);
+	if (cmd.fd_out)
+		dup2(cmd.fd_out, 1);
 	else
-		fd_out = output;
-
+		cmd.fd_out = output;
 
 	//check assignation
+	//i = check_assigations(vars, &cmd);
 	i = 0;
-	if (cmd_args[i] && is_assignation(cmd_args[i]))
+	if (cmd.args[i] && is_assignation(cmd.args[i]))
 	{
-		while (cmd_args[++i])
+		while (cmd.args[++i])
 		{
-			if (!is_assignation(cmd_args[i]))
+			if (!is_assignation(cmd.args[i]))
 				break ;
 		}
 
-		translate_dollars_all(cmd_args, vars);
-		if (!cmd_args[i] && vars->segments_count == 1)
-			return_code = add_local_var(vars, cmd_args);
+		translate_dollars_all(cmd.args, vars);
+		if (!(cmd.args[i]) && vars->segments_count == 1)
+			return_code = add_local_var(vars, cmd.args);
 	}
 
-
 	//execute cmds
-	translate_dollars_all(cmd_args, vars);
-	if (cmd_args[i] && vars->segments_count == 1 && is_builtin(cmd_args[i]))
-		return_code = exec_builtin(vars, cmd_args + i);
+	translate_dollars_all(cmd.args, vars);
+	if (cmd.args[i] && vars->segments_count == 1 && is_builtin(cmd.args[i]))
+		return_code = exec_builtin(vars, (cmd.args) + i);
 	else
-		return_code = run_cmd(vars, cmd_args + i, fd_out);
+		return_code = run_cmd(vars, (cmd.args) + i, cmd.fd_out);
 	
-
-	//return code
-	if (!cmd_args[i])
-		return_code = 0;
-	buff = 	ft_itoa(return_code);
-	update_var(&vars->loc, "?", buff);
-	ft_free_null((void **)&buff);
+	update_return_code();
 
 	//resets
 	init_signal_main(&vars->sig);
 	//reset redirs and close fds
-	if (fd_in)
+	if (cmd.fd_in)
 	{
-		close (fd_in);
+		close (cmd.fd_in);
 	}
-	if (fd_out > 1)
+	if (cmd.fd_out > 1)
 	{
 		dup2(vars->stdout_fd, 1);
-		close (fd_out);
+		close (cmd.fd_out);
 	}
 	if (output)
 		dup2(vars->stdin_fd, 0);
 
 
-	ft_free_array(cmd_args); // mettre cmd_args == NULL ?
+	ft_free_array(cmd.args); // mettre cmd_args == NULL ?
 
 }

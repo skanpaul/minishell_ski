@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/22 15:06:55 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 00:22:44 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,16 @@ typedef struct	s_vars
 	t_sig	sig;
 	int		segments_count;
 }	t_vars;
+
+/* ************************************************************************** */
+
+typedef struct	s_cmd
+{
+	int	fd_in;
+	int	fd_out;
+	char	**args;
+}	t_cmd;
+
 /* ************************************************************************** */
 void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
@@ -88,8 +98,9 @@ void	clean_program(t_vars *vars);
 char	**lexing(t_vars *vars, char * line);
 void	handle_segments(t_vars *vars, char **segments);
 void	parse_line(t_vars *vars, char *line, int output);
+int	check_assignation(t_vars *vars, t_cmd *cmd);
 
-void	get_redirections(t_vars *vars, char **cmd_args, int *fd_in, int *fd_out, int output);
+void	get_redirections(t_vars *vars, t_cmd *cmd);
 
 int		is_builtin(char *cmd);
 int		exec_builtin(t_vars *vars, char **cmd_args);

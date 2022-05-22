@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 16:07:30 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/22 16:43:53 by gudias           ###   ########.fr       */
+/*   Created: 2022/05/22 15:29:38 by gudias            #+#    #+#             */
+/*   Updated: 2022/05/23 00:35:54 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	redirect_input(int new_fd)
-{	
-		dup2(new_fd, 0);
-}
 
-static void	redirect_output(int new_fd)
+void	execute_cmd(t_vars *vars, t_cmd *cmd)
 {
-		dup2(new_fd, 1);
-}
-
-
-void	get_redirections(t_vars *vars, t_cmd *cmd)
-{	
-	cmd->fd_in = get_segment_fd_in(vars, cmd->args);
-	cmd->fd_out = get_segment_fd_out(cmd->args);
-	clear_chevron_segment(cmd->args);
+	
+	//exec cmds
+	translate_dollars_all(cmd->args, vars);
+	//.
 }
