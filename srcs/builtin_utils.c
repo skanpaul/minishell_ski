@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:41:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/19 13:28:37 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/22 15:06:24 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	is_assignation(char *cmd)
 	if (equal && (equal - cmd > 0))
 	{
 		name = ft_substr(cmd, 0, equal - cmd);
-		ft_printf("%s\n", name);
 		if (name_is_valid(name))
 		{
 			free(name);
