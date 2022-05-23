@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:20:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 14:32:35 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 15:24:01 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	exit_builtin(t_vars *vars, char **cmd_args)
 	else if (!ft_isnumber(cmd_args[1]) || \
 		(!is_zeros(cmd_args[1]) && ft_atoi(cmd_args[1]) == 0))
 	{
-		err_msg("exit: numeric argument required");
+		err_msg(ERR_EXIT_NUM);
 		exit_code = 2;
 	}
 	else if (cmd_args[2])
 	{
-		err_msg("exit: too many arguments");
+		err_msg(ERR_EXIT_ARG);
 		return (1);
 	}
 	else

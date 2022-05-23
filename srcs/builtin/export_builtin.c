@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/19 13:28:33 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 15:27:24 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	export_builtin(t_vars *vars, char **cmd_args)
 		}
 		if (!name_is_valid(name))
 		{
-			err_msg("export: not a valid identifier");
+			err_msg(ERR_EXPORT_ID);
 			return (1);
 		}
 		else
