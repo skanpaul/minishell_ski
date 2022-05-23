@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils_fork_child.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/19 17:53:35 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 19:42:20 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	init_signal_fork_child(t_sig *s)
 /* ************************************************************************** */
 static void	init_struct_sa_fork_child(t_sig *s)
 {
-	// SIGINT -----------------------------------------	
 	s->sa_sigint.sa_handler = SIG_DFL;
-	// SIGQUIT -----------------------------------------	
 	s->sa_sigquit.sa_handler = SIG_DFL;
 }
 
