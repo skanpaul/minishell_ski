@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_shell_line.delimiter                                 :+:      :+:    :+:   */
+/*   split_shell_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 17:29:32 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 11:45:00 by ski              ###   ########.fr       */
+/*   Created: 2022/05/23 19:47:09 by sorakann          #+#    #+#             */
+/*   Updated: 2022/05/23 19:51:58 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /* ************************************************************************** */
-// static int	count_words(char *line, char separator)
-int	count_words(char *line, char separator)
+static int	count_words(char *line, char separator)
 {
-	int	i;
-	int	count;
-	t_quote_info qti;
+	int				i;
+	int				count;
+	t_quote_info	qti;
 
 	init_quote_info(&qti);
-
 	i = 0;
 	count = 0;
 	while (line[i] != '\0')
 	{
 		refresh_quote_info(&qti, line[i]);
-
 		if (line[i] != separator)
 		{
-			if (	i == 0 		|| 		(	line[i - 1] == separator	&& 		(	is_outside_realquote(&qti) || is_entering_realquote(&qti)	)		)	)
+			if (i == 0 || (line[i - 1] == separator
+					&& (is_outside_realquote(&qti)
+						|| is_entering_realquote(&qti))))
 				count++;
 		}
-
 		i++;
 	}
 	return (count);
@@ -49,41 +47,35 @@ char	**split_shell_line(char *line, char separator)
 	t_quote_info qti;
 
 	init_quote_info(&qti);
-
 	if (!line)
 		return (NULL);
-
 	res = malloc (sizeof (char *) * (count_words(line, separator) + 1));
-
 	if (!res)
-		return (NULL);
-		
+		return (NULL);		
 	i = 0;
 	j = 0;
 	start = 0;
 	while (line[i] != '\0')
 	{
-		// ------------------------------------------------------------------
 		refresh_quote_info(&qti, line[i]);
-		
-		// ------------------------------------------------------------------
-		if (	line[i] != separator	)
+		if (line[i] != separator)
 		{
-			if (	i == 0 		|| 		(	line[i - 1] == separator	&& 		(	is_outside_realquote(&qti) || is_entering_realquote(&qti)	)		)	)
+			if (i == 0 || (line[i - 1] == separator
+				&& (is_outside_realquote(&qti)
+				|| is_entering_realquote(&qti))))
 				start = i;
 		}
-		// ------------------------------------------------------------------
-		if 	(	line[i] != separator) 		
+		if 	(line[i] != separator) 		
 		{
-			if 	(	line[i + 1] == '\0' 	|| 		(	line[i + 1] == separator 	&& 		(	is_outside_realquote(&qti) || is_exiting_realquote(&qti)		)		)		)
+			if 	(line[i + 1] == '\0' || (line[i + 1] == separator
+				&& (is_outside_realquote(&qti)
+				|| is_exiting_realquote(&qti))))
 			{
 				qty = (i - start) + 1;
 				res[j++] = ft_substr(line, start, qty);
 			}		
 		}
-		// ------------------------------------------------------------------
 		i++;
-		// ------------------------------------------------------------------
 	}
 	res[j] = 0;
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 19:37:14 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:45:35 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void	print_array(char **array);
 void	free_array(char **array);
 // -------------------------------------------------------------------
 char	**split_shell_line(char *line, char separator);
-int		count_words(char *line, char separator);
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
 // ------------------------------------------------ translate_dollar.c
