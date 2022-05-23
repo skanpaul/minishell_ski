@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linklist_utils.c                                   :+:      :+:    :+:   */
+/*   linklist_utils_01.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/05/15 22:17:14 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:30:58 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* ************************************************************************** */
-void print_var(t_env *var_head)
+void	print_var(t_env *var_head)
 {
 	t_env	*temp;
-	
+
 	temp = var_head;
 	while (temp)
 	{
@@ -34,11 +34,10 @@ void print_var(t_env *var_head)
 t_env	*get_var(t_env *var_head, char *var_name)
 {
 	t_env	*ptr;
-	
+
 	ptr = var_head;
 	while (ptr)
 	{
-
 		if (!ft_strncmp(var_name, ptr->name, ft_strlen(ptr->name) + 1))
 			return (ptr);
 		ptr = ptr->next;
@@ -47,7 +46,7 @@ t_env	*get_var(t_env *var_head, char *var_name)
 }
 
 /* ************************************************************************** */
-bool does_var_exist(t_env *var_head, char *var_name)
+bool	does_var_exist(t_env *var_head, char *var_name)
 {
 	if (get_var(var_head, var_name) == NULL)
 		return (false);
@@ -59,18 +58,17 @@ bool does_var_exist(t_env *var_head, char *var_name)
 //		- free itself the old_data
 //		- malloc itself the new_data
 // ---------------------------------------------------------------
-void update_var(t_env **var_head, char *var_name, char *new_data)
+void	update_var(t_env **var_head, char *var_name, char *new_data)
 {
-	t_env *buff;
+	t_env	*buff;
 
 	buff = NULL;
-	
 	if (!does_var_exist(*var_head, var_name))
 		add_var(var_head, var_name, new_data);
 	else
 	{
 		buff = get_var(*var_head, var_name);
-		ft_free_null((void**)&buff->data);
+		ft_free_null((void **)&buff->data);
 		buff->data = ft_strdup(new_data);
 	}	
 }
@@ -99,67 +97,6 @@ void	add_var(t_env **var_head, char *name, char *data)
 			ptr = ptr->next;
 		ptr->next = new;
 	}
-}
-
-/* ************************************************************************** */
-void remove_var(t_env **var_head, char *var_name)
-{
-	t_env	*ptr;
-	t_env	*prev;
-
-	prev = NULL;
-	ptr = *var_head;
-	while (ptr)
-	{
-		if (!ft_strncmp(var_name, ptr->name, ft_strlen(ptr->name) + 1))
-		{
-			if (prev)
-				prev->next = ptr->next;
-			else
-				*var_head = ptr->next;
-			ft_free_null((void**)&ptr->name);
-			ft_free_null((void**)&ptr->data);
-			ft_free_null((void**)&ptr);
-			return ;
-		}
-		prev = ptr;
-		ptr = ptr->next;	
-	}
-}
-
-/* ************************************************************************** */
-int size_var_list(t_env *var_head)
-{
-	int i;
-	t_env *temp;
-	
-	temp = var_head;
-
-	i = 0;
-	while(temp != NULL)
-	{
-		temp = temp->next;
-		i++;
-	}
-	return (i);
-}
-
-/* ************************************************************************** */
-void	free_var_list(t_env **var_head)
-{
-	t_env	*tmp;
-	t_env	*ptr;
-
-	ptr = *var_head;
-	while (ptr)
-	{
-		ft_free_null((void**)&ptr->name);
-		ft_free_null((void**)&ptr->data);
-		tmp = ptr->next;
-		ft_free_null((void**)&ptr);
-		ptr = tmp;
-	}
-	*var_head = NULL;
 }
 
 /* ************************************************************************** */

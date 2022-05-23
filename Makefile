@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
+#    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/23 17:19:52 by ski              ###   ########.fr        #
+#    Updated: 2022/05/23 19:31:20 by sorakann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRCS	=	minishell.c \
 			redirection.c \
 			execution.c \
 			utils/termios_utils.c \
-			utils/linklist_utils.c \
+			utils/linklist_utils_01.c \
+			utils/linklist_utils_02.c \
 			utils/quote_info_utils_01.c \
 			utils/quote_info_utils_02.c \
 			utils/space_maker_pipeline.c \
