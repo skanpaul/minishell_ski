@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:48:48 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 15:27:37 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 19:30:48 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERR_EXIT_NUM	"minishell: exit: numeric argument required"
 # define ERR_EXIT_ARG	"minishell: exit: too many arguments"
 # define ERR_EXPORT_ID	"minishell: export: not a valid identifier"
+# define ERR_UNSET_ID	"minishell: unset: not a valid identifier"
 /* ************************************************************************** */
 #define BUILTIN_SUCCESS			0
 #define BUILTIN_FAILURE			-1
