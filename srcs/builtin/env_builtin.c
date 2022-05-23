@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/15 22:14:55 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:51:40 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,13 @@ void	init_env(t_vars *vars, char **envp)
 	copy_parent_env(&vars->env, envp);
 	remove_var(&vars->env, "OLDPWD");
 	
-	// Update: SHLVL
-	temp_str = ft_itoa(ft_atoi(get_var(vars->env, "SHLVL")->data) + 1);
+	if (does_var_exist(vars->env, "SHLVL"))
+		temp_str = ft_itoa(ft_atoi(get_var(vars->env, "SHLVL")->data) + 1);
+	else
+		temp_str = ft_itoa(1);
 	update_var(&vars->env, "SHLVL", temp_str);
 	ft_free_null((void **)&temp_str);	
-
-	// AJOUTER le path de [./minishell] dans la variable d'environnement $PATH
 	add_minishell_to_path(vars);
-
-	//assurer que PATH, HOME, PWD, OLDPWD, SHLVL SONT PRESENTS
-	//sinon -> les ajouter
-	
 }
 
 /* ************************************************************************** */
