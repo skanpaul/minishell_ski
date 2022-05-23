@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/19 16:41:26 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 11:57:21 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int	main(int argc, char **argv, char **envp)
 	char	*new_line;
 	char	**segments;
 	int		i;
+	int		return_code;
+
+	return_code = 0;
 
 	if (argc > 1 || argv[1])
 		exit_msg(ERR_ARGS);
@@ -36,8 +39,14 @@ int	main(int argc, char **argv, char **envp)
 			if (segments)
 				handle_segments(&g_vars, segments);
 		}
+		if(new_line == NULL)
+		{
+			break;
+			return_code = 1;
+		}
 		ft_free_null((void **)&new_line);
 	}
 	clean_program(&g_vars);
-	return (0);
+	
+	return (return_code);
 }
