@@ -3,38 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   quote_info_utils_02.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 10:28:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/05 11:33:15 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 19:40:48 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* ************************************************************************** */
-// To used with: [ refresh_info_quote() ]
-bool	is_good_number_of_realquote(t_quote_info *qti)
-{
-	if (qti->cnt_char_realquote % 2 == 0)
-		return (true);
-	return (false);
-}
-
-/* ************************************************************************** */
-bool is_inside_double_realquote(t_quote_info *qti)
-{
-	if (is_inside_realquote(qti) && qti->last_char_realquote == '\"')
-		return (true);
-	return (false);	
-}
-
+// bool	is_inside_double_realquote(t_quote_info *qti)
+// {
+// 	if (is_inside_realquote(qti) && qti->last_char_realquote == '\"')
+// 		return (true);
+// 	return (false);	
+// }
 // -------------------------------------------------
-bool is_inside_single_realquote(t_quote_info *qti)
+bool	is_inside_single_realquote(t_quote_info *qti)
 {
 	if (is_inside_realquote(qti) && qti->last_char_realquote == '\'')
 		return (true);
-	return (false);	
+	return (false);
 }
 
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 10:28:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/23 19:35:05 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:39:53 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,15 @@ bool	is_line_with_correct_quote(char *line, t_vars *vars)
 		return (true);
 	ft_printf("minishell: syntax error in quoting line\n");
 	update_var(&vars->loc, "?", "1");
+	return (false);
+}
+
+/* ************************************************************************** */
+// To used with: [ refresh_info_quote() ]
+bool	is_good_number_of_realquote(t_quote_info *qti)
+{
+	if (qti->cnt_char_realquote % 2 == 0)
+		return (true);
 	return (false);
 }
 

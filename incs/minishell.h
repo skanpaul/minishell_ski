@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 15:38:19 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 19:37:14 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ bool	is_inside_realquote(t_quote_info *qti);
 bool	is_outside_realquote(t_quote_info *qti);
 bool	is_entering_realquote(t_quote_info *qti);
 bool	is_exiting_realquote(t_quote_info *qti);
-bool	is_inside_double_realquote(t_quote_info *qti);
 bool	is_inside_single_realquote(t_quote_info *qti);
 
 bool	is_line_with_correct_quote(char *line, t_vars *vars);
