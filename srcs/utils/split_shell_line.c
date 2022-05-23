@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 19:47:09 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/23 19:51:58 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:54:32 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ static int	count_words(char *line, char separator)
 /* ************************************************************************** */
 char	**split_shell_line(char *line, char separator)
 {
-	char	**res;
-	int		i;
-	int		j;
-	int		start;
-	int		qty;
-	t_quote_info qti;
+	char			**res;
+	int				i;
+	int				j;
+	int				start;
+	int				qty;
+	t_quote_info	qti;
 
 	init_quote_info(&qti);
 	if (!line)
 		return (NULL);
 	res = malloc (sizeof (char *) * (count_words(line, separator) + 1));
 	if (!res)
-		return (NULL);		
+		return (NULL);
 	i = 0;
 	j = 0;
 	start = 0;
@@ -61,15 +61,15 @@ char	**split_shell_line(char *line, char separator)
 		if (line[i] != separator)
 		{
 			if (i == 0 || (line[i - 1] == separator
-				&& (is_outside_realquote(&qti)
-				|| is_entering_realquote(&qti))))
+					&& (is_outside_realquote(&qti)
+						|| is_entering_realquote(&qti))))
 				start = i;
 		}
-		if 	(line[i] != separator) 		
+		if (line[i] != separator)
 		{
-			if 	(line[i + 1] == '\0' || (line[i + 1] == separator
-				&& (is_outside_realquote(&qti)
-				|| is_exiting_realquote(&qti))))
+			if (line[i + 1] == '\0' || (line[i + 1] == separator
+					&& (is_outside_realquote(&qti)
+						|| is_exiting_realquote(&qti))))
 			{
 				qty = (i - start) + 1;
 				res[j++] = ft_substr(line, start, qty);
