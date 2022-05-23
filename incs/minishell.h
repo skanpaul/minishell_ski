@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 14:10:36 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 15:38:19 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct	s_env
 // ----------------------------------------
 typedef struct	s_vars
 {
+	char	*new_line;
 	int		stdin_fd;
 	int		stdout_fd;
 	int		stderr_fd;

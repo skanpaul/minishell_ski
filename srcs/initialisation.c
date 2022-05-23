@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 09:17:34 by ski               #+#    #+#             */
-/*   Updated: 2022/05/18 15:25:02 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 15:38:45 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void initialisation(t_vars *vars, char **envp)
 static void init_vars(t_vars *vars, char **envp)
 {
 	(void)envp;
+	vars->new_line = NULL;
 	vars->stdin_fd = dup(0);
 	vars->stdout_fd = dup(1);
 	vars->stderr_fd = dup(2);
 	vars->env = NULL;
 	vars->loc = NULL;
-	vars->env_char_array = NULL;
 	vars->segments_count = 0;
 }
 
