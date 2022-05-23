@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:19:45 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/17 11:10:13 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 16:30:46 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@
 // return FALSE if general grammar is not correct
 bool	is_grammar_correct(char *line, t_vars *vars)
 {
-	char *cpy_line;
+	char	*cpy_line;
 
 	cpy_line = ft_strdup(line);
 	if (is_line_with_correct_quote(cpy_line, vars))
 	{
 		cpy_line = chevron_space_maker(cpy_line);
 		cpy_line = pipeline_space_maker(cpy_line);
-	
 		if (is_grammar_pipeline_correct(cpy_line, vars)
 			&& is_grammar_chevron_correct(cpy_line, vars))
 		{
@@ -31,8 +30,8 @@ bool	is_grammar_correct(char *line, t_vars *vars)
 			return (true);
 		}
 	}		
-	ft_free_null((void **)&cpy_line);	
-    return (false);
+	ft_free_null((void **)&cpy_line);
+	return (false);
 }
 
 /* ************************************************************************** */
@@ -41,17 +40,13 @@ bool	is_grammar_correct(char *line, t_vars *vars)
 // char    *check_grammar(char *line, t_vars *vars)
 // {
 // 	if (!line)
-// 		return (NULL);
-	
+// 		return (NULL);	
 // 	line = check_grammar_pipeline(line, vars);
 // 	if (!line)
-// 		return (line);
-		
+// 		return (line);		
 // 	line = check_grammar_chevron(line, vars);
 // 	if (!line)
 // 		return (line);
-
 //     return (line);
 // }
-
 /* ************************************************************************** */
