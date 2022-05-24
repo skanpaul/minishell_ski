@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:10:05 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 17:25:45 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 19:58:58 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ char	*show_prompt(t_vars *vars)
 	char	*new_line;
 
 	prompt_line = get_prompt_line(vars->env);
+	stop_echoctl();
 	new_line = readline(prompt_line);
+	start_echoctl();
 	free(prompt_line);
 	return (new_line);
 }

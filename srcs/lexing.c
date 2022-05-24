@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:48:06 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/18 16:03:36 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 17:43:08 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	**lexing(t_vars *vars, char *line)
 		i = -1;
 		while (segments[++i])
 			vars->segments_count++;
+		vars->new_line = line;
 	}
 	return (segments);
 }

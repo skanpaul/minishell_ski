@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/24 11:49:26 by ski              ###   ########.fr        #
+#    Updated: 2022/05/24 18:27:53 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ DBG_OBJS = $(SRCS:%.c=$(OBJSDIR)/%_dbg.o)
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c
 	@echo "$(YELLOW)Compiling $(DEFAULT)$<"
 	@mkdir -p $(OBJSDIR) $(OBJSDIR)/builtin $(OBJSDIR)/utils
-	@$(CC) $(CLFAGS) $(INCL) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 all: $(NAME)
 

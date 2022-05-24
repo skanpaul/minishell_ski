@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 14:52:31 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 18:19:51 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include <sys/types.h>
-# include <dirent.h>
 # include <termios.h>
 /* ************************************************************************** */
 
@@ -90,6 +88,7 @@ void	init_signal_fork_parent(t_sig *s);
 void	handler_signal_fork_parent(int sig_code);
 /* ************************************************************************** */
 void	initialisation(t_vars *vars, char **envp);
+void	init_env(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
 /* ************************************************************************** */
 char	**lexing(t_vars *vars, char *line);
@@ -100,9 +99,12 @@ int		execute_cmd(t_vars *vars, t_cmd *cmd, int i);
 void	get_redirections(t_vars *vars, t_cmd *cmd);
 void	set_redirections(t_cmd *cmd);
 void	reset_redirections(t_vars *vars, t_cmd *cmd);
+void	here_doc(char *limiter);
 
 int		is_builtin(char *cmd);
 int		exec_builtin(t_vars *vars, char **cmd_args);
+int		run_cmd(t_vars *vars, t_cmd *cmd, int i);
+void	exec_cmd(t_vars *vars, char **cmd_args);
 
 int		check_assignations(t_vars *vars, t_cmd *cmd);
 int		name_is_valid(char *name);
@@ -115,8 +117,6 @@ int		unset_builtin(t_vars *vars, char **cmd_args);
 int		cd_builtin(t_vars *vars, char **cmd_args);
 int		env_builtin(t_vars *vars);
 int		loc_builtin(t_vars *vars);
-
-void	init_env(t_vars *vars, char **envp);
 
 char	*show_prompt(t_vars *vars);
 void	launch_message(void);
@@ -152,7 +152,6 @@ bool	is_vardol(char *str, int i);
 int		get_end_pos_vardol(char *str, int start_pos);
 char	*substitute_vardol(char *str, int *start_pos, t_vars *vars);
 char	*delete_char(char *str, int *i);
-
 // ------------------------------------------------ quote_info_utils.c
 void	init_quote_info(t_quote_info *qti);
 void	refresh_quote_info(t_quote_info *qti, char actual_char);
@@ -162,10 +161,8 @@ bool	is_outside_realquote(t_quote_info *qti);
 bool	is_entering_realquote(t_quote_info *qti);
 bool	is_exiting_realquote(t_quote_info *qti);
 bool	is_inside_single_realquote(t_quote_info *qti);
-
-bool	is_line_with_correct_quote(char *line, t_vars *vars);
 // -------------------------------------------------------------------
-
+bool	is_line_with_correct_quote(char *line, t_vars *vars);
 // -------------------------------------------------------------------
 bool	is_grammar_correct(char *line, t_vars *vars);
 bool	is_grammar_chevron_correct(char *line, t_vars *vars);
@@ -175,18 +172,10 @@ int		get_segment_fd_in(t_vars *vars, char **array);
 int		get_segment_fd_out(char **array);
 void	clear_chevron_segment(char **array);
 // -------------------------------------------------------------------
-
-int		run_cmd(t_vars *vars, t_cmd *cmd, int i);
-void	exec_cmd(t_vars *vars, char **cmd_args);
-
-void	here_doc(char *limiter);
-
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
 int		manage_perror(char *remark, int error_code);
-
-void	clean_program(t_vars *vars);
-
+// -------------------------------------------------------------------
 void	stop_echoctl(void);
 void	start_echoctl(void);
 // -------------------------------------------------------------------
