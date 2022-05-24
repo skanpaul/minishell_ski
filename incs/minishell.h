@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 17:27:58 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 11:49:09 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,10 @@ void	print_array(char **array);
 void	free_array(char **array);
 // -------------------------------------------------------------------
 char	**split_shell_line(char *line, char separator);
-int		count_words(char *line, char separator);
 char	*chevron_space_maker(char *line);
 char	*pipeline_space_maker(char *line);
+char	*insert_space_before_actual_pos(char *line, int *actual_position);
+char	*insert_space_after_actual_pos(char *line, int *actual_position);
 // ------------------------------------------------ translate_dollar.c
 char	**translate_dollars_all(char **array, t_vars *vars);
 char	*translate_dollar(char *str, t_vars *vars);
@@ -166,7 +167,6 @@ bool	is_inside_realquote(t_quote_info *qti);
 bool	is_outside_realquote(t_quote_info *qti);
 bool	is_entering_realquote(t_quote_info *qti);
 bool	is_exiting_realquote(t_quote_info *qti);
-bool	is_inside_double_realquote(t_quote_info *qti);
 bool	is_inside_single_realquote(t_quote_info *qti);
 
 bool	is_line_with_correct_quote(char *line, t_vars *vars);

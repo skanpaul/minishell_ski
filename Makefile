@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/23 18:03:19 by gudias           ###   ########.fr        #
+#    Updated: 2022/05/24 11:49:26 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,13 @@ SRCS	=	minishell.c \
 			execution.c \
 			assignations.c \
 			utils/termios_utils.c \
-			utils/linklist_utils.c \
+			utils/linklist_utils_01.c \
+			utils/linklist_utils_02.c \
 			utils/quote_info_utils_01.c \
 			utils/quote_info_utils_02.c \
-			utils/pipeline_space_maker.c \
-			utils/chevron_space_maker.c \
+			utils/space_maker_pipeline.c \
+			utils/space_maker_chevron.c \
+			utils/space_maker_utils.c \
 			utils/split_shell_line.c \
 			utils/translate_dollar_utils_01.c \
 			utils/translate_dollar_utils_02.c \

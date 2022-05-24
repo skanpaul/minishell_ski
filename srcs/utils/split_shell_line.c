@@ -1,92 +1,92 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_shell_line.delimiter                                 :+:      :+:    :+:   */
+/*   split_shell_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 17:29:32 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 11:45:00 by ski              ###   ########.fr       */
+/*   Created: 2022/05/23 19:47:09 by sorakann          #+#    #+#             */
+/*   Updated: 2022/05/24 09:59:51 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 /* ************************************************************************** */
-// static int	count_words(char *line, char separator)
-int	count_words(char *line, char separator)
+typedef struct s_ssl
 {
-	int	i;
-	int	count;
-	t_quote_info qti;
+	char			**array;
+	t_quote_info	qti;
+}	t_ssl;
 
-	init_quote_info(&qti);
+/* ************************************************************************** */
+static int	count_words(char *line, char separator);
+static void	get_array(t_ssl *ssl, char *line, char sep);
 
-	i = 0;
-	count = 0;
-	while (line[i] != '\0')
-	{
-		refresh_quote_info(&qti, line[i]);
+/* ************************************************************************** */
+char	**split_shell_line(char *line, char sep)
+{
+	t_ssl			ssl;
 
-		if (line[i] != separator)
-		{
-			if (	i == 0 		|| 		(	line[i - 1] == separator	&& 		(	is_outside_realquote(&qti) || is_entering_realquote(&qti)	)		)	)
-				count++;
-		}
-
-		i++;
-	}
-	return (count);
+	init_quote_info(&ssl.qti);
+	if (!line)
+		return (NULL);
+	ssl.array = malloc (sizeof (char *) * (count_words(line, sep) + 1));
+	if (!ssl.array)
+		return (NULL);
+	get_array(&ssl, line, sep);
+	return (ssl.array);
 }
 
 /* ************************************************************************** */
-char	**split_shell_line(char *line, char separator)
+static void	get_array(t_ssl *ssl, char *line, char sep)
 {
-	char	**res;
-	int		i;
-	int		j;
-	int		start;
-	int		qty;
-	t_quote_info qti;
+	int	i;
+	int	j;
+	int	start;
 
-	init_quote_info(&qti);
-
-	if (!line)
-		return (NULL);
-
-	res = malloc (sizeof (char *) * (count_words(line, separator) + 1));
-
-	if (!res)
-		return (NULL);
-		
 	i = 0;
 	j = 0;
 	start = 0;
 	while (line[i] != '\0')
 	{
-		// ------------------------------------------------------------------
-		refresh_quote_info(&qti, line[i]);
-		
-		// ------------------------------------------------------------------
-		if (	line[i] != separator	)
-		{
-			if (	i == 0 		|| 		(	line[i - 1] == separator	&& 		(	is_outside_realquote(&qti) || is_entering_realquote(&qti)	)		)	)
-				start = i;
-		}
-		// ------------------------------------------------------------------
-		if 	(	line[i] != separator) 		
-		{
-			if 	(	line[i + 1] == '\0' 	|| 		(	line[i + 1] == separator 	&& 		(	is_outside_realquote(&qti) || is_exiting_realquote(&qti)		)		)		)
-			{
-				qty = (i - start) + 1;
-				res[j++] = ft_substr(line, start, qty);
-			}		
-		}
-		// ------------------------------------------------------------------
+		refresh_quote_info(&ssl->qti, line[i]);
+		if ((line[i] != sep) && (i == 0 || (line[i - 1] == sep
+					&& (is_outside_realquote(&ssl->qti)
+						|| is_entering_realquote(&ssl->qti)))))
+			start = i;
+		if ((line[i] != sep) && (line[i + 1] == '\0' || (line[i + 1] == sep
+					&& (is_outside_realquote(&ssl->qti)
+						|| is_exiting_realquote(&ssl->qti)))))
+			ssl->array[j++] = ft_substr(line, start, (i - start) + 1);
 		i++;
-		// ------------------------------------------------------------------
 	}
-	res[j] = 0;
-	return (res);
+	ssl->array[j] = 0;
+}
+
+/* ************************************************************************** */
+static int	count_words(char *line, char separator)
+{
+	int				i;
+	int				count;
+	t_quote_info	qti;
+
+	init_quote_info(&qti);
+	i = 0;
+	count = 0;
+	while (line[i] != '\0')
+	{
+		refresh_quote_info(&qti, line[i]);
+		if (line[i] != separator)
+		{
+			if (i == 0 || (line[i - 1] == separator
+					&& (is_outside_realquote(&qti)
+						|| is_entering_realquote(&qti))))
+				count++;
+		}
+		i++;
+	}
+	return (count);
 }
 
 /* ************************************************************************** */

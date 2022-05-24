@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:12:10 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 17:38:54 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 16:54:06 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /* ************************************************************************** */
 static void	delete_chevron_and_file(char **array, int *i);
+static void	manage_heredoc(t_vars *vars, int *fd_in, char **array, int *i);
 
 /* ************************************************************************** */
 void	clear_chevron_segment(char **array)
@@ -67,23 +68,13 @@ int	get_segment_fd_out(char **array)
 {
 	int		i;
 	int		fd_out;
-	// char 	*temp;
 
-	// temp = NULL;
 	fd_out = 0;
 	i = 0;
 	while (array[i])
 	{
 		if (does_word_match(array[i], ">") || does_word_match(array[i], ">>"))
 		{
-			// PEUT ETRE A EFFACER -----------------------------------------
-			if(array[i + 1] == NULL  || array[i + 1][0] == '\0')
-			{
-				ft_printf("syntax error near unexpected token `newline'\n");
-				fd_out = -1;
-				break ;
-			}
-			// -------------------------------------------------------------
 			if (fd_out != 0)
 				close(fd_out);
 			if (does_word_match(array[i], ">"))
@@ -92,9 +83,6 @@ int	get_segment_fd_out(char **array)
 				fd_out = openfilex(array[i + 1], 2);
 			if (fd_out < 0)
 			{
-				// temp = ft_strjoin("minishell: ", array[i + 1]);
-				// perror(temp);
-				// ft_free_null((void **)&temp);
 				perror(array[i + 1]);
 				break ;
 			}
@@ -113,23 +101,13 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 {
 	int		i;
 	int		fd_in;
-	// char 	*temp;
 
-	// temp = NULL;
 	fd_in = 0;
 	i = 0;
 	while (array[i])
 	{
 		if (does_word_match(array[i], "<") || does_word_match(array[i], "<<"))
 		{
-			// PEUT ETRE A EFFACER -----------------------------------------
-			if(array[i + 1] == NULL  || array[i + 1][0] == '\0')
-			{
-				ft_printf("syntax error near unexpected token `newline'\n");
-				fd_in = -1;
-				break ;
-			}
-			// -------------------------------------------------------------
 			if (fd_in != 0)
 				close(fd_in);
 			if (does_word_match(array[i], "<"))
@@ -139,12 +117,9 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 				fd_in = 0;
 				dup2(vars->stdin_fd, 0);
 				here_doc(array[i + 1]);
-			}
+			}				
 			if (fd_in < 0)
 			{
-				// temp = ft_strjoin("minishell: ", array[i + 1]);
-				// perror(temp);
-				// ft_free_null((void **)&temp);
 				perror(array[i + 1]);
 				break ;
 			}
@@ -152,6 +127,14 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 		i++;
 	}
 	return (fd_in);
+}
+
+/* ************************************************************************** */
+static void	manage_heredoc(t_vars *vars, int *fd_in, char **array, int *i)
+{
+	*fd_in = 0;
+	dup2(vars->stdin_fd, 0);
+	here_doc(array[*i + 1]);
 }
 
 /* ************************************************************************** */
