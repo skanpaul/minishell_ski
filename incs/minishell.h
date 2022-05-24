@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 14:04:54 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 14:52:31 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <signal.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <termios.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <termios.h>
 /* ************************************************************************** */
 
 typedef struct s_quote_info
@@ -40,28 +40,26 @@ typedef struct s_quote_info
 	char	last_char_realquote;
 	bool	flag_inside_realquote;
 	bool	flag_entering_realquote;
-	bool	flag_exiting_realquote;
-	
+	bool	flag_exiting_realquote;	
 }	t_quote_info;
 
 /* ************************************************************************** */
 
 typedef struct s_sig
 {
-	struct sigaction	sa_sigint;	// ctrl-C
-	struct sigaction	sa_sigquit;	// ctrl-/
+	struct sigaction	sa_sigint;
+	struct sigaction	sa_sigquit;
 	struct sigaction	sa_sigchild;
-	// struct sigaction	sa_sig_ctr_D;
-} t_sig;
+}	t_sig;
 // ----------------------------------------
-typedef struct	s_env
+typedef struct s_env
 {
 	char			*name;
 	char			*data;
 	struct s_env	*next;
 }	t_env;
 // ----------------------------------------
-typedef struct	s_vars
+typedef struct s_vars
 {
 	char	*new_line;
 	int		stdin_fd;
@@ -69,17 +67,16 @@ typedef struct	s_vars
 	int		stderr_fd;
 	t_env	*env;
 	t_env	*loc;
-	char	**env_char_array; // à effacer ?
 	t_sig	sig;
 	int		segments_count;
 }	t_vars;
 
 /* ************************************************************************** */
 
-typedef struct	s_cmd
+typedef struct s_cmd
 {
-	int	fd_in;
-	int	fd_out;
+	int		fd_in;
+	int		fd_out;
 	char	**args;
 }	t_cmd;
 
@@ -88,7 +85,6 @@ void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
 // --------------------------------------------
 void	init_signal_fork_child(t_sig *s);
-// void	handler_signal_fork_child(int sig_code);
 // --------------------------------------------
 void	init_signal_fork_parent(t_sig *s);
 void	handler_signal_fork_parent(int sig_code);
@@ -96,7 +92,7 @@ void	handler_signal_fork_parent(int sig_code);
 void	initialisation(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
 /* ************************************************************************** */
-char	**lexing(t_vars *vars, char * line);
+char	**lexing(t_vars *vars, char *line);
 void	handle_segments(t_vars *vars, char **segments);
 void	parse_line(t_vars *vars, char *line, int output);
 
@@ -105,10 +101,8 @@ void	get_redirections(t_vars *vars, t_cmd *cmd);
 void	set_redirections(t_cmd *cmd);
 void	reset_redirections(t_vars *vars, t_cmd *cmd);
 
-
 int		is_builtin(char *cmd);
 int		exec_builtin(t_vars *vars, char **cmd_args);
-
 
 int		check_assignations(t_vars *vars, t_cmd *cmd);
 int		name_is_valid(char *name);
@@ -189,10 +183,9 @@ void	here_doc(char *limiter);
 
 void	err_msg(char *msg);
 void	exit_msg(char *msg);
-int		manage_perror(char *remark, int error_code); 
+int		manage_perror(char *remark, int error_code);
 
 void	clean_program(t_vars *vars);
-
 
 void	stop_echoctl(void);
 void	start_echoctl(void);
