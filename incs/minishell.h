@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 11:49:09 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 14:04:54 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int		get_segment_fd_out(char **array);
 void	clear_chevron_segment(char **array);
 // -------------------------------------------------------------------
 
-int		run_cmd(t_vars *vars, char **cmd_args, int output);
+int		run_cmd(t_vars *vars, t_cmd *cmd, int i);
 void	exec_cmd(t_vars *vars, char **cmd_args);
 
 void	here_doc(char *limiter);

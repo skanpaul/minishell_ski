@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 15:29:38 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 16:37:59 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 14:06:22 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	execute_cmd(t_vars *vars, t_cmd *cmd, int i)
 	if (cmd->args[i] && vars->segments_count == 1 && is_builtin(cmd->args[i]))
 		return_code = exec_builtin(vars, (cmd->args) + i);
 	else
-		return_code = run_cmd(vars, (cmd->args) + i, cmd->fd_out);
+		return_code = run_cmd(vars, cmd, i);
 	return (return_code);
 }
