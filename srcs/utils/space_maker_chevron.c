@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 06:15:33 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/23 17:29:17 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 11:49:34 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static bool	is_chevron(char c);
 static bool	is_white_space(char c);
 static bool	is_prev_char_correct(char *line, int actual_position);
 static bool	is_next_char_correct(char *line, int actual_position);
-static char	*insert_space_before_actual_pos(char *line, int *actual_position);
-static char	*insert_space_after_actual_pos(char *line, int *actual_position);
 
 /* ************************************************************************** */
 char	*chevron_space_maker(char *line)
@@ -39,49 +37,6 @@ char	*chevron_space_maker(char *line)
 		}
 		i++;
 	}
-	return (line);
-}
-
-/* ************************************************************************** */
-static char	*insert_space_before_actual_pos(char *line, int *actual_position)
-{
-	char	*start;
-	char	*start_with_space;
-	char	*end;
-	int		qty;
-
-	qty = *actual_position;
-	start = ft_substr(line, 0, qty);
-	qty = ft_strlen(line) - *actual_position;
-	end = ft_substr(line, *actual_position, qty);
-	start_with_space = ft_strjoin(start, " ");
-	free(start);
-	free(line);
-	line = ft_strjoin(start_with_space, end);
-	free(start_with_space);
-	free(end);
-	(*actual_position)++;
-	return (line);
-}
-
-/* ************************************************************************** */
-static char	*insert_space_after_actual_pos(char *line, int *actual_position)
-{
-	char	*start;
-	char	*start_with_space;
-	char	*end;
-	int		qty;
-
-	qty = *actual_position + 1;
-	start = ft_substr(line, 0, qty);
-	qty = ft_strlen(line) - *actual_position;
-	end = ft_substr(line, *actual_position + 1, qty);
-	start_with_space = ft_strjoin(start, " ");
-	free(start);
-	free(line);
-	line = ft_strjoin(start_with_space, end);
-	free(start_with_space);
-	free(end);
 	return (line);
 }
 

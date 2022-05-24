@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 09:08:42 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:04:12 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 		ft_free_null((void **)&g_vars.new_line);
 	}
-	clean_program(&g_vars);
-	
-	while(1) 
-	{
-		sleep(1);
-	}
-
-	
+	clean_program(&g_vars);	
 	return (return_code);
 }

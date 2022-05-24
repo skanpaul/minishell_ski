@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
+#    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2022/05/23 19:31:20 by sorakann         ###   ########.fr        #
+#    Updated: 2022/05/24 11:49:26 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS	=	minishell.c \
 			utils/quote_info_utils_02.c \
 			utils/space_maker_pipeline.c \
 			utils/space_maker_chevron.c \
+			utils/space_maker_utils.c \
 			utils/split_shell_line.c \
 			utils/translate_dollar_utils_01.c \
 			utils/translate_dollar_utils_02.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_shell_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 19:47:09 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/24 09:12:42 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/24 09:59:51 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_ssl
 
 /* ************************************************************************** */
 static int	count_words(char *line, char separator);
-static void	loop_while(t_ssl *ssl, char *line, char sep);
+static void	get_array(t_ssl *ssl, char *line, char sep);
 
 /* ************************************************************************** */
 char	**split_shell_line(char *line, char sep)
@@ -34,12 +34,12 @@ char	**split_shell_line(char *line, char sep)
 	ssl.array = malloc (sizeof (char *) * (count_words(line, sep) + 1));
 	if (!ssl.array)
 		return (NULL);
-	loop_while(&ssl, line, sep);
+	get_array(&ssl, line, sep);
 	return (ssl.array);
 }
 
 /* ************************************************************************** */
-static void	loop_while(t_ssl *ssl, char *line, char sep)
+static void	get_array(t_ssl *ssl, char *line, char sep)
 {
 	int	i;
 	int	j;
