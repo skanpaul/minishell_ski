@@ -6,36 +6,36 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/05/18 17:57:09 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 18:07:40 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* ************************************************************************** */
-bool does_word_match(char *str, char *hard_text)
+bool	does_word_match(char *str, char *hard_text)
 {
-	int res;
+	int	res;
 
 	res = ft_strncmp(str, hard_text, ft_strlen(hard_text) + 1);
 	if (res == 0)
 		return (true);
-	return (false);	
+	return (false);
 }
 
 /* ************************************************************************** */
-bool does_wordstart_match(char *str, char *hard_text)
+bool	does_wordstart_match(char *str, char *hard_text)
 {
-	int res;
+	int	res;
 
 	res = ft_strncmp(str, hard_text, ft_strlen(hard_text));
 	if (res == 0)
 		return (true);
-	return (false);	
+	return (false);
 }
 
 /* ************************************************************************** */
-void ft_free_null(void **ptr)
+void	ft_free_null(void **ptr)
 {
 	if (*ptr != NULL)
 		free(*ptr);

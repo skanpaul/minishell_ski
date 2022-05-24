@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/18 17:53:35 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 19:13:38 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	cd_empty(t_vars *vars);
 static int	cd_other(char *pathname, t_vars *vars);
 static char	*manage_tild(char *pathname, t_vars *vars);
-// static bool	is_good_path(char *pathname, t_vars *vars);
 static int	cd_hyphen(t_vars *vars);
 
 /* ************************************************************************** */
@@ -74,14 +73,14 @@ static int	cd_other(char *pathname, t_vars *vars)
 	char	cwd[CWD_BUF_SIZE];
 	char	oldcwd[CWD_BUF_SIZE];
 
-	if (getcwd(oldcwd, CWD_BUF_SIZE) == NULL) // free ?
+	if (getcwd(oldcwd, CWD_BUF_SIZE) == NULL)
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	if (chdir(pathname) == CHDIR_ERROR)
 	{
 		ft_printf("minishell: cd: ");
 		return (manage_perror(pathname, errno));
 	}		
-	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)  // free ?
+	if (getcwd(cwd, CWD_BUF_SIZE) == NULL)
 		return (manage_perror("cd_builtin: [ getcwd() ] ", errno));
 	update_var(&vars->env, "OLDPWD", oldcwd);
 	update_var(&vars->env, "PWD", cwd);

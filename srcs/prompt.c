@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:10:05 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/16 20:04:50 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 17:25:45 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ static char	*get_prompt_line(t_env *env)
 		}
 		else
 			prompt_line = ft_strjoin(CYAN, dir);
-		//free(dir);
 	}
 	else
-		prompt_line = ft_strdup("minishell");
+		prompt_line = ft_strdup(RED"minishell");
 	tmp = prompt_line;
 	prompt_line = ft_strjoin(prompt_line, " > "DEFAULT);
 	free(tmp);
