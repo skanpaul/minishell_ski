@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:41:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 16:31:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 14:01:50 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	exec_builtin(t_vars *vars, char **cmd_args)
 {
 	int	res;
 
+	res = 0;
 	if (!ft_strncmp(cmd_args[0], "echo", 5))
 		res = echo_builtin(cmd_args);
 	else if (!ft_strncmp(cmd_args[0], "cd", 3))

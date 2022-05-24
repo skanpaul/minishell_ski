@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 15:21:37 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 14:02:48 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	run_cmd(t_vars *vars, char **cmd_args, int output)
 	int	pipe_fd[2];
 	int	status;
 
+	id = 0;
 	if (pipe(pipe_fd) == -1)
 		err_msg(ERR_PIPE);
 	if (cmd_args[0])

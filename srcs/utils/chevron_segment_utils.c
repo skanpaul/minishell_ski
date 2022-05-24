@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:12:10 by ski               #+#    #+#             */
-/*   Updated: 2022/05/23 16:54:06 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 14:03:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,7 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 			if (does_word_match(array[i], "<"))
 				fd_in = openfilex(array[i + 1], 0);
 			else
-			{
-				fd_in = 0;
-				dup2(vars->stdin_fd, 0);
-				here_doc(array[i + 1]);
-			}				
+				manage_heredoc(vars, &fd_in, array, &i);
 			if (fd_in < 0)
 			{
 				perror(array[i + 1]);
