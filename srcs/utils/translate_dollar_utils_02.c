@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:22:02 by ski               #+#    #+#             */
-/*   Updated: 2022/05/11 10:44:06 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 09:58:39 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	is_char_for_dolvar_name(char c)
 /* ************************************************************************** */
 bool	is_vardol(char *str, int i)
 {
-	if (str[i] == '$' && is_char_for_dolvar_name(str[i + 1]))	
+	if (str[i] == '$' && is_char_for_dolvar_name(str[i + 1]))
 		return (true);
 	return (false);
 }
