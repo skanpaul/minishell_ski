@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:14:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/04 16:21:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 19:32:12 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 int	unset_builtin(t_vars *vars, char **cmd_args)
 {
-	// t_env	*ptr;
-	// t_env	*prev;
 	int	i;
+	int	return_code;
 
+	return_code = 0;
 	i = 1;
 	while (cmd_args[i])
 	{
-		//check name, "not a valid identifier" --> return (1)
-		//ne doit pas commencer par un chiffre, pas de char special
-		//++ ??
-		//surement meme checks que pour assign (name_is_valid)
-
-    		remove_var(&vars->env, cmd_args[i]);
-    		remove_var(&vars->loc, cmd_args[i]);
+		if (!name_is_valid(cmd_args[i]))
+		{
+			err_msg(ERR_UNSET_ID);
+			return_code = 1;
+		}
+		else
+		{
+			remove_var(&vars->env, cmd_args[i]);
+			remove_var(&vars->loc, cmd_args[i]);
+		}
 		i++;
 	}
 	return (0);

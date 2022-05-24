@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/19 17:51:46 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 18:06:25 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ void	init_signal_main(t_sig *s)
 /* ************************************************************************** */
 static void	init_struc_sa_main(t_sig *s)
 {		
-	// SIGINT -----------------------------------------	
 	s->sa_sigint.sa_handler = &handler_signal_main;
 	s->sa_sigint.sa_flags = SA_RESTART;
-	// SIGQUIT -----------------------------------------	
 	s->sa_sigquit.sa_handler = SIG_IGN;
 }
 

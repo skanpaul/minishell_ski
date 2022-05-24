@@ -6,13 +6,11 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/17 12:15:07 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 16:52:57 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_vars vars;
 
 static void	pipe_input(char *limiter, int pipe_fd[2])
 {
@@ -44,11 +42,9 @@ static void	pipe_input(char *limiter, int pipe_fd[2])
 
 void	here_doc(char *limiter)
 {
-	int	id;
-	int	pipe_fd[2];
-	// int status; // ski
-	// char *buf; // ski
-	t_sig s; 							//ski
+	int		id;
+	int		pipe_fd[2];
+	t_sig	s;
 
 	if (pipe(pipe_fd) == -1)
 		err_msg(ERR_PIPE);
@@ -57,34 +53,13 @@ void	here_doc(char *limiter)
 		err_msg(ERR_FORK);
 	if (id == 0)
 	{
-		init_signal_fork_child(&s); //ski
+		init_signal_fork_child(&s);
 		pipe_input(limiter, pipe_fd);
 	}	
-	init_signal_fork_parent(&s); //ski
+	init_signal_fork_parent(&s);
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], 0);
 	close(pipe_fd[0]);
-	// waitpid(id, &status, 0);		
-	waitpid(id, NULL, 0);		
-	init_signal_main(&s); //ski a mettre au retour
-
+	waitpid(id, NULL, 0);
+	init_signal_main(&s);
 }
-
-	// 1) ski: gerer les information retourne par le child
-	// 2) ski: peut etre creer un handler au signal SIGCHLD reçu par le parent
-	// lorsque le child est interompu par un signal
-	// pour terminer proprement le child ou parent à réfléchir
-
-	// ft_printf("salut\n");
-	// if (WIFEXITED(status))
-	// {
-	// 	ft_printf("aa\n");
-	// 	buf = ft_itoa(WEXITSTATUS(status));
-	// 	update_var(&vars.loc, "?", buf);
-	// 	ft_free_null((void **)&buf);
-	// }
-	// if (WIFSIGNALED(status))
-	// {
-	// 	ft_printf("bb\n");
-	// 	update_var(&vars.loc, "?", "1");	
-	// }

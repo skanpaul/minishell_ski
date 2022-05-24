@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:07:30 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 14:17:17 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/23 17:22:54 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 static void	redirect_input(int new_fd)
 {	
-		dup2(new_fd, 0);
+	dup2(new_fd, 0);
 }
 
 static void	redirect_output(int new_fd)
 {
-		dup2(new_fd, 1);
+	dup2(new_fd, 1);
 }
 
+void	set_redirections(t_cmd *cmd)
+{
+	if (cmd->fd_in)
+		redirect_input(cmd->fd_in);
+	if (cmd->fd_out > 1)
+		redirect_output(cmd->fd_out);
+}
 
 void	get_redirections(t_vars *vars, t_cmd *cmd)
 {	
@@ -36,7 +43,7 @@ void	reset_redirections(t_vars *vars, t_cmd *cmd)
 		close (cmd->fd_in);
 	if (cmd->fd_out > 1)
 	{
-		dup2(vars->stdout_fd, 1);
+		redirect_output(vars->stdout_fd);
 		close (cmd->fd_out);
 	}
 }

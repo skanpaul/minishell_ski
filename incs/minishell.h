@@ -99,17 +99,19 @@ void	clean_program(t_vars *vars);
 char	**lexing(t_vars *vars, char * line);
 void	handle_segments(t_vars *vars, char **segments);
 void	parse_line(t_vars *vars, char *line, int output);
-int	check_assignation(t_vars *vars, t_cmd *cmd);
 
 int		execute_cmd(t_vars *vars, t_cmd *cmd, int i);
 void	get_redirections(t_vars *vars, t_cmd *cmd);
+void	set_redirections(t_cmd *cmd);
 void	reset_redirections(t_vars *vars, t_cmd *cmd);
+
 
 int		is_builtin(char *cmd);
 int		exec_builtin(t_vars *vars, char **cmd_args);
-int		is_assignation(char *cmd);
+
+
+int		check_assignations(t_vars *vars, t_cmd *cmd);
 int		name_is_valid(char *name);
-int		add_local_var(t_vars *vars, char **cmd_args);
 
 int		exit_builtin(t_vars *vars, char **cmd_args);
 int		echo_builtin(char **cmd_args);
@@ -180,9 +182,6 @@ int		get_segment_fd_out(char **array);
 void	clear_chevron_segment(char **array);
 // -------------------------------------------------------------------
 
-
-
-char	*find_cmd_path(t_env *env, char *cmd);
 int		run_cmd(t_vars *vars, char **cmd_args, int output);
 void	exec_cmd(t_vars *vars, char **cmd_args);
 

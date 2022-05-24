@@ -45,6 +45,7 @@ SRCS	=	minishell.c \
 			prompt.c \
 			redirection.c \
 			execution.c \
+			assignations.c \
 			utils/termios_utils.c \
 			utils/linklist_utils_01.c \
 			utils/linklist_utils_02.c \
@@ -97,7 +98,7 @@ libclean:
 
 debug: $(DBG_OBJS) $(LIBFT)
 	@echo "$(YELLOW)Preparing files for debug...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $^ -lreadline -o debug_$(NAME)
+	@$(CC) $(CFLAGS) $^ -L$(HOME)/.brew/opt/readline/lib -lreadline -o debug_$(NAME)
 	@echo "$(GREEN)----> ./debug_$(NAME) is ready$(DEFAULT)"
 	@echo "$(CYAN)Launching LLDB...$(DEFAULT)"
 	@lldb ./debug_$(NAME)

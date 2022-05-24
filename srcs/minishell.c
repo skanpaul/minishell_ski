@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 10:04:12 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 17:08:35 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ int	main(int argc, char **argv, char **envp)
 	int		return_code;
 
 	return_code = 0;
-
 	if (argc > 1 || argv[1])
 		exit_msg(ERR_ARGS);
 	initialisation (&g_vars, envp);
 	while (1)
 	{
-		stop_echoctl();
 		g_vars.new_line = show_prompt(&g_vars);
-		start_echoctl();
 		if (g_vars.new_line && *(g_vars.new_line))
 		{
 			add_history(g_vars.new_line);
@@ -43,6 +40,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 		ft_free_null((void **)&g_vars.new_line);
 	}
-	clean_program(&g_vars);	
+	clean_program(&g_vars);
 	return (return_code);
 }

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:44:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 15:51:56 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/23 16:32:38 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ void	exit_msg(char *msg)
 }
 
 /* ************************************************************************** */
-int manage_perror(char *remark, int error_code)
+int	manage_perror(char *remark, int error_code)
 {
 	perror(remark);
-	ft_printf("\n"); // a effacer, si besoin
+	ft_printf("\n");
 	return (error_code);
 }
-
-/* ************************************************************************** */
