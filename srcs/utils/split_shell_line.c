@@ -6,11 +6,64 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 19:47:09 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/23 19:54:32 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/24 09:12:42 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* ************************************************************************** */
+typedef struct s_ssl
+{
+	char			**array;
+	t_quote_info	qti;
+}	t_ssl;
+
+/* ************************************************************************** */
+static int	count_words(char *line, char separator);
+static void	loop_while(t_ssl *ssl, char *line, char sep);
+
+/* ************************************************************************** */
+char	**split_shell_line(char *line, char sep)
+{
+	t_ssl			ssl;
+
+	init_quote_info(&ssl.qti);
+	if (!line)
+		return (NULL);
+	ssl.array = malloc (sizeof (char *) * (count_words(line, sep) + 1));
+	if (!ssl.array)
+		return (NULL);
+	loop_while(&ssl, line, sep);
+	return (ssl.array);
+}
+
+/* ************************************************************************** */
+static void	loop_while(t_ssl *ssl, char *line, char sep)
+{
+	int	i;
+	int	j;
+	int	start;
+
+	i = 0;
+	j = 0;
+	start = 0;
+	while (line[i] != '\0')
+	{
+		refresh_quote_info(&ssl->qti, line[i]);
+		if ((line[i] != sep) && (i == 0 || (line[i - 1] == sep
+					&& (is_outside_realquote(&ssl->qti)
+						|| is_entering_realquote(&ssl->qti)))))
+			start = i;
+		if ((line[i] != sep) && (line[i + 1] == '\0' || (line[i + 1] == sep
+					&& (is_outside_realquote(&ssl->qti)
+						|| is_exiting_realquote(&ssl->qti)))))
+			ssl->array[j++] = ft_substr(line, start, (i - start) + 1);
+		i++;
+	}
+	ssl->array[j] = 0;
+}
+
 /* ************************************************************************** */
 static int	count_words(char *line, char separator)
 {
@@ -34,51 +87,6 @@ static int	count_words(char *line, char separator)
 		i++;
 	}
 	return (count);
-}
-
-/* ************************************************************************** */
-char	**split_shell_line(char *line, char separator)
-{
-	char			**res;
-	int				i;
-	int				j;
-	int				start;
-	int				qty;
-	t_quote_info	qti;
-
-	init_quote_info(&qti);
-	if (!line)
-		return (NULL);
-	res = malloc (sizeof (char *) * (count_words(line, separator) + 1));
-	if (!res)
-		return (NULL);
-	i = 0;
-	j = 0;
-	start = 0;
-	while (line[i] != '\0')
-	{
-		refresh_quote_info(&qti, line[i]);
-		if (line[i] != separator)
-		{
-			if (i == 0 || (line[i - 1] == separator
-					&& (is_outside_realquote(&qti)
-						|| is_entering_realquote(&qti))))
-				start = i;
-		}
-		if (line[i] != separator)
-		{
-			if (line[i + 1] == '\0' || (line[i + 1] == separator
-					&& (is_outside_realquote(&qti)
-						|| is_exiting_realquote(&qti))))
-			{
-				qty = (i - start) + 1;
-				res[j++] = ft_substr(line, start, qty);
-			}		
-		}
-		i++;
-	}
-	res[j] = 0;
-	return (res);
 }
 
 /* ************************************************************************** */
