@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/23 18:06:25 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 10:38:35 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handler_signal_main(int sig_code)
 {
 	if (sig_code == SIGINT)
 	{
-		write(1, "\n", 1);
+		ft_putstr_fd("\n", 2);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();

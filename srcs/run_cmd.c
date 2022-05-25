@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 14:38:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 10:38:50 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	get_child_returned_code(int status)
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGQUIT)
-			ft_printf("Quit: 3\n");
+			ft_putstr_fd("Quit: 3\n", 2);
 		return (128 + WTERMSIG(status));
 	}
 	return (1);

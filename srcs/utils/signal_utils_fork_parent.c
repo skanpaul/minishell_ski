@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils_fork_parent.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/23 19:43:32 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/25 10:39:06 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	handler_signal_fork_parent(int sig_code)
 {
 	if (sig_code == SIGINT)
 	{	
-		write(1, "\n", 1);
+		ft_putstr_fd("\n", 2);
 	}
 }
 
