@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:14:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 19:32:12 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:23:29 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int	unset_builtin(t_vars *vars, char **cmd_args)
 		}
 		i++;
 	}
-	return (0);
+	return (return_code);
 }

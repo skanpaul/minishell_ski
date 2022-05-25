@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:07:30 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 17:22:54 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:39:35 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	redirect_output(int new_fd)
 
 void	set_redirections(t_cmd *cmd)
 {
-	if (cmd->fd_in)
+	if (cmd->fd_in > 0)
 		redirect_input(cmd->fd_in);
 	if (cmd->fd_out > 1)
 		redirect_output(cmd->fd_out);
@@ -39,7 +39,7 @@ void	get_redirections(t_vars *vars, t_cmd *cmd)
 
 void	reset_redirections(t_vars *vars, t_cmd *cmd)
 {
-	if (cmd->fd_in)
+	if (cmd->fd_in > 0)
 		close (cmd->fd_in);
 	if (cmd->fd_out > 1)
 	{
