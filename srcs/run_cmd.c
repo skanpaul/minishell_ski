@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/25 10:38:50 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/25 15:53:00 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	exec_cmd(t_vars *vars, char **cmd_args)
 		cmd_args[0] = find_cmd_path(vars->env, cmd_args[0]);
 		ft_free_null((void **)&tmp);
 	}
+	else if (access(cmd_args[0], 0) != 0)
+		exit(manage_perror("minishell: ", 127));
 	if (!cmd_args[0] || (access(cmd_args[0], 0) != 0))
 	{
 		err_msg(ERR_CMD);
