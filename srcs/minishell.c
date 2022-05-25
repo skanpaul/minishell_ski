@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 17:40:36 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:05:41 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		if (g_vars.new_line == NULL)
 		{
 			clean_program(&g_vars);
-			return (1);
+			exit_msg("exit");
 		}
 		ft_free_null((void **)&g_vars.new_line);
 	}
