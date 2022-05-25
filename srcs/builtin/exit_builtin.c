@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:20:41 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 19:33:03 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 15:59:32 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	exit_builtin(t_vars *vars, char **cmd_args)
 		(!is_zeros(cmd_args[1]) && ft_atoi(cmd_args[1]) == 0))
 	{
 		err_msg(ERR_EXIT_NUM);
-		exit_code = 2;
+		exit_code = 255;
 	}
 	else if (cmd_args[2])
 	{
