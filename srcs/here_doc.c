@@ -6,11 +6,13 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 16:52:57 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 11:10:57 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	special_child_return(int status);
 
 static void	pipe_input(char *limiter, int pipe_fd[2])
 {
@@ -45,6 +47,7 @@ void	here_doc(char *limiter)
 	int		id;
 	int		pipe_fd[2];
 	t_sig	s;
+	int		status;
 
 	if (pipe(pipe_fd) == -1)
 		err_msg(ERR_PIPE);
@@ -60,6 +63,17 @@ void	here_doc(char *limiter)
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], 0);
 	close(pipe_fd[0]);
-	waitpid(id, NULL, 0);
+	waitpid(id, &status, 0);
+	special_child_return(status);
 	init_signal_main(&s);
+}
+
+/* ************************************************************************** */
+static void	special_child_return(int status)
+{
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_putstr_fd("\n", 2);
+	}
 }
