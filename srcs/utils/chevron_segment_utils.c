@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:12:10 by ski               #+#    #+#             */
-/*   Updated: 2022/05/25 11:18:13 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/25 12:49:34 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* ************************************************************************** */
 static void	delete_chevron_and_file(char **array, int *i);
-static void	manage_heredoc(t_vars *vars, int *fd_in, char **array, int *i);
+static int	manage_heredoc(t_vars *vars, char *limiter);
 
 /* ************************************************************************** */
 void	clear_chevron_segment(char **array)
@@ -113,7 +113,7 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 			if (does_word_match(array[i], "<"))
 				fd_in = openfilex(array[i + 1], 0);
 			else
-				manage_heredoc(vars, &fd_in, array, &i);
+				fd_in = manage_heredoc(vars, array[i + 1]);
 			if (fd_in < 0)
 			{
 				perror(array[i + 1]);
@@ -126,13 +126,13 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 }
 
 /* ************************************************************************** */
-static void	manage_heredoc(t_vars *vars, int *fd_in, char **array, int *i)
+static int	manage_heredoc(t_vars *vars, char *limiter)
 {
 	stop_echoctl_fd(vars->stdin_fd);
-	*fd_in = 0;
 	dup2(vars->stdin_fd, 0);
-	here_doc(array[*i + 1]);
+	here_doc(limiter);
 	start_echoctl_fd(vars->stdin_fd);
+	return (0);
 }
 
 /* ************************************************************************** */
