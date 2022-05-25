@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 18:19:51 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/25 11:49:08 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
 // --------------------------------------------
 void	init_signal_fork_child(t_sig *s);
+void	init_signal_fork_child_hd(t_sig *s);
 // --------------------------------------------
 void	init_signal_fork_parent(t_sig *s);
 void	handler_signal_fork_parent(int sig_code);
@@ -178,5 +179,7 @@ int		manage_perror(char *remark, int error_code);
 // -------------------------------------------------------------------
 void	stop_echoctl(void);
 void	start_echoctl(void);
+void	stop_echoctl_fd(int fd);
+void	start_echoctl_fd(int fd);
 // -------------------------------------------------------------------
 #endif

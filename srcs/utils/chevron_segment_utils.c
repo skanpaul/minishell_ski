@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:12:10 by ski               #+#    #+#             */
-/*   Updated: 2022/05/24 14:03:53 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/25 11:18:13 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,11 @@ int	get_segment_fd_in(t_vars *vars, char **array)
 /* ************************************************************************** */
 static void	manage_heredoc(t_vars *vars, int *fd_in, char **array, int *i)
 {
+	stop_echoctl_fd(vars->stdin_fd);
 	*fd_in = 0;
 	dup2(vars->stdin_fd, 0);
 	here_doc(array[*i + 1]);
+	start_echoctl_fd(vars->stdin_fd);
 }
 
 /* ************************************************************************** */
