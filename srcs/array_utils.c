@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:59:35 by ski               #+#    #+#             */
-/*   Updated: 2022/05/24 13:44:56 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**conv_list_to_array(t_env *var_head)
 	{
 		start_string = ft_strjoin(var_head->name, "=");
 		env_char_array[i] = ft_strjoin(start_string, var_head->data);
-		ft_free_null((void **)&start_string);
+		ft_free_null(&start_string);
 		var_head = var_head->next;
 		i++;
 	}
@@ -61,7 +61,7 @@ void	free_array(char **array)
 	i = 0;
 	while (array[i] != NULL)
 	{
-		ft_free_null((void **)&array[i]);
+		ft_free_null(&array[i]);
 		i++;
 	}
 	if (array)

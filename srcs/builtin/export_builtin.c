@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/26 14:26:00 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:31:53 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ int	export_builtin(t_vars *vars, char **cmd_args)
 			update_var(&vars->env, var->name, var->data);
 		if (does_var_exist(vars->loc, var->name))
 			update_var(&vars->loc, var->name, var->data);
-		ft_free_null((void **) &(var->data));
-		ft_free_null((void **) &(var->name));
-		ft_free_null((void **) &var);
+		ft_free_null(&(var->data));
+		ft_free_null(&(var->name));
+		ft_free_null((char **)&var);
 		i++;
 	}
 	return (0);

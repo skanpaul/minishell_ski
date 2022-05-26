@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:18:13 by ski               #+#    #+#             */
-/*   Updated: 2022/05/23 18:07:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:32:18 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	does_wordstart_match(char *str, char *hard_text)
 }
 
 /* ************************************************************************** */
-void	ft_free_null(void **ptr)
+void	ft_free_null(char **ptr)
 {
 	if (*ptr != NULL)
 		free(*ptr);

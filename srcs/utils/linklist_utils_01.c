@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linklist_utils_01.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:31:38 by ski               #+#    #+#             */
-/*   Updated: 2022/05/23 19:30:58 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	update_var(t_env **var_head, char *var_name, char *new_data)
 	else
 	{
 		buff = get_var(*var_head, var_name);
-		ft_free_null((void **)&buff->data);
+		ft_free_null(&buff->data);
 		buff->data = ft_strdup(new_data);
 	}	
 }

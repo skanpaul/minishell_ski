@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/26 17:01:10 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	update_return_code(t_vars *vars, int return_code)
 
 	buff = ft_itoa(return_code);
 	update_var(&vars->loc, "?", buff);
-	ft_free_null((void **)&buff);
+	ft_free_null(&buff);
 }
 
 void	handle_segments(t_vars *vars, char **segments)

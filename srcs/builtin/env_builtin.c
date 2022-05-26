@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 19:18:16 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	copy_parent_env(t_env **child_env, char **parent_env)
 		name = ft_substr(*parent_env, 0, len);
 		data = ft_substr(*parent_env, len + 1, ft_strlen(*parent_env));
 		add_var(child_env, name, data);
-		ft_free_null((void **)&name);
-		ft_free_null((void **)&data);
+		ft_free_null(&name);
+		ft_free_null(&data);
 		parent_env++;
 	}
 }
@@ -47,7 +47,7 @@ void	init_env(t_vars *vars, char **envp)
 	else
 		temp_str = ft_itoa(1);
 	update_var(&vars->env, "SHLVL", temp_str);
-	ft_free_null((void **)&temp_str);
+	ft_free_null(&temp_str);
 	add_minishell_to_path(vars);
 }
 
@@ -79,9 +79,9 @@ static void	add_minishell_to_path(t_vars *vars)
 	buff = ft_strjoin(temp_path, ":");
 	getcwd(temp_cwd, CWD_BUF_SIZE);
 	temp_str = ft_strjoin(buff, temp_cwd);
-	ft_free_null((void **)&buff);
+	ft_free_null(&buff);
 	update_var(&vars->env, "PATH", temp_str);
-	ft_free_null((void **)&temp_str);
+	ft_free_null(&temp_str);
 }
 
 /* ************************************************************************** */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:38:31 by ski               #+#    #+#             */
-/*   Updated: 2022/05/23 19:13:38 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ static char	*manage_tild(char *pathname, t_vars *vars)
 		buff1 = get_var(vars->env, "HOME")->data;
 		len = ft_strlen(pathname);
 		buff2 = ft_substr(pathname, 1, len - 1);
-		ft_free_null((void **)&pathname);
+		ft_free_null(&pathname);
 		pathname = ft_strjoin(buff1, buff2);
-		ft_free_null((void **)&buff2);
+		ft_free_null(&buff2);
 	}
 	return (pathname);
 }

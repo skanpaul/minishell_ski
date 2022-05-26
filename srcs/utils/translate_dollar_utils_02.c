@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:22:02 by ski               #+#    #+#             */
-/*   Updated: 2022/05/24 09:58:39 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ char	*delete_char(char *str, int *i)
 	len = ft_strlen(str);
 	buf_1 = ft_substr(str, 0, *i);
 	buf_2 = ft_substr(str, *i + 1, len - *i - 1);
-	ft_free_null((void **)&str);
+	ft_free_null(&str);
 	str = ft_strjoin(buf_1, buf_2);
 	(*i)--;
-	ft_free_null((void **)&buf_1);
-	ft_free_null((void **)&buf_2);
+	ft_free_null(&buf_1);
+	ft_free_null(&buf_2);
 	return (str);
 }
 

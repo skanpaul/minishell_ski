@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:12:10 by ski               #+#    #+#             */
-/*   Updated: 2022/05/25 12:49:34 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static void	delete_chevron_and_file(char **array, int *i)
 	}
 	array[*i + j] = array[*i + j + 2];
 	array[*i + j + 1] = NULL;
-	ft_free_null((void **)&ptr_chevron_str);
-	ft_free_null((void **)&ptr_filename);
+	ft_free_null(&ptr_chevron_str);
+	ft_free_null(&ptr_filename);
 	(*i)--;
 }
 

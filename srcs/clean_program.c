@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 09:23:17 by ski               #+#    #+#             */
-/*   Updated: 2022/05/25 18:26:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	clean_program(t_vars *vars)
 	rl_clear_history();
 	free_var_list(&vars->env);
 	free_var_list(&vars->loc);
-	ft_free_null((void **)&vars->new_line);
+	ft_free_null(&vars->new_line);
 }
 /* ************************************************************************** */

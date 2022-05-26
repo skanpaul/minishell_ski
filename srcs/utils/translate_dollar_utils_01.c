@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:22:02 by ski               #+#    #+#             */
-/*   Updated: 2022/05/24 09:57:11 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,20 +106,20 @@ static void	part_2(int *start_pos, t_vars *vars, t_sv *s)
 		s->var_data = get_var(vars->env, s->var_name)->data;
 	if (does_var_exist(vars->loc, s->var_name))
 		s->var_data = get_var(vars->loc, s->var_name)->data;
-	ft_free_null((void **)&s->str);
+	ft_free_null(&s->str);
 	if (s->var_data)
 	{
 		s->str = ft_strjoin(s->buf_1, s->var_data);
-		ft_free_null((void **)&s->buf_1);
+		ft_free_null(&s->buf_1);
 		s->buf_1 = s->str;
 		*start_pos = *start_pos + ft_strlen(s->var_data) - 1;
 	}
 	else
 		(*start_pos) = *start_pos - 1;
 	s->str = ft_strjoin(s->buf_1, s->buf_2);
-	ft_free_null((void **)&s->buf_1);
-	ft_free_null((void **)&s->buf_2);
-	ft_free_null((void **)&s->var_name);
+	ft_free_null(&s->buf_1);
+	ft_free_null(&s->buf_2);
+	ft_free_null(&s->var_name);
 }
 
 /* ************************************************************************** */
@@ -147,20 +147,20 @@ static void	part_2(int *start_pos, t_vars *vars, t_sv *s)
 // 		var_data = get_var(vars->env, vardol_name)->data;
 // 	if (does_var_exist(vars->loc, vardol_name))
 // 		var_data = get_var(vars->loc, vardol_name)->data;
-// 	ft_free_null((void **)&str);
+// 	ft_free_null(&str);
 // 	if (var_data)
 // 	{
 // 		str = ft_strjoin(buf_1, var_data);
-// 		ft_free_null((void **)&buf_1);
+// 		ft_free_null(&buf_1);
 // 		buf_1 = str;
 // 		*start_pos = *start_pos + ft_strlen(var_data) - 1;
 // 	}
 // 	else
 // 		(*start_pos) = *start_pos - 1;
 // 	str = ft_strjoin(buf_1, buf_2);
-// 	ft_free_null((void **)&buf_1);
-// 	ft_free_null((void **)&buf_2);
-// 	ft_free_null((void **)&vardol_name);
+// 	ft_free_null(&buf_1);
+// 	ft_free_null(&buf_2);
+// 	ft_free_null(&vardol_name);
 // 	return (str);
 // }
 

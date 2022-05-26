@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:10:05 by ski               #+#    #+#             */
-/*   Updated: 2022/05/26 16:21:15 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static bool	is_next_token_correct(char **array, t_vars *vars)
 // 	// print_array_in_line(array, "B)   tok. trans.:\t ");	
 // 	if (!is_token_chevron_correct(array, vars)
 // 		|| !is_next_token_correct(array, vars))
-// 		ft_free_null((void **)&line);		
+// 		ft_free_null(&line);		
 // 	free_array(&array);
 // 	return (line);
 // }
