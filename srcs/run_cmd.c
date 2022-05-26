@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/25 15:53:00 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 16:18:22 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static char	*find_cmd_path(t_env *env, char *cmd)
 	char	*path;
 	int		i;
 
+	if (!does_var_exist(env, "PATH"))
+		return (NULL);
 	path = get_var(env, "PATH")->data;
 	dirs = ft_split(path, ':');
 	i = 0;
@@ -49,7 +51,7 @@ static void	child_process(t_vars *vars, int *pipe_fd, t_cmd *cmd, int i)
 	if (is_builtin(cmd->args[i]))
 		exit(exec_builtin(vars, (cmd->args) + i));
 	else
-		exec_cmd(vars, (cmd->args + i));
+		exec_cmd(vars, (cmd->args) + i);
 }
 
 int	run_cmd(t_vars *vars, t_cmd *cmd, int i)

@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:09:45 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/23 16:29:30 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/26 16:22:05 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ bool	is_grammar_pipeline_correct(char *line, t_vars *vars)
 	if (!is_token_pipeline_correct(array, vars)
 		|| !is_previous_token_correct(array, vars)
 		|| !is_next_token_correct(array, vars))
+	{
+		free_array(array);
 		return (false);
+	}
 	free_array (array);
 	return (true);
 }

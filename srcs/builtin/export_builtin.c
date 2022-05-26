@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:48:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 14:29:52 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 14:26:00 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,24 @@ static t_env	*sort_env_lst(t_env *env)
 static int	export_print(t_env *env)
 {
 	t_env	*tmp;
+	t_env	*ptr;
 
 	tmp = sort_env_lst(env);
+	ptr = tmp;
 	while (tmp)
 	{
-		if (!tmp->data)
-			return (0);
 		ft_putstr_fd("declare -x ", 1);
 		ft_putstr_fd(tmp->name, 1);
-		ft_putstr_fd("=", 1);
-		ft_putstr_fd(tmp->data, 1);
+		if (tmp->data)
+		{
+			ft_putstr_fd("=\"", 1);
+			ft_putstr_fd(tmp->data, 1);
+			ft_putstr_fd("\"", 1);
+		}
 		ft_putstr_fd("\n", 1);
 		tmp = tmp->next;
 	}
-	free_var_list(&tmp);
+	free_var_list(&ptr);
 	return (0);
 }
 
@@ -95,6 +99,7 @@ static	t_env	*get_name_and_data(t_vars *vars, char *arg)
 		else
 			var->data = NULL;
 	}
+	var->next = NULL;
 	return (var);
 }
 

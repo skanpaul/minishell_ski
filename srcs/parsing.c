@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 14:47:15 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/26 17:01:10 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	parse_line(t_vars *vars, char *line, int output)
 	return_code = 0;
 	cmd.args = split_shell_line(line, ' ');
 	if (!(cmd.args) || !(cmd.args[0]))
+	{
+		free_array(cmd.args);
 		return ;
+	}
 	get_redirections(vars, &cmd);
 	if (!cmd.fd_out)
 		cmd.fd_out = output;
